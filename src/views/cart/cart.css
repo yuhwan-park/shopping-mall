@@ -1,15 +1,15 @@
-.progressDiv {
+.progress-container {
   display: flex;
   align-items: baseline;
   border-bottom: 1px solid #bbb;
   padding: 20px;
 }
 
-.progressDiv h1 {
+.progress-container h1 {
   font-size: 32px;
   font-weight: 700;
 }
-.progressDiv span {
+.progress-container span {
   padding: 0 10px;
 }
 
