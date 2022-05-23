@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>쇼핑-n팀</title>
+  <!-- 아이콘 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <!-- 폰트 어썸: 아이콘 -->
+  <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="cart.css" />
+  <script src="cart.js" type="module" defer></script>
+</head>
+
+<body>
+  <!-- 헤더 -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container mt-3">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/elice-rabbit.png" width="30" height="30" />
+          <span class="has-text-link">쇼핑-n팀</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+        <ul id="navbar">
+          <li><a href="/login">로그인</a></li>
+          <li><a href="/register">회원가입</a></li>
+          <li>
+            <a href="/cart" aria-current="page">
+              <span class="icon">
+                <i class="fas fa-cart-shopping"></i>
+              </span>
+              <span>카트</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="progressDiv">
+        <h1>장바구니</h1>
+        <span> > 주문결제</span>
+        <span> > 주문완료</span>
+      </div>
+    </div>
+
+    <div class="tile is-ancestor">
+      <div class="tile is-8 is-parent">
+        <div class="box cart-container">
+          <div class="cart-header">
+            <!-- 전체선택 체크박스 -->
+            <input type="checkbox" />
+            <p>전체선택 |</p>
+            <p>선택삭제</p>
+          </div>
+          <div class="cart-item">
+            <input type="checkbox" />
+            <img src="https://cdn.pixabay.com/photo/2022/01/13/21/17/jar-6936032_1280.jpg" alt="image">
+            <div class="content">
+              <div class="content-title">상품 이름</div>
+              <div class="quantity">
+                <button class="button is-rounded">
+                  -
+                </button>
+                <input type="number" min="1" max="99" value="1">
+                <button class="button is-rounded">
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="calculation">
+              <p>상품 가격</p>
+              <p>X</p>
+              <p>상품 개수</p>
+              <p>=</p>
+              <p>가격*개수</p>
+            </div>
+            <button class="button" id="delete-product">삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile is-parent">
+        <div class="box order-summary">
+          <div class="header">결제정보</div>
+          <div class="order-info">
+            <div class="info">
+              <p>상품수</p>
+              <p>n개</p>
+            </div>
+            <div class="info">
+              <p>상품금액</p>
+              <p>n원</p>
+            </div>
+            <div class="info">
+              <p>배송비</p>
+              <p>n원</p>
+            </div>
+          </div>
+          <div class="total">
+            <p>총 결제금액</p>
+            <p>n원</p>
+          </div>
+          <button class="button is-info">구매하기</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</body>
+
+</html>
