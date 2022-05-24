@@ -16,7 +16,6 @@ const CategorySchema = new Schema(
     }
   },
   {
-    collection: 'users',
     timestamps: true,
   }
 );

@@ -28,8 +28,17 @@ export class CategoryModel {
     const filter = { _id: categoryId };
     const option = { returnOriginal: false };
 
-    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    const updatedCategory = await Category.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
     return updatedCategory;
+  }
+
+  async delete(categoryId) {
+    const category = await Category.findOneAndDelete({ _id: categoryId });
+    return category;
   }
 }
 
