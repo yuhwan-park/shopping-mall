@@ -30,7 +30,6 @@ const ProductSchema = new Schema(
       type: String,
       required: true
     }
-
   },
   {
     collection: 'users',
