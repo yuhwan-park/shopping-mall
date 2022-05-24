@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/assets/images/elice-rabbit-favicon.png"
-    />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
+    <!-- head -->
+    <script src="/static/js/head.js" type="module" defer></script>
+    <!-- cdn -->
     <script
-      defer
       src="https://kit.fontawesome.com/7630448495.js"
       crossorigin="anonymous"
+      defer
     ></script>
-
-    <script src="/include/layout.js" type="module" defer></script>
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module" defer></script>
+    <!-- custom -->
   </head>
   <body>
-
-    <!-- CONTENT : START -->
-    <section class="section">
-      <div class="container content-container">
-        <div style="background: #999">공통 레이아웃 입니다</div>
-      </div>
-    </section>
-    <!-- CONTENT : END -->
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div style="background: #999">공통 레이아웃 입니다</div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
   </body>
 </html>
