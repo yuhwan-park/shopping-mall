@@ -1,5 +1,5 @@
-const app = document.getElementById('app');
-app.insertAdjacentHTML(
+const head = document.querySelector('head');
+head.insertAdjacentHTML(
   'afterbegin',
   `
     <meta charset="utf-8" />
