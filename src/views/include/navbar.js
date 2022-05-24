@@ -1,4 +1,5 @@
-document.body.insertAdjacentHTML(
+const app = document.getElementById('app');
+app.insertAdjacentHTML(
   'afterbegin',
   `
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -6,7 +7,7 @@ document.body.insertAdjacentHTML(
       <div class="navbar-container">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <img src="/assets/images/elice-rabbit.png" width="30" height="30" />
+            <img src="/static/images/elice-rabbit.png" width="30" height="30" />
             <span class="has-text-link">쇼핑-22팀</span>
           </a>
         </div>
@@ -28,5 +29,5 @@ document.body.insertAdjacentHTML(
       </div>
     </div>
   </nav>
-  `
-)
+  `,
+);

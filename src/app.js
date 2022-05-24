@@ -2,7 +2,6 @@ import cors from "cors";
 import express from "express";
 import { viewsRouter, userRouter } from "./routers";
 import { errorHandler } from "./middlewares";
-import nunjucks from "nunjucks";
 //TEST
 const app = express();
 
@@ -17,12 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // html, css, js 라우팅
 app.use(viewsRouter);
-app.set('view engine', 'html')
-nunjucks.configure('views', { // 폴더 경로: views
-  autoescape: true,
-  express: app, // 위에 const app = express();라서 app객체 즉, express 함수를 넣음
-  watch: true, // html 파일이 변경될 때, 템플릿 엔진을 다시 렌더링
-});
 
 // api 라우팅
 // 아래처럼 하면, userRouter 에서 '/login' 으로 만든 것이 실제로는 앞에 /api가 붙어서

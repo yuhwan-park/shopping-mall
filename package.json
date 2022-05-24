@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "sass-watch": "sass --no-source-map --watch src/views/assets/sass/main.scss src/views/assets/css/main.css",
+    "sass-watch": "sass --no-source-map --watch src/public/sass/main.scss src/public/css/main.css",
     "start": "nodemon index.js --exec babel-node sass-watch"
   },
   "dependencies": {
@@ -16,7 +16,6 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.1",
-    "nunjucks": "^3.2.3",
     "sass": "^1.52.1"
   },
   "devDependencies": {
