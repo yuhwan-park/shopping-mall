@@ -23,6 +23,7 @@ class CategoryService {
   // 카테고리 전부를 받음.
   async getCategories() {
     const categories = await this.categoryModel.findAll();
+
     return categories;
   }
 
@@ -31,8 +32,10 @@ class CategoryService {
     const categories = await this.categoryModel.findAll();
     const names = categories.map((category) => {
       const { name } = category;
+
       return name;
     });
+
     return names;
   }
 
