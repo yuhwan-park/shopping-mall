@@ -1,57 +1,3 @@
-.navbar {
-  min-width: 360px;
-}
-
-.navbar-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.login-form-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 85vh;
-}
-
-.login-form-box {
-  width: 30rem;
-}
-
-.login-form-box .title {
-  text-align: center;
-}
-
-.login-form-box .button {
-  font-weight: bold;
-}
-
-.register-user-form-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 85vh;
-}
-
-.register-user-form-box {
-  width: 30rem;
-}
-
-.register-user-form-box .title {
-  text-align: center;
-}
-
-.register-user-form-box .button {
-  font-weight: bold;
-}
-
-.register-user-form-box .input:focus {
-  border-color: #00d1b2;
-  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
-}
-
 .progress-container {
   display: flex;
   align-items: baseline;
@@ -63,7 +9,6 @@
   font-size: 32px;
   font-weight: 700;
 }
-
 .progress-container span {
   padding: 0 10px;
 }
@@ -83,18 +28,15 @@
   width: 96px;
   height: 96px;
 }
-
 .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
 .quantity {
   display: flex;
 }
-
 .content-title {
   font-size: 24px;
 }
@@ -107,7 +49,6 @@
   width: 100%;
   font-size: 18px;
 }
-
 .order-summary .header {
   border-bottom: 1px solid #bbb;
 }
