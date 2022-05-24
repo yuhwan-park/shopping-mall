@@ -1,14 +1,12 @@
-import { Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const ProductSchema = new Schema(
   {
     category: {
-        type: String,
-        required: true
-    },
-    id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'category',
+        required: true,
+        index:true,
     },
     name: {
       type: String,
@@ -29,6 +27,12 @@ const ProductSchema = new Schema(
     brand: {
       type: String,
       required: true
+    },
+    sellerId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index:true,
     }
   },
   {
