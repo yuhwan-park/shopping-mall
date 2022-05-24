@@ -28,12 +28,6 @@ const ProductSchema = new Schema(
       type: String,
       required: true
     },
-    sellerId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-      index:true,
-    }
   },
   {
     collection: 'users',
