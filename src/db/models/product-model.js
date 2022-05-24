@@ -9,8 +9,8 @@ export class ProductModel {
     return product;
   }
 
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
+  async findById(shortId) {
+    const product = await Product.findOne({ shortId });
     return product;
   }
 
@@ -24,16 +24,20 @@ export class ProductModel {
     return products;
   }
 
-  async update({ productId, update }) {
-    const filter = { _id: productId };
+  async update({ shortId, update }) {
+    const filter = { shortId };
     const option = { returnOriginal: false };
 
-    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
+    const updatedProduct = await Product.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
     return updatedProduct;
   }
 
-  async delete(productId) {
-    const product = await Product.findOneAndDelete({ _id: productId })
+  async delete(shortId) {
+    const product = await Product.findOneAndDelete({ shortId });
     return product;
   }
 }

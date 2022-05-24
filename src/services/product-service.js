@@ -27,11 +27,9 @@ class ProductService {
   }
 
   // 상품 정보 수정
-  async setProduct(productInfoRequired, toUpdate) {
-    const { productId } = productInfoRequired;
-
+  async setProduct(shortId, toUpdate) {
     // 상품 존재 여부 확인 후 에러 반환
-    let product = await this.productModel.findById(productId);
+    let product = await this.productModel.findById(shortId);
 
     if (!product) {
       throw new Error('상품이 존재하지 않습니다. 다시 한 번 확인해 주세요.');
@@ -39,7 +37,7 @@ class ProductService {
 
     // 업데이트 진행
     product = await this.productModel.update({
-      productId,
+      shortId,
       update: toUpdate,
     });
 
@@ -47,9 +45,8 @@ class ProductService {
   }
 
   //상품 삭제
-  async deleteProduct(productInfo) {
-    const { productId } = productInfo;
-    const product = await this.productModel.delete(productId);
+  async deleteProduct(shortId) {
+    const product = await this.productModel.delete(shortId);
 
     return product;
   }
