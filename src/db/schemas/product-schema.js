@@ -6,20 +6,24 @@ const ProductSchema = new Schema(
         type: String,
         required: true
     },
-    product_id: {
+    id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    product_name: {
+    name: {
       type: String,
       required: true,
     },
-    product_image: {
+    image: {
       type: String,
       required: true,
     },
-    product_price: {
+    price: {
       type: Number,
+      required: true
+    },
+    content: {
+      type: String,
       required: true
     },
     brand: {
