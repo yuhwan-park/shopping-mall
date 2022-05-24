@@ -17,3 +17,28 @@
   padding: 10px;
   margin-left: 3rem;
 }
+ 
+/* Img slide */
+
+.slide{
+  
+}
+
+.slide li{
+  display:block;
+  width:90vh;
+  height: 1000px;
+}
+
+.slide ul:nth-child(1){
+  background-color:#cefef7;
+}
+
+.slide ul:nth-child(2){
+  background-color:#fff4d1;
+}
+
+.slide li img{
+  width:100%;
+
+}
