@@ -48,11 +48,11 @@ class ProductService {
 
   //상품 삭제
   async deleteProduct(productInfo) {
-    const {productId} = productInfo
-    const product = await this.productModel.delete(productId)
+    const { productId } = productInfo;
+    const product = await this.productModel.delete(productId);
 
     return product;
-}
+  }
 }
 
 const ProductService = new ProductService(productModel);
