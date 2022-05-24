@@ -1,38 +1,38 @@
 import { model } from 'mongoose';
-import { ProductSchema } from '../schemas/user-schema';
+import { ProductSchema } from '../schemas/product-schema';
 
-const User = model('users', ProductSchema);
+const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
+  async findByEmail(name) {
+    const product = await Product.findOne({ name });
+    return product;
   }
 
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
-    return user;
+  async findById(productId) {
+    const product = await Product.findOne({ _id: productId });
+    return product;
   }
 
-  async create(userInfo) {
-    const createdNewUser = await User.create(userInfo);
-    return createdNewUser;
+  async create(productInfo) {
+    const createdNewProduct = await Product.create(productInfo);
+    return createdNewProduct;
   }
 
   async findAll() {
-    const users = await User.find({});
-    return users;
+    const products = await Product.find({});
+    return products;
   }
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
+  async update({ productId, update }) {
+    const filter = { _id: productId };
     const option = { returnOriginal: false };
 
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
+    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
+    return updatedProduct;
   }
 }
 
-const userModel = new UserModel();
+const productModel = new ProductModel();
 
-export { userModel };
+export { productModel };
