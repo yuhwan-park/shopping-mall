@@ -4,7 +4,7 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findByEmail(name) {
+  async findByName(name) {
     const product = await Product.findOne({ name });
     return product;
   }
@@ -30,6 +30,11 @@ export class ProductModel {
 
     const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
     return updatedProduct;
+  }
+
+  async delete(productId) {
+    const product = await Product.findOneAndDelete({ _id: productId })
+    return product;
   }
 }
 
