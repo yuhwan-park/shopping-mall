@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="layout.js" type="module" defer></script>
+    <script src="/static/js/modal.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -44,7 +44,10 @@
                         />
                       </div>
                     </div>
-                    <button class="button is-primary is-fullwidth mt-5">
+                    <button
+                      class="button is-primary is-fullwidth mt-5 js-modal-trigger"
+                      data-target="modal-js-signout"
+                    >
                       회원정보 안전하게 삭제하기
                     </button>
                   </form>
@@ -52,7 +55,31 @@
               </div>
             </div>
           </div>
-
+          <div class="modal" id="modal-js-signout">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <div class="modal-header">
+                  <p class="is-size-6">
+                    회원정보 삭제 시 복구할 수 없습니다.<br />
+                    정말로 삭제하시겠습니까?
+                  </p>
+                  <button
+                    class="delete is-large modal-close"
+                    aria-label="close"
+                  ></button>
+                </div>
+                <div
+                  class="modal-controller is-flex is-justify-content-center mt-5"
+                >
+                  <button class="button">네</button>
+                  <button class="button is-primary modal-close-button">
+                    아니오
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- CONTENT : END -->
         </div>
       </section>

@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = $trigger.dataset.target;
     const $target = document.getElementById(modal);
 
-    $trigger.addEventListener('click', () => {
+    $trigger.addEventListener('click', (e) => {
+      e.preventDefault();
       openModal($target);
     });
   });
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add a click event on various child elements to close the parent modal
   (
     document.querySelectorAll(
-      '.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot',
+      '.modal-background, .modal-close, .modal-close-button, .modal-card-head .delete, .modal-card-foot',
     ) || []
   ).forEach(($close) => {
     const $target = $close.closest('.modal');

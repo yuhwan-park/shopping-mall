@@ -1,4 +1,7 @@
 .modal {
+  &-header {
+    text-align: center;
+  }
   &-close {
     position: absolute;
   }
@@ -8,5 +11,13 @@
   }
   .delete:hover {
     background-color: rgba(10, 10, 10, 0.05);
+  }
+  &-controller {
+    & {
+      text-align: center;
+    }
+    .button + .button {
+      margin-left: 0.5rem;
+    }
   }
 }
