@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import is from '@sindresorhus/is';
-import { loginRequired } from '../middlewares';
 import { orderService } from '../services';
 
 const orderRouter = Router();
@@ -51,4 +49,4 @@ orderRouter.post('/', async (req, res, next) => {
 
 // // 주문 수정
 // // orderRouter.fetch(async (req, res, next) => {});
-// // export { orderRouter };
+export { orderRouter };
