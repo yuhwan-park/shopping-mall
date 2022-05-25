@@ -17,18 +17,35 @@ export class OrderModel {
   }
 
   // 주문 생성
-  async create(orderInfo) {
-    // product 정보 가져오기
-    const {
+  async create(newOrderInfo, userId) {
+    const [
       shortId,
       quantity,
       ordererName,
       phoneNumber,
       address,
+      totalPrice,
+      deliveryFee,
       deliveryRequest,
-    } = orderInfo;
-    const { product } = await Order.findOne(shortId);
-    const createdNewOrder = await Order.create(orderInfo);
+    ] = newOrderInfo;
+
+    // product 정보 가져오기
+    const product = await Product.findOne({
+      shortId: newOrderInfo[0],
+    });
+
+    // orderDB에 데이터 추가
+    const createdNewOrder = await Order.create({
+      // products[ { { product }, { quantity } } ]
+      products: [{ product: shortId }, { quantity }],
+      orderer: { userId: userId },
+      ordererName,
+      phoneNumber,
+      address,
+      totalPrice,
+      deliveryFee,
+      deliveryRequest,
+    });
     return createdNewOrder;
   }
 
