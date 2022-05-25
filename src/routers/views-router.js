@@ -19,7 +19,7 @@ viewsRouter.use('/account/security', serveStatic('account/security'));
 viewsRouter.use('/account/signout', serveStatic('account/signout'));
 viewsRouter.use('/admin', serveStatic('admin'));
 viewsRouter.use('/admin/products', serveStatic('admin/products'));
-viewsRouter.use('/admin/products/:id', serveStatic('admin/products/parmas'));
+viewsRouter.use('/admin/products/:id', serveStatic('admin/products', 'detail'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
