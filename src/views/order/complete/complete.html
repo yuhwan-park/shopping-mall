@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module" defer></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module" defer></script>
+    <!-- custom -->
+    <script src="complete.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div class="cart-header">
+            <div class="subtitle">
+              <p>장바구니 ></p>
+            </div>
+            <div class="subtitle">
+              <p>주문결제 ></p>
+            </div>
+            <div class="title">
+              <p>주문완료</p>
+            </div>
+          </div>
+
+          <div class="order-complete-container">
+            <div class="box order-complete">
+              <div class="complete-message">
+                <span class="icon"><i class="fas fa-circle-check"></i></span>
+                <span>주문이 완료되었습니다!</span>
+              </div>
+              <div class="button-container">
+                <button
+                  class="button is-medium is-fullwidth"
+                  id="orderDetailButton"
+                >
+                  주문내역 보기
+                </button>
+                <button
+                  class="button is-primary is-medium is-fullwidth"
+                  id="shoppingButton"
+                >
+                  쇼핑 계속하기
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>

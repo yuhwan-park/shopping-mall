@@ -12,19 +12,5 @@ head.insertAdjacentHTML(
       sizes="16x16"
       href="/static/images/elice-rabbit-favicon.png"
     />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script> 
-    -->
-    <!-- 공통 css -->
-    <link rel="stylesheet" href="/static/css/main.css" />
   `,
 );
