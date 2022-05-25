@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="/static/js/modal.js" defer type="module"></script>
+    <script src="order_list.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container">
+          <div class="block account-header">
+            <h1 class="subtitle is-4">주문조회</h1>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="control email-search-input">
+              <input
+                class="input"
+                type="text"
+                placeholder="Email로 유저 검색"
+              />
+            </div>
+          </div>
+
+          <div class="container admin-orders-container" id="ordersContainer">
+            <div
+              class="columns notification is-info is-light is-mobile orders-top"
+            >
+              <div class="column is-2">날짜</div>
+              <div class="column is-6">주문정보</div>
+              <div class="column is-2">상태</div>
+              <div class="column is-2">신청</div>
+            </div>
+
+            <!-- orders-item div를 js로 추가 -->
+            <div
+              class="columns orders-item"
+              id="order-628c550dae629ef7dc9d7bc4"
+            >
+              <div class="column is-2">2022-05-24</div>
+              <div class="column is-6 order-summary">아이보리 니트 / 1개</div>
+              <div class="column is-2">상품 준비중</div>
+              <div class="column is-2">
+                <button
+                  class="button js-modal-trigger"
+                  id="deleteButton-628c550dae629ef7dc9d7bc4"
+                  data-target="modal-js-order-cancel"
+                >
+                  주문 취소
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION : END -->
+      <div class="modal modal-js-order-cancel">
+        <div class="modal-background" id="modalBackground"></div>
+        <div class="modal-content">
+          <div class="box">
+            <p class="mb-3">
+              주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
+            </p>
+
+            <div class="buttons">
+              <button
+                class="button mt-5"
+                id="deleteCompleteButton"
+                aria-label="close"
+              >
+                네
+              </button>
+              <button
+                class="button is-primary mt-5"
+                id="deleteCancelButton"
+                aria-label="close"
+              >
+                아니오
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="modal-close is-large"
+          id="modalCloseButton"
+          aria-label="close"
+        ></button>
+      </div>
+    </div>
+  </body>
+</html>
