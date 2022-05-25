@@ -18,6 +18,16 @@ export class OrderModel {
 
   // 주문 생성
   async create(orderInfo) {
+    // product 정보 가져오기
+    const {
+      shortId,
+      quantity,
+      ordererName,
+      phoneNumber,
+      address,
+      deliveryRequest,
+    } = orderInfo;
+    const { product } = await Order.findOne(shortId);
     const createdNewOrder = await Order.create(orderInfo);
     return createdNewOrder;
   }
