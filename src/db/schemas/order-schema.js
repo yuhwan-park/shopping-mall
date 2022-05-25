@@ -23,44 +23,42 @@ const OrderSchema = new Schema(
         },
       },
     ],
-    orderer: {
-      userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-      },
-      ordererName: {
-        type: String,
-        required: true,
-      },
-      phoneNumber: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: new Schema(
-          {
-            postalCode: String,
-            address1: String,
-            address2: String,
-          },
-          {
-            _id: false,
-          },
-        ),
-        required: true,
-      },
-      deliveryRequest: {
-        type: String,
-        required: true,
-      },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    ordererName: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: new Schema(
+        {
+          postalCode: String,
+          address1: String,
+          address2: String,
+        },
+        {
+          _id: false,
+        },
+      ),
+      required: true,
+    },
+    deliveryRequest: {
+      type: String,
+      required: true,
     },
     deliveryFee: {
-      type: String || Number, // 무료일 경우 대비, String
+      type: Number,
       required: true,
     },
     totalPrice: {
-      type: String, // String, Number?
+      type: Number,
       required: true,
     },
   },
