@@ -17,6 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
+    <script src="/static/js/modal.js" type="module" defer></script>
     <script src="security.js" type="module" defer></script>
   </head>
   <body>
@@ -27,7 +28,7 @@
           <!-- CONTENT : START -->
           <div class="account">
             <div class="account-header">
-              <h1 class="title">회원정보 관리</h1>
+              <h1 class="title">회원정보 관리 <span>(회원이메일)</span></h1>
             </div>
             <div class="account-content">
               <div class="account-security">
@@ -36,7 +37,12 @@
                     <div class="field">
                       <label class="label" for="input-name">이름</label>
                       <div class="control">
-                        <input class="input" type="text" id="input-name" />
+                        <input
+                          class="input"
+                          type="text"
+                          id="input-name"
+                          disabled
+                        />
                         <label class="switch" for="toggle-name">
                           <input type="checkbox" id="toggle-name" />
                           <span class="switch-toggle"></span>
@@ -53,17 +59,25 @@
                             class="input"
                             type="text"
                             id="input-password"
+                            disabled
                           />
-                          <label class="switch" for="toggle-name">
-                            <input type="checkbox" id="toggle-name" />
+                          <label class="switch" for="toggle-passwrod">
+                            <input type="checkbox" id="toggle-password" />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
                       </div>
                       <div class="field-container">
-                        <label class="label">비밀번호 확인</label>
+                        <label class="label" for="input-password-confirm"
+                          >비밀번호 확인</label
+                        >
                         <div class="control">
-                          <input class="input" type="text" />
+                          <input
+                            class="input"
+                            type="text"
+                            id="input-password-confirm"
+                            disabled
+                          />
                         </div>
                       </div>
                     </div>
@@ -71,31 +85,49 @@
                       <div class="field-container">
                         <label class="label">주소</label>
                         <div class="control">
-                          <input class="input" type="text" />
-                          <button class="button is-light">주소 찾기</button>
-                          <label class="switch" for="toggle-name">
-                            <input type="checkbox" id="toggle-name" />
+                          <input
+                            class="input"
+                            type="text"
+                            id="input-address"
+                            readonly
+                            disabled
+                          />
+                          <button class="button is-light" disabled>
+                            주소 찾기
+                          </button>
+                          <label class="switch" for="toggle-address">
+                            <input type="checkbox" id="toggle-address" />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
                       </div>
                       <div class="field-container">
                         <div class="control">
-                          <input class="input" type="text" />
+                          <input class="input" type="text" disabled />
                         </div>
                       </div>
                       <div class="field-container">
                         <div class="control">
-                          <input class="input" type="text" />
+                          <input
+                            class="input"
+                            type="text"
+                            id="input-address"
+                            disabled
+                          />
                         </div>
                       </div>
                     </div>
                     <div class="field">
-                      <label class="label">전화번호</label>
+                      <label class="label" for="input-phone">전화번호</label>
                       <div class="control">
-                        <input class="input" type="text" />
-                        <label class="switch" for="toggle-name">
-                          <input type="checkbox" id="toggle-name" />
+                        <input
+                          class="input"
+                          type="text"
+                          id="input-phone"
+                          disabled
+                        />
+                        <label class="switch" for="toggle-phone">
+                          <input type="checkbox" id="toggle-phone" />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
@@ -131,17 +163,17 @@
                       <label
                         class="label a11y"
                         for="input-current-password-confirm"
-                        >이름</label
+                        >비밀번호</label
                       >
                       <div class="control">
                         <input
-                          class="input"
+                          class="input is-link"
                           type="text"
                           id="input-current-password-confirm"
                         />
                       </div>
                     </div>
-                    <button class="button is-success">저장 완료하기</button>
+                    <button class="button is-link mt-5">저장 완료하기</button>
                   </form>
                 </div>
               </div>

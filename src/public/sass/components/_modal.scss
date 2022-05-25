@@ -6,4 +6,7 @@
   &-close::after {
     background: #000;
   }
+  .delete:hover {
+    background-color: rgba(10, 10, 10, 0.05);
+  }
 }
