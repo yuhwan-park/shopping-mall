@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
 const OrderSchema = new Schema(
   {
-    products: {
-      items: {
-        productId: {
+    products: [
+      {
+        product: {
           type: Schema.Types.ObjectId,
           ref: 'Product',
           required: true,
@@ -13,18 +13,14 @@ const OrderSchema = new Schema(
           required: true,
         },
       },
-    },
+    ],
     orderer: {
       userId: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
         required: true,
       },
-      userName: {
-        type: String,
-        required: true,
-      },
-      address: {
+      ordererName: {
         type: String,
         required: true,
       },
