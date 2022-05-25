@@ -1,0 +1,9 @@
+.modal {
+  &-close {
+    position: absolute;
+  }
+  &-close::before,
+  &-close::after {
+    background: #000;
+  }
+}

@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="layout.js" type="module" defer></script>
+    <script src="security.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -25,16 +25,128 @@
       <section class="section">
         <div class="container content-container">
           <!-- CONTENT : START -->
-
           <div class="account">
             <div class="account-header">
               <h1 class="title">회원정보 관리</h1>
             </div>
             <div class="account-content">
-              <div class="account-security">회원정보 관리</div>
+              <div class="account-security">
+                <div class="account-security-container">
+                  <from class="form box">
+                    <div class="field">
+                      <label class="label" for="input-name">이름</label>
+                      <div class="control">
+                        <input class="input" type="text" id="input-name" />
+                        <label class="switch" for="toggle-name">
+                          <input type="checkbox" id="toggle-name" />
+                          <span class="switch-toggle"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="field-container">
+                        <label class="label" for="input-password"
+                          >비밀번호</label
+                        >
+                        <div class="control">
+                          <input
+                            class="input"
+                            type="text"
+                            id="input-password"
+                          />
+                          <label class="switch" for="toggle-name">
+                            <input type="checkbox" id="toggle-name" />
+                            <span class="switch-toggle"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="field-container">
+                        <label class="label">비밀번호 확인</label>
+                        <div class="control">
+                          <input class="input" type="text" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="field-container">
+                        <label class="label">주소</label>
+                        <div class="control">
+                          <input class="input" type="text" />
+                          <button class="button is-light">주소 찾기</button>
+                          <label class="switch" for="toggle-name">
+                            <input type="checkbox" id="toggle-name" />
+                            <span class="switch-toggle"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="field-container">
+                        <div class="control">
+                          <input class="input" type="text" />
+                        </div>
+                      </div>
+                      <div class="field-container">
+                        <div class="control">
+                          <input class="input" type="text" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label">전화번호</label>
+                      <div class="control">
+                        <input class="input" type="text" />
+                        <label class="switch" for="toggle-name">
+                          <input type="checkbox" id="toggle-name" />
+                          <span class="switch-toggle"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <button
+                      class="button is-info is-fullwidth mt-5 js-modal-trigger"
+                      data-target="modal-js-password"
+                    >
+                      회원정보 안전하게 삭제하기
+                    </button>
+                  </from>
+                </div>
+              </div>
             </div>
           </div>
-
+          <div class="modal" id="modal-js-password">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <div class="modal-header">
+                  <p class="is-size-6">현재 비밀번호를 입력해 주세요.</p>
+                  <p class="is-size-6">
+                    카카오 로그인인 경우, 'kakao'를 입력해 주세요.
+                  </p>
+                  <button
+                    class="delete is-large modal-close"
+                    aria-label="close"
+                  ></button>
+                </div>
+                <div class="mt-5">
+                  <form class="form">
+                    <div class="field">
+                      <label
+                        class="label a11y"
+                        for="input-current-password-confirm"
+                        >이름</label
+                      >
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="text"
+                          id="input-current-password-confirm"
+                        />
+                      </div>
+                    </div>
+                    <button class="button is-success">저장 완료하기</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- CONTENT : END -->
         </div>
       </section>

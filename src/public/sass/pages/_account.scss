@@ -32,6 +32,32 @@
   }
 }
 
+.account-security {
+  & {
+    display: flex;
+    justify-content: center;
+  }
+  &-container {
+    width: 40rem;
+  }
+  .field-container + .field-container {
+    margin-top: 0.75rem;
+  }
+  .field {
+    .control {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .switch {
+    margin-left: 2rem;
+    flex-shrink: 0;
+  }
+  .input + .button {
+    margin-left: 2rem;
+  }
+}
+
 .account-signout {
   & {
     display: flex;
