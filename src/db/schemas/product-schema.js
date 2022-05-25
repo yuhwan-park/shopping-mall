@@ -5,10 +5,8 @@ const ProductSchema = new Schema(
   {
     shortId,
     category: {
-      type: Schema.Types.ObjectId,
-      ref: 'category',
+      type: String,
       required: true,
-      index: true,
     },
     brand: {
       type: String,

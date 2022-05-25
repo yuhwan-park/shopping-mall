@@ -1,7 +1,7 @@
 import { model } from 'mongoose';
 import { CategorySchema } from '../schemas/category-schema';
 
-const Category = model('categories', CategorySchema);
+const Category = model('category', CategorySchema);
 
 export class CategoryModel {
   async findByName(name) {
@@ -9,19 +9,14 @@ export class CategoryModel {
     return category;
   }
 
-  async findById(shortId) {
-    const category = await Category.findOne({ shortId });
-    return category;
+  async findAll() {
+    const categories = await Category.find({});
+    return categories;
   }
 
   async create(categoryInfo) {
     const createdCategory = await Category.create(categoryInfo);
     return createdCategory;
-  }
-
-  async findAll() {
-    const categories = await Category.find({});
-    return categories;
   }
 
   async update({ shortId, update }) {

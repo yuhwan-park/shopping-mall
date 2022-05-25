@@ -7,8 +7,8 @@ class ProductService {
   async addProduct(productInfo) {
     const { category, name, image, price, content, brand } = productInfo;
 
-    // 상품명 중복 확인
-    const product = await this.productModel.findByName(name);
+    // 같은 상품 중복을 걸러낼 수 있는 방법이 무엇이 있을까 고민됨
+    const product = await this.productModel.findOneByName(name);
     if (product) {
       throw new Error('이미 해당 상품이 존재합니다.');
     }
@@ -20,9 +20,21 @@ class ProductService {
     return createdNewProduct;
   }
 
-  // 상품 목록을 받음.
+  // 모든 상품 목록을 받음.
   async getProducts() {
     const products = await this.productModel.findAll();
+    return products;
+  }
+
+  //category에 따른 상품 목록
+  async getProductsByCategory(category) {
+    const products = await this.productModel.findAllByCategory(category);
+    return products;
+  }
+
+  //bran에 따른 상품 목록
+  async getProductsByBrand(brand) {
+    const products = await this.productModel.findAllByBrand(brand);
     return products;
   }
 

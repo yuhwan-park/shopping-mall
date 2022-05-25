@@ -20,13 +20,6 @@ class CategoryService {
     return createdNewCategory;
   }
 
-  // 카테고리 전부를 받음.
-  async getCategories() {
-    const categories = await this.categoryModel.findAll();
-
-    return categories;
-  }
-
   //카테고리들 이름만 받기
   async getCategorynames() {
     const categories = await this.categoryModel.findAll();
@@ -56,14 +49,14 @@ class CategoryService {
       update: toUpdate,
     });
 
-    return product;
+    return category;
   }
 
   //상품 삭제
-  async deleteProduct(shortId) {
-    const product = await this.productModel.delete(shortId);
+  async deleteCategory(shortId) {
+    const category = await this.categoryModel.delete(shortId);
 
-    return product;
+    return category;
   }
 }
 
