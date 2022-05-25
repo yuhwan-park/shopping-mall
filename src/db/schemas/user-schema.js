@@ -18,6 +18,14 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
+    orderInfo: [
+      // 주문번호
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Order',
+        required: false,
+      },
+    ],
     address: {
       type: new Schema(
         {
@@ -27,7 +35,7 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
@@ -40,7 +48,7 @@ const UserSchema = new Schema(
   {
     collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { UserSchema };
