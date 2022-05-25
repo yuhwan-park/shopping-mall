@@ -21,9 +21,8 @@ adminRouter.get('/', (req, res) => {
     });
     res.redirect('/home')
   }
-
-  res.json
 });
 
+adminRouter.post('/')
 
 export { adminRouter };

@@ -5,7 +5,8 @@ const ProductSchema = new Schema(
   {
     shortId,
     category: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'categories',
       required: true,
     },
     brand: {
@@ -16,11 +17,15 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    content: {
+    shortDescription: {
       type: String,
       required: true,
     },
-    image: {
+    detailDescription: {
+      type: String,
+      required: true,
+    },
+    imageURL: {
       type: String,
       required: true,
     },
@@ -31,6 +36,7 @@ const ProductSchema = new Schema(
   },
   {
     timestamps: true,
+    collection: 'products'
   },
 );
 
