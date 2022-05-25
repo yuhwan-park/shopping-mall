@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="detail.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div class="product-container">
+            <div class="product-img">
+              <img
+                src="https://cdn.pixabay.com/photo/2022/05/21/11/46/frog-7211336_1280.png"
+                alt="product-img"
+              />
+              <button class="button is-primary">이미지 수정</button>
+            </div>
+            <div class="product-info">
+              <div class="button-container">
+                <button class="button edit-content-button">수정</button>
+              </div>
+              <div class="box product-form">
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label for="productTitle" class="label">제품명</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input
+                          type="text"
+                          class="input"
+                          id="productTitle"
+                          readonly
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label for="productPrice" class="label">가격</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input
+                          type="text"
+                          class="input"
+                          id="productPrice"
+                          readonly
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label for="productCategories" class="label"
+                      >카테고리</label
+                    >
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input
+                          type="text"
+                          class="input"
+                          id="productCategories"
+                          readonly
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label for="productBrand" class="label">브랜드</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input
+                          type="text"
+                          class="input"
+                          id="productBrand"
+                          readonly
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-horizontal">
+                  <div class="field-label">
+                    <label for="productQuantity" class="label">재고</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input
+                          type="text"
+                          class="input"
+                          id="productQuantity"
+                          readonly
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>

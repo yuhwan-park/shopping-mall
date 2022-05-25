@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="layout.js" type="module" defer></script>
+    <script src="products.js" defer></script>
   </head>
   <body>
     <div id="app">
@@ -25,7 +25,26 @@
       <section class="section">
         <div class="container content-container">
           <!-- CONTENT : START -->
-          <div style="background: #999">공통 레이아웃 입니다</div>
+          <div class="products-header title">
+            <p>상품관리</p>
+          </div>
+
+          <ul class="product-list">
+            <!-- li tag를 js에서 불러오는 리스트 수만큼 반복 -->
+            <li class="list-item" id="listItem">
+              <img
+                class="product-image"
+                src="https://cdn.pixabay.com/photo/2022/05/21/11/46/frog-7211336_1280.png"
+                alt="product image"
+              />
+              <div class="product-info">
+                <p class="product-title">상품명</p>
+                <p>상품 재고 수 : <span class="product-quantity">10</span>개</p>
+                <p>상품 가격 : <span class="product-prict">n</span>원</p>
+              </div>
+            </li>
+          </ul>
+
           <!-- CONTENT : END -->
         </div>
       </section>

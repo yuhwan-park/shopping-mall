@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="admin.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div class="admin">
+            <div class="admin-header">
+              <h1 class="title">계정관리</h1>
+            </div>
+            <div class="admin-content">
+              <div class="navbar-card columns is-desktop">
+                <div class="navbar-card-item column">
+                  <a class="navbar-card-menu" href="/admin/products">
+                    <div class="navbar-card-menu-icon">
+                      <span class="icon has-text-info">
+                        <i class="fa-solid fa-shop"></i>
+                      </span>
+                    </div>
+                    <div class="navbar-card-menu-body">
+                      <p class="title is-3">상품관리</p>
+                      <p class="subtitle is-5">
+                        상품의 상세 내용을 관리할 수 있습니다.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="navbar-card-item column">
+                  <a class="navbar-card-menu" href="/admin/add">
+                    <div class="navbar-card-menu-icon">
+                      <span class="icon has-text-info">
+                        <i class="fa-solid fa-square-plus"></i>
+                      </span>
+                    </div>
+                    <div class="navbar-card-menu-body">
+                      <p class="title is-3">상품추가</p>
+                      <p class="subtitle is-5">
+                        판매 상품을 추가할 수 있습니다.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div class="navbar-card-item column">
+                  <a class="navbar-card-menu" href="/admin/security">
+                    <div class="navbar-card-menu-icon">
+                      <span class="icon has-text-info">
+                        <i class="fa-solid fa-users"></i>
+                      </span>
+                    </div>
+                    <div class="navbar-card-menu-body">
+                      <p class="title is-3">유저 조회</p>
+                      <p class="subtitle is-5">
+                        유저의 정보를 조회할 수 있습니다.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>
