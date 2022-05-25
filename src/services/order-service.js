@@ -9,13 +9,29 @@ class OrderService {
   }
 
   // 주문 생성
-  async addOrder(orderInfo, userId) {
-    const [{ shortId, quantity }] = orderInfo;
+  async addOrder(orderInfo) {
+    const {
+      shortId,
+      quantity,
+      userId,
+      orderer,
+      address,
+      deliveryFee,
+      totalPrice,
+    } = orderInfo;
 
-    const newOrderInfo = [{ shortId, quantity }];
+    const newOrderInfo = {
+      shortId,
+      quantity,
+      userId,
+      orderer,
+      address,
+      deliveryFee,
+      totalPrice,
+    };
 
     // db에 저장
-    const createdNewOrder = await this.orderModel.create(newOrderInfo, userId);
+    const createdNewOrder = await this.orderModel.create(newOrderInfo);
 
     return createdNewOrder;
   }

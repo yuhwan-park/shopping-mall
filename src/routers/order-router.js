@@ -5,7 +5,7 @@ import { orderService } from '../services';
 
 const orderRouter = Router();
 
-// 주문 생성
+// 주문 생성 - 질문
 orderRouter.post('/', async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -15,9 +15,9 @@ orderRouter.post('/', async (req, res, next) => {
         'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
-    // 주문 안에 상품이 여러개일 경우, 배열로 받아온다.
+    // 주문 안에 상품이 여러개일 경우, products를 배열로 받아온다.
     const {
-      products, // products = [{id, quantity}]
+      products, // products = [{shortId, quantity}]
       ordererName,
       phoneNumber,
       postalCode,
@@ -27,12 +27,35 @@ orderRouter.post('/', async (req, res, next) => {
       deliveryFee,
       totalPrice,
     } = req.body.orderInfo;
-
     // jwt token
-    const userId = req.currentId;
+    const userId = req.currentuserId;
+
+    const address = { postalCode, address1, address2 };
+
+    const orderer = {
+      ordererName,
+      phoneNumber,
+      deliveryRequest,
+    };
+
+    // products에 값이 있을 경우 값 추출
+    // for (i = 0; i <= products.length; i++) {
+    //   const { shortId, quantity } = products[i];
+    //   return { shortId, quantity };
+    // }
+
+    const orderInfo = {
+      id,
+      quantity,
+      userId,
+      orderer,
+      address,
+      deliveryFee,
+      totalPrice,
+    };
 
     // 위 데이터를 주문 db에 추가하기
-    const newOrder = await orderService.addOrder();
+    const newOrder = await orderService.addOrder(orderInfo);
 
     res.status(201).json(newOrder);
   } catch (error) {
