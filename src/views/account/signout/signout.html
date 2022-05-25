@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="layout.js" type="module" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+
+          <div class="account">
+            <div class="account-content">
+              <div class="account-signout">
+                <div class="account-signout-container">
+                  <form class="box">
+                    <div class="form-header mb-5">
+                      <p class="title">삭제를 진행합니다.</p>
+                    </div>
+                    <div class="field">
+                      <label class="label">현재 비밀번호</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="text"
+                          placeholder="카카오 로그인의 경우 'kakao'를 입력해 주세요."
+                        />
+                      </div>
+                    </div>
+                    <button class="button is-primary is-fullwidth mt-5">
+                      회원정보 안전하게 삭제하기
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>

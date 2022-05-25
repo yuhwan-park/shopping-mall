@@ -31,3 +31,24 @@
     }
   }
 }
+
+.account-signout {
+  & {
+    display: flex;
+    height: calc(85vh);
+    align-items: center;
+    justify-content: center;
+  }
+  &-container {
+    width: 30rem;
+  }
+  .form-header {
+    & {
+      text-align: center;
+    }
+    .title {
+      font-size: 1.4rem;
+      color: #00d1b2;
+    }
+  }
+}
