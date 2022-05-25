@@ -24,7 +24,5 @@ head.insertAdjacentHTML(
       crossorigin="anonymous"
     ></script> 
     -->
-    <!-- 공통 css -->
-    <link rel="stylesheet" href="/static/css/main.css" />
   `,
 );

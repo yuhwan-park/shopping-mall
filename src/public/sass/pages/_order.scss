@@ -1,0 +1,20 @@
+.cart-products {
+  width: 60%;
+  flex: none;
+  .delivery-info {
+    width: 100%;
+  }
+}
+
+.tile-order-summary {
+  width: 40%;
+  height: 100%;
+}
+
+.field-body .search {
+  display: flex;
+  .control {
+    margin-right: 5px;
+    width: 100%;
+  }
+}
