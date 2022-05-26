@@ -121,10 +121,12 @@ userRouter.patch('/:shortId', loginRequired, async function (req, res, next) {
   }
 });
 
-// 사용자 상세 정보
+// 사용자 정보 조회
 userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
+    const getUserInfo = userService.getUser(userId);
+    res.status(200).json(getUserInfo);
   } catch (error) {
     next(error);
   }
