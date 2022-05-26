@@ -76,7 +76,7 @@ class UserService {
 
   // 사용자 목록을 받음.
   async getUsers() {
-    const users = await this.userModel.findAll();
+    const users = await this.userModel.userfindAll();
     return users;
   }
 

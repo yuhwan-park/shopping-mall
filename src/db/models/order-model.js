@@ -39,17 +39,16 @@ export class OrderModel {
   }
 
   // 사용자용 주문 전체 조회
-  async getOrders(userobjectId) {
+  async userfindAll(userobjectId) {
     const orders = await Order.findMany({ userobjectId });
     return orders;
   }
 
   // 관리자용 주문 전체 조회
-  async findAll() {
+  async adminfindAll() {
     const orders = await Order.find({});
     return orders;
   }
-
 
   // 주문 취소
   async delete({ shortId }) {
