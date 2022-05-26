@@ -1,9 +1,7 @@
-
 import cors from 'cors';
 import express from 'express';
 import { viewsRouter, userRouter, orderRouter, adminRouter } from './routers';
 import { errorHandler } from './middlewares';
-
 
 //TEST
 const app = express();
