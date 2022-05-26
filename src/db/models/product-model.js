@@ -9,7 +9,7 @@ export class ProductModel {
     return product;
   }
 
-  async findOneByshortId(shortId) {
+  async findById(shortId) {
     const product = await Product.findOne({ shortId });
     return product;
   }
@@ -19,7 +19,7 @@ export class ProductModel {
     return products;
   }
 
-  async findAllBybrand(brand) {
+  async findAllByBrand(brand) {
     const products = await Product.find({ brand });
     return products;
   }
@@ -46,9 +46,9 @@ export class ProductModel {
     return updatedProduct;
   }
 
-  async delete(shortId) {
-    const product = await Product.findOneAndDelete({ _id });
-    return product;
+  async delete(_id) {
+    const result = await Product.findOneAndDelete({ _id });
+    return result;
   }
 }
 
