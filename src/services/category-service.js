@@ -5,14 +5,14 @@ class CategoryService {
     this.categoryModel = categoryModel;
   }
   async addCategory(categoryInfo) {
-    const { name, content, image } = categoryInfo;
+    const { name, content, imageURL } = categoryInfo;
 
     // 카테고리명 중복 확인
     const category = await this.categoryModel.findByName(name);
     if (category) {
       throw new Error('이미 해당 카테고리가 존재합니다.');
     }
-    const newCategoryInfo = { name, content, image };
+    const newCategoryInfo = { name, content, imageURL };
 
     // db에 저장
     const createdNewCategory = await this.categoryModel.create(newCategoryInfo);
@@ -52,7 +52,7 @@ class CategoryService {
     return category;
   }
 
-  //상품 삭제
+  //상품 삭제 shortid => objectid
   async deleteCategory(shortId) {
     const category = await this.categoryModel.delete(shortId);
 
