@@ -125,7 +125,7 @@ userRouter.patch('/:shortId', loginRequired, async function (req, res, next) {
 userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    const getUserInfo = userService.getUser(userId);
+    const getUserInfo = await userService.getUser(userId);
     res.status(200).json(getUserInfo);
   } catch (error) {
     next(error);
