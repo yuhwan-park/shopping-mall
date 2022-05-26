@@ -1,0 +1,17 @@
+@mixin clearfix {
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+@mixin a11y {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%); 
+}
