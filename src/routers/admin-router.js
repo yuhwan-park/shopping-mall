@@ -11,10 +11,6 @@ adminRouter.get('/', adminRequired, (req, res) => {
   });
 });
 
-adminRouter.get('/products', (req, res) => {
-  res.json('a');
-});
-
 adminRouter.post('/');
 
 export { adminRouter };
