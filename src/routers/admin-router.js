@@ -114,7 +114,7 @@ adminRouter.patch('/products/:id', adminRequired, async (req, res) => {
     imageURL,
     price,
   } = req.body;
-  const toUpdate = {
+  const updateRequest = {
     category,
     brand,
     name,
@@ -123,7 +123,7 @@ adminRouter.patch('/products/:id', adminRequired, async (req, res) => {
     imageURL,
     price,
   };
-  const updatedProduct = await productService.setProduct(shortId, toUpdate)
+  const updatedProduct = await productService.setProduct(shortId, updateRequest)
   res.status(200).json(updatedProduct)
 })
 export { adminRouter };
