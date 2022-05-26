@@ -32,39 +32,39 @@ export class OrderModel {
     return createdNewOrder;
   }
 
-  // // 주문 상세 조회
-  // async findById(orderId) {
-  //   const order = await Order.findOne({ _id: orderId });
-  //   return order;
-  // }
+  // 주문 상세 조회
+  async findById(orderId) {
+    const order = await Order.findOne({ _id: orderId });
+    return order;
+  }
 
-  // // 사용자용 주문 상세 조회
-  // async findById(userId) {
-  //   const orders = await Order.findMany({ orderer: { userId: userId } });
-  //   return orders;
-  // }
+  // 사용자용 주문 상세 조회
+  async findById(userId) {
+    const orders = await Order.findMany({ orderer: { userId: userId } });
+    return orders;
+  }
 
-  // // 관리자용 주문 전체 조회
-  // async findAll() {
-  //   const orders = await Order.find({});
-  //   return orders;
-  // }
+  // 관리자용 주문 전체 조회
+  async findAll() {
+    const orders = await Order.find({});
+    return orders;
+  }
 
-  // // 주문 수정
-  // async update({ orderId, update }) {
-  //   const filter = { _id: orderId };
-  //   // 갱신된 document를 반환한다.
-  //   const option = { returnOriginal: false };
+  // 주문 수정
+  async update({ orderId, update }) {
+    const filter = { _id: orderId };
+    // 갱신된 document를 반환한다.
+    const option = { returnOriginal: false };
 
-  //   const updatedOrder = await Order.findOneAndUpdate(filter, update, option);
-  //   return updatedUser;
-  // }
+    const updatedOrder = await Order.findOneAndUpdate(filter, update, option);
+    return updatedUser;
+  }
 
-  // // 주문 취소
-  // async delete({ orderId }) {
-  //   const deletedOrder = await Order.findOneAndDelete({ _id: orderId });
-  //   return deletedOrder;
-  // }
+  // 주문 취소
+  async delete({ orderId }) {
+    const deletedOrder = await Order.findOneAndDelete({ _id: orderId });
+    return deletedOrder;
+  }
 }
 
 const orderModel = new OrderModel();
