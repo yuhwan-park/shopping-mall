@@ -76,9 +76,8 @@ userRouter.patch('/:shortId', loginRequired, async function (req, res, next) {
         'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
-
     // 토큰에서 userId 가져옴
-    const userId = req.curenntUserId;
+    const userId = req.currentUserId;
     // const shortId = req.body.shortId
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.
@@ -90,7 +89,6 @@ userRouter.patch('/:shortId', loginRequired, async function (req, res, next) {
 
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
     const currentPassword = req.body.currentPassword;
-
     // currentPassword 없을 시, 진행 불가
     if (!currentPassword) {
       throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
