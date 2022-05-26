@@ -31,7 +31,26 @@
                 src="https://cdn.pixabay.com/photo/2022/05/21/11/46/frog-7211336_1280.png"
                 alt="product-img"
               />
-              <button class="button is-primary">이미지 수정</button>
+              <div class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input
+                    class="file-input"
+                    id="imageInput"
+                    type="file"
+                    name="image-file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload" aria-hidden="true"></i>
+                    </span>
+                    <span class="file-label"> 사진 업로드 </span>
+                  </span>
+                  <span class="file-name" id="fileNameSpan">
+                    사진파일 (png, jpg, jpeg)
+                  </span>
+                </label>
+              </div>
             </div>
             <div class="product-info">
               <div class="button-container">
@@ -49,7 +68,7 @@
                           type="text"
                           class="input"
                           id="productTitle"
-                          readonly
+                          disabled
                         />
                       </p>
                     </div>
@@ -66,7 +85,7 @@
                           type="text"
                           class="input"
                           id="productPrice"
-                          readonly
+                          disabled
                         />
                       </p>
                     </div>
@@ -85,7 +104,7 @@
                           type="text"
                           class="input"
                           id="productCategories"
-                          readonly
+                          disabled
                         />
                       </p>
                     </div>
@@ -102,7 +121,7 @@
                           type="text"
                           class="input"
                           id="productBrand"
-                          readonly
+                          disabled
                         />
                       </p>
                     </div>
@@ -119,7 +138,7 @@
                           type="text"
                           class="input"
                           id="productQuantity"
-                          readonly
+                          disabled
                         />
                       </p>
                     </div>
