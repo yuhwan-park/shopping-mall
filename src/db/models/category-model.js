@@ -32,7 +32,8 @@ export class CategoryModel {
   }
 
   async delete(shortId) {
-    const category = await Category.findOneAndDelete({ shortId });
+    //shortid => objectid
+    const category = await Category.findOneAndDelete({ _id });
     return category;
   }
 }

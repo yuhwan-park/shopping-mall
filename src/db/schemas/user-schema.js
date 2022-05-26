@@ -24,7 +24,7 @@ const UserSchema = new Schema(
       // 주문번호
       {
         type: Schema.Types.ObjectId,
-        ref: 'Order',
+        ref: 'orders',
         required: false,
       },
     ],

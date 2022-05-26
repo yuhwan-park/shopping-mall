@@ -47,7 +47,7 @@ export class ProductModel {
   }
 
   async delete(shortId) {
-    const product = await Product.findOneAndDelete({ shortId });
+    const product = await Product.findOneAndDelete({ _id });
     return product;
   }
 }

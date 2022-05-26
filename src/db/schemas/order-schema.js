@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { orderService } from '../../services';
 import shortId from './types/short-id';
 
 const OrderSchema = new Schema(
@@ -8,7 +9,7 @@ const OrderSchema = new Schema(
       {
         productId: {
           type: Schema.Types.ObjectId,
-          ref: 'Product',
+          ref: 'products',
           required: true,
         },
         quantity: {
@@ -19,7 +20,7 @@ const OrderSchema = new Schema(
     ],
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'users',
       required: true,
     },
     ordererName: {
@@ -58,6 +59,7 @@ const OrderSchema = new Schema(
   },
   {
     timestamps: true,
+    collection: 'orders'
   },
 );
 
