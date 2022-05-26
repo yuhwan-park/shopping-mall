@@ -1,15 +1,9 @@
 import { Schema } from 'mongoose';
-import { nanoid } from 'nanoid';
+import shortId from './types/short-id';
 
 const OrderSchema = new Schema(
   {
-    shortId: {
-      type: String,
-      default: () => {
-        return nanoid();
-      },
-      required: true,
-    },
+    shortId,
     products: [
       {
         productId: {
