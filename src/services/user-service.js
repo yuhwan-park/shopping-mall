@@ -76,7 +76,7 @@ class UserService {
 
   // 사용자 목록을 받음.
   async getUsers() {
-    const users = await this.userModel.userfindAll();
+    const users = await this.userModel.findAll();
     return users;
   }
 
@@ -135,6 +135,12 @@ class UserService {
     }
     const result = await this.userModel.delete(userId);
     return result;
+  }
+
+  // email => userid
+  async getUserIdByEmail(email) {
+    const { _id } = await this.userModel.findByEmail(email);
+    return _id
   }
 }
 

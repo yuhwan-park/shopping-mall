@@ -34,7 +34,6 @@ function adminRequired(req, res, next) {
       result: 'forbidden-approach',
       reason: '관리자만 사용할 수 있는 서비스입니다.',
     });
-    res.redirect('/home');
     return;
   }
 }

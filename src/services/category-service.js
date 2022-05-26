@@ -20,10 +20,9 @@ class CategoryService {
     return createdNewCategory;
   }
 
-
-  //카테고리 이름 => return object Id 
-  async getIdByName(name) {
-    const category = await this.categoryModel.findByName(name)
+  //카테고리 name => object Id 
+  async getIdByName(categoryname) {
+    const category = await this.categoryModel.findByName(categoryname)
     if (!category) {
       throw new Error('카테고리가 존재하지 않습니다.')
     }
@@ -44,8 +43,13 @@ class CategoryService {
       const { name } = category;
       return name;
     });
-
     return names;
+  }
+
+  // 카테고리 상세
+  async getCategory(shortId) {
+    const category = await this.categoryModel.findById(shortId)
+    return category
   }
 
   // 카테고리 수정
@@ -68,7 +72,7 @@ class CategoryService {
     return category;
   }
 
-  //상품 삭제 shortid => objectid
+  //카테고리 삭제
   async deleteCategory(shortId) {
     const { _id } = await this.categoryModel.findById(shortId)
     const result = await this.categoryModel.delete(_id);

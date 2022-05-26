@@ -15,7 +15,7 @@ class ProductService {
       imageURL,
       price,
     } = productInfo;
-
+    
     // 같은 상품 중복을 걸러낼 수 있는 방법이 무엇이 있을까 고민됨
     const product = await this.productModel.findOneByName(name);
     if (product) {
@@ -67,7 +67,7 @@ class ProductService {
       detailDescription,
       imageURL,
       price,
-    } = updateRequest;
+    } = await updateRequest
 
     const newcategoryId = await categoryService.getIdByName(category);
     const toUpdate = {
