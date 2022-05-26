@@ -101,14 +101,14 @@ adminRouter.get('/products/:id', adminRequired, async (req, res) => {
 
 // 상품 삭제
 adminRouter.delete('/products/:id', adminRequired, async (req, res) => {
-  const shortId = await req.params.id;
+  const shortId = req.params.id;
   const result = await productService.delete(shortId);
   res.status(200).json(result);
 });
 
 // 상품 정보 수정
 adminRouter.patch('/products/:id', adminRequired, async (req, res) => {
-  const shortId = await req.params.id;
+  const shortId = req.params.id;
   const {
     category,
     brand,

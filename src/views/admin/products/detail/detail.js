@@ -9,6 +9,15 @@ const $shortDescription = document.querySelector('#shortDescription');
 const $detailDescription = document.querySelector('#detailDescription');
 const $editButton = document.querySelector('#editButton');
 
+const elements = [
+  $title,
+  $price,
+  $categories,
+  $brand,
+  $shortDescription,
+  $detailDescription,
+];
+
 const path = window.location.pathname.split('/');
 const id = path[path.length - 2];
 
@@ -24,11 +33,11 @@ async function printDetail() {
     const product = await Api.get('/api/admin/products', id);
     $title.value = product.name;
     $price.value = product.price;
-    $categories.value = product.category;
+    $categories.value = product.categoryId;
     $brand.value = product.brand;
     $shortDescription.value = product.shortDescription;
     $detailDescription.value = product.detailDescription;
-    console.log(first);
+    $img.src = product.imageURL;
   } catch (error) {
     console.error(error);
   }
@@ -37,7 +46,27 @@ async function printDetail() {
 async function editDetail(event) {
   if (event.target.innerText === '수정') {
     event.target.innerText = '수정완료';
+    toggle(false);
   } else {
+    const newProductData = {
+      name: $title.value,
+      brand: $brand.value,
+      price: $price.value,
+      category: $categories.value,
+      shortDescription: $shortDescription.value,
+      detailDescription: $detailDescription.value,
+      imageURL: $img.src,
+    };
+
+    await Api.patch('/api/admin/products', id, newProductData);
+
     event.target.innerText = '수정';
+    toggle(true);
   }
+}
+
+function toggle(boolean) {
+  elements.forEach((element) => {
+    element.disabled = boolean;
+  });
 }
