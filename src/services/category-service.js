@@ -19,7 +19,16 @@ class CategoryService {
 
     return createdNewCategory;
   }
-
+  //카테고리 이름 => return object Id 
+  async getIdByName(name) {
+    const category = await this.categoryModel.findByName(name)
+    if (!category) {
+      throw new Error('카테고리가 존재하지 않습니다.')
+    }
+    const { _id } = category
+    return _id
+  }
+  
   //카테고리들 이름만 받기
   async getCategorynames() {
     const categories = await this.categoryModel.findAll();

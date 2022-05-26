@@ -1,18 +1,21 @@
 import { productModel } from '../db';
-
+import { categoryService } from './'
 class ProductService {
   constructor(productModel) {
     this.productModel = productModel;
   }
   async addProduct(productInfo) {
-    const { category, name, imageURL, price, content, brand } = productInfo;
+    const { category, brand, name, shortDescription, detailDescription, imageURL, price } = productInfo;
 
     // 같은 상품 중복을 걸러낼 수 있는 방법이 무엇이 있을까 고민됨
     const product = await this.productModel.findOneByName(name);
     if (product) {
       throw new Error('이미 해당 상품이 존재합니다.');
     }
-    const newProductInfo = { category, name, imageURL, price, content, brand };
+
+    const categoryId = await categoryService.getIdByName(category)
+
+    const newProductInfo = { categoryId, brand, name, shortDescription, detailDescription, imageURL, price: Number(price) };
 
     // db에 저장
     const createdNewProduct = await this.productModel.create(newProductInfo);
