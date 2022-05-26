@@ -19,9 +19,6 @@ window.onload = async () => {
           />
           <div class="product-info">
             <p class="product-title">${product.name}</p>
-            <p>
-              상품 재고 수 : <span class="product-quantity">${product.inventory}</span>개
-            </p>
             <p>상품 가격 : <span class="product-prict">${product.price}</span>원</p>
           </div>
         </li>
