@@ -90,7 +90,7 @@ adminRouter.get('/products', adminRequired, async (req, res) => {
 
 // 상품 상세 조회
 adminRouter.get('/products/:id', adminRequired, async (req, res) => {
-  const shortId = await req.params.id;
+  const shortId = req.params.id;
   const product = await productService.getProduct(shortId);
   res.status(200).json(product);
 })
