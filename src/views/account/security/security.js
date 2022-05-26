@@ -4,11 +4,12 @@ import * as Api from '/api.js';
 const fullNameInput = document.querySelector('#fullNameInput');
 const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
-const addressToggle = document.querySelector('#addressToggle');
+const addressInput = document.querySelector('#addressInput');
 const phoneInput = document.querySelector('#phoneInput');
 const currentPasswordConfirmInput = document.querySelector(
   '#currentPasswordConfirmInput',
 );
+const swithCheckboxs = document.querySelectorAll('.switch');
 const modalPassword = document.querySelector('#modal-js-password');
 const submitButton = document.querySelector('#submitButton');
 const submitConfirmButton = document.querySelector('#submitConfirmButton');
@@ -24,6 +25,10 @@ async function addAllElements() {}
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
   submitConfirmButton.addEventListener('click', handlePasswordSubmit);
+  swithCheckboxs.forEach((swithCheckbox) => {
+    const checkbox = swithCheckbox.querySelector('input');
+    checkbox.addEventListener('click', handleSwitch);
+  });
 }
 
 async function userData() {
@@ -33,6 +38,10 @@ async function userData() {
   } catch (err) {
     console.error(err);
   }
+}
+
+async function handleSwitch(e) {
+  console.log(e.target.id);
 }
 
 async function handleSubmit(e) {
