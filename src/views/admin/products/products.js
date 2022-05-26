@@ -2,11 +2,13 @@ import * as Api from '/api.js';
 
 const $productList = document.querySelector('#productList');
 
-window.onload = async () => {
+getProducts();
+
+async function getProducts() {
   try {
     let node = '';
     const products = await Api.get('/api/admin/products');
-    // 받아온 데이터를 템플릿에 맞게 변수에 저장
+
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
       node += `
@@ -24,13 +26,13 @@ window.onload = async () => {
         </li>
       </a>`;
     }
-    // ul 태그에 추가
+
     if (node) {
-      $productList.innerHTML = node;
+      $productList.insertAdjacentHTML('afterbegin', node);
     } else {
-      $productList.innerHTML = `<p>조회된 상품이 없습니다.</p>`;
+      $productList.innerHTML = '<div>조회된 상품이 없습니다.</div>';
     }
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
   }
-};
+}
