@@ -130,6 +130,7 @@ class UserService {
   // 사용자 삭제
   async delUser(userId) {
     let user = await this.userModel.findById(userId);
+    console.log(user);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
