@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import { orderService } from '../../services';
-import shortId from './types/short-id';
+import { shortId } from './types/short-id';
 
 const OrderSchema = new Schema(
   {
@@ -59,7 +59,7 @@ const OrderSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'orders'
+    collection: 'orders',
   },
 );
 

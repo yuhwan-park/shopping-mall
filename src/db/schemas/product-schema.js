@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import shortId from './types/short-id';
+import { shortId } from './types/short-id';
 
 const ProductSchema = new Schema(
   {
@@ -36,7 +36,7 @@ const ProductSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'products'
+    collection: 'products',
   },
 );
 
