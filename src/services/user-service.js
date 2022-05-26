@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password, role } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -27,7 +27,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = { fullName, email, password: hashedPassword, role };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -74,7 +74,7 @@ class UserService {
     return { token };
   }
 
-  // 사용자 목록을 받음.
+  // 사용자 목록을 받음. - admin으로 이동
   async getUsers() {
     const users = await this.userModel.userfindAll();
     return users;
@@ -127,11 +127,29 @@ class UserService {
     return user;
   }
 
+  // 사용자 정보 조회
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+    return user;
+  }
+
   // 사용자 삭제
-  async delUser(userId) {
-    let user = await this.userModel.findById(userId);
+  async delUser(userId, currentPassword) {
+    const user = await this.userModel.findById(userId);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    const correctPasswordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+      currentPassword,
+      correctPasswordHash,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+      );
     }
     const result = await this.userModel.delete(userId);
     return result;
