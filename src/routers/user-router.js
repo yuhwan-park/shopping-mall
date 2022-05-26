@@ -18,15 +18,19 @@ userRouter.post('/register', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const password = req.body.password;
+    const { fullName, email, password, adminCode } = req.body;
 
+    const checkAdminCode = '222222';
+    let role = 'basic-user';
+    if (adminCode == checkAdminCode) {
+      role = 'admin';
+    }
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
+      role,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -56,20 +60,6 @@ userRouter.post('/login', async function (req, res, next) {
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// 전체 유저 목록을 가져옴 (배열 형태임) -> admin으로 빼기
-// 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get('/userlist', loginRequired, async function (req, res, next) {
-  try {
-    // 전체 사용자 목록을 얻음
-    const users = await userService.getUsers();
-
-    // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
