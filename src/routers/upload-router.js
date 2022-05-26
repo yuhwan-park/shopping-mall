@@ -37,3 +37,5 @@ uploadRouter.post('/', upload.single('img'), (req, res) => {
   console.log(req.body, req.file);
   res.json({ url: `src/uploads/${req.file.filename}` });
 });
+
+export { uploadRouter }
