@@ -134,7 +134,16 @@ userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
 userRouter.delete('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    const deletedUserInfo = await userService.delUser(userId);
+
+    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    const currentPassword = req.body.currentPassword;
+
+    // currentPassword 없을 시, 진행 불가
+    if (!currentPassword) {
+      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
+    }
+
+    const deletedUserInfo = await userService.delUser(userId, currentPassword);
     res.status(200).json(deletedUserInfo);
   } catch (error) {
     next(error);

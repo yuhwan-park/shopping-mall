@@ -128,11 +128,22 @@ class UserService {
   }
 
   // 사용자 삭제
-  async delUser(userId) {
+  async delUser(userId, currentPassword) {
     let user = await this.userModel.findById(userId);
-    console.log(user);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    const correctPasswordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+      currentPassword,
+      correctPasswordHash,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+      );
     }
     const result = await this.userModel.delete(userId);
     return result;
