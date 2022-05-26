@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="admin.js" defer></script>
+    <script src="admin.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -27,7 +27,7 @@
           <!-- CONTENT : START -->
           <div class="admin">
             <div class="admin-header">
-              <h1 class="title">계정관리</h1>
+              <h1 class="title">관리자 메뉴</h1>
             </div>
             <div class="admin-content">
               <div class="navbar-card columns is-desktop">
@@ -62,16 +62,16 @@
                   </a>
                 </div>
                 <div class="navbar-card-item column">
-                  <a class="navbar-card-menu" href="/admin/security">
+                  <a class="navbar-card-menu" href="/admin/order_list">
                     <div class="navbar-card-menu-icon">
                       <span class="icon has-text-info">
                         <i class="fa-solid fa-users"></i>
                       </span>
                     </div>
                     <div class="navbar-card-menu-body">
-                      <p class="title is-3">유저 조회</p>
+                      <p class="title is-3">유저 주문 조회</p>
                       <p class="subtitle is-5">
-                        유저의 정보를 조회할 수 있습니다.
+                        유저의 주문을 조회할 수 있습니다.
                       </p>
                     </div>
                   </a>
