@@ -61,7 +61,7 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
-// 전체 유저 목록을 가져옴 (배열 형태임)
+// 전체 유저 목록을 가져옴 (배열 형태임) -> admin으로 빼기
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   try {
@@ -78,7 +78,7 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
-  '/users/:userId',
+  '/users/:shortId',
   loginRequired,
   async function (req, res, next) {
     try {
@@ -91,7 +91,7 @@ userRouter.patch(
       }
 
       // params로부터 id를 가져옴
-      const userId = req.params.userId;
+      const shortId = req.params.shortId;
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const fullName = req.body.fullName;
@@ -108,7 +108,7 @@ userRouter.patch(
         throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
       }
 
-      const userInfoRequired = { userId, currentPassword };
+      const userInfoRequired = { shortId, currentPassword };
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
       // 보내주었다면, 업데이트용 객체에 삽입함.
@@ -135,13 +135,18 @@ userRouter.patch(
 );
 
 // 사용자 상세 정보
-userRouter.get('/:shortId', loginRequired, async (req, res) => {});
-
-// 사용자 삭제(탈퇴)
-userRouter.delete('/users/:userId', loginRequired, async (req, res) => {
+userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
   try {
-    const { userId } = req.params;
-    const deletedUserInfo = await userService.delUser(userId);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 사용자 삭제(탈퇴) - shortId의 필요성 여부
+userRouter.delete('/users/:shortId', loginRequired, async (req, res) => {
+  try {
+    const { ObjectId } = req.currentUserId;
+    const deletedUserInfo = await userService.delUser(ObjectId);
     res.status(200).json(deletedUserInfo);
   } catch (error) {
     next(error);
