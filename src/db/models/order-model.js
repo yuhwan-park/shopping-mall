@@ -1,6 +1,6 @@
 import { model } from 'mongoose';
 import { OrderSchema } from '../schemas/order-schema';
-import { productModel } from './product-modal';
+import { productModel } from './schemas/product-model';
 
 const Order = model('orders', OrderSchema);
 

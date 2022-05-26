@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import shortId from './types/short-id';
+import { shortId } from './types/short-id';
 
 const CategorySchema = new Schema(
   {
