@@ -86,10 +86,8 @@ class UserService {
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
     const { userId, currentPassword } = userInfoRequired;
-
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(userId);
-
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
@@ -125,7 +123,6 @@ class UserService {
       userId,
       update: toUpdate,
     });
-
     return user;
   }
 

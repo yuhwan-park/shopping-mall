@@ -25,11 +25,39 @@ export class UserModel {
     return users;
   }
 
-  async update({ shortId, update }) {
-    const filter = { shortId };
+  async update({ userId, update }) {
+    const filter = { _id: userId };
     const option = { returnOriginal: false };
+    // 서브스키마를 넣으려고 풀어씀
+    const {
+      fullName,
+      password,
+      phoneNumber,
+      role,
+      postalCode,
+      address1,
+      address2,
+    } = update;
 
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
+    const updatedUser = await User.findOneAndUpdate(
+      filter,
+      {
+        fullName,
+        password,
+        phoneNumber,
+        role,
+        $push: {
+          address: {
+            postalCode,
+            address1,
+            address2,
+          },
+        },
+      },
+      option,
+    );
+
+    // const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
 

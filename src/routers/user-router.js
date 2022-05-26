@@ -78,8 +78,7 @@ userRouter.patch('/:shortId', loginRequired, async function (req, res, next) {
     }
     // 토큰에서 userId 가져옴
     const userId = req.currentUserId;
-    // const shortId = req.body.shortId
-    console.log(userId);
+
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     const fullName = req.body.fullName;
     const password = req.body.password;
