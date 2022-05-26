@@ -1,0 +1,30 @@
+.navbar {
+  min-width: 360px;
+}
+.navbar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-card {
+  & {
+    align-items: stretch;
+  }
+  &-menu {
+    padding: 1.5rem;
+    display: block;
+    height: 100%;
+    border: 1px solid #d5d9d9;
+    border-radius: 6px;
+  }
+  &-menu-icon {
+    & {
+      padding: 1.5rem;
+    }
+    .icon {
+      font-size: 3rem;
+    }
+  }
+}

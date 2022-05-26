@@ -1,0 +1,80 @@
+.account-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.account-orders {
+  .table {
+    th {
+      padding: 1rem;
+      background-color: #eff5fb;
+      color: #296fa8;
+      text-align: center;
+    }
+    td {
+      vertical-align: middle;
+      text-align: center;
+    }
+    td:nth-child(1) {
+      width: 20%;
+    }
+    td:nth-child(2) {
+      width: 40%;
+    }
+    td:nth-child(3) {
+      width: 20%;
+    }
+    td:nth-child(4) {
+      width: 20%;
+    }
+  }
+}
+
+.account-security {
+  & {
+    display: flex;
+    justify-content: center;
+  }
+  &-container {
+    width: 40rem;
+  }
+  .field-container + .field-container {
+    margin-top: 0.75rem;
+  }
+  .field {
+    .control {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .switch {
+    margin-left: 2rem;
+    flex-shrink: 0;
+  }
+  .input + .button {
+    margin-left: 2rem;
+  }
+}
+
+.account-signout {
+  & {
+    display: flex;
+    height: calc(85vh);
+    align-items: center;
+    justify-content: center;
+  }
+  &-container {
+    width: 30rem;
+  }
+  .form-header {
+    & {
+      text-align: center;
+    }
+    .title {
+      font-size: 1.4rem;
+      color: #00d1b2;
+    }
+  }
+}
