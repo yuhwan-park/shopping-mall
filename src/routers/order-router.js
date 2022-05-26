@@ -29,25 +29,30 @@ orderRouter.post('/', async (req, res, next) => {
   }
 });
 
-// 주문 상세 조회
-orderRouter.get('/:userId/orderId', async function (req, res, next) {
+// 사용자의 주문 전체 조회
+orderRouter.get('/:userShortId', async function (req, res, next) {
   try {
-    // 전체 사용자 목록을 얻음
+    // 특정 사용자의 전체 주문 목록을 얻음
     const orders = await orderService.getOrders();
-
     res.status(200).json(orders);
   } catch (error) {
     next(error);
   }
 });
 
-// 주문 조회
-orderRouter.get('/orders/:userId/', async (req, res, next) => {});
+// 사용자의 특정 주문 상세 조회
+// shortId로 objectId를 추출해서 사용할지, 바로 사용할지
+orderRouter.get('/:userShortId/:orderId', async function (req, res, next) {
+  try {
+    // 전체 사용자 목록을 얻음
+    const orders = await orderService.findById();
+    res.status(200).json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // 주문 삭제
-orderRouter.delete('/:userId/orderId', async (req, res, next) => {});
-
-// 주문 수정
-orderRouter.fetch(async (req, res, next) => {});
+orderRouter.delete('/:userShortId/orderId', async (req, res, next) => {});
 
 export { orderRouter };
