@@ -12,7 +12,7 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
+    imageURL: {
       type: String,
       required: true,
     },
