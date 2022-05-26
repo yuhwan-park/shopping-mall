@@ -14,6 +14,10 @@ const id = path[path.length - 2];
 
 printDetail();
 
+$editButton.addEventListener('click', (e) => {
+  editDetail(e);
+});
+
 async function printDetail() {
   try {
     // 상품 상세를 불러와 input 에 주입
@@ -24,6 +28,7 @@ async function printDetail() {
     $brand.value = product.brand;
     $shortDescription.value = product.shortDescription;
     $detailDescription.value = product.detailDescription;
+    console.log(first);
   } catch (error) {
     console.error(error);
   }
@@ -36,7 +41,3 @@ async function editDetail(event) {
     event.target.innerText = '수정';
   }
 }
-
-$editButton.addEventListener('click', (e) => {
-  editDetail(e);
-});
