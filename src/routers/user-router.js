@@ -134,6 +134,9 @@ userRouter.patch(
   },
 );
 
+// 사용자 상세 정보
+userRouter.get('/:shortId', loginRequired, async (req, res) => {});
+
 // 사용자 삭제(탈퇴)
 userRouter.delete('/users/:userId', loginRequired, async (req, res) => {
   try {
