@@ -1,11 +1,35 @@
-const $listItem = document.querySelectorAll('#listItem');
+import * as Api from '/api.js';
 
-for (let i = 0; i < $listItem.length; i++) {
-  const item = $listItem[i];
-  item.addEventListener('click', (e) => {
-    window.location.href += 'id';
-    // 원래라면 상품의 id를 파라미터로 쓰기위해
-    // `admin/products/${item.id}` 로 해야하지만
-    // db정보가 없기때문에 임시로 적용
-  });
-}
+const $productList = document.querySelector('#productList');
+
+window.onload = async () => {
+  try {
+    let node;
+    const products = await Api.get('/api/admin/products');
+    // 받아온 데이터를 템플릿에 맞게 변수에 저장
+    for (let i = 0; i < products.length; i++) {
+      const product = products[i];
+      node += `
+      <a href="/admin/products/${product.shortId}" class="list-link">
+        <li class="list-item" id="listItem">
+          <img
+          class="product-image"
+          src="${product.imageURL}"
+          alt="product image"
+          />
+          <div class="product-info">
+            <p class="product-title">${product.name}</p>
+            <p>
+              상품 재고 수 : <span class="product-quantity">${product.inventory}</span>개
+            </p>
+            <p>상품 가격 : <span class="product-prict">${product.price}</span>원</p>
+          </div>
+        </li>
+      </a>`;
+    }
+    // ul 태그에 추가
+    $productList.innerHTML = node;
+  } catch (e) {
+    console.error(e);
+  }
+};
