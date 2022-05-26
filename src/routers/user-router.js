@@ -13,7 +13,7 @@ userRouter.post('/register', async (req, res, next) => {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
       throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
+        'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
 
@@ -43,7 +43,7 @@ userRouter.post('/login', async function (req, res, next) {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
       throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
+        'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
 
@@ -86,7 +86,7 @@ userRouter.patch(
       // 설정 안 하고 요청하면, body가 비어 있게 됨.
       if (is.emptyObject(req.body)) {
         throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
+          'headers의 Content-Type을 application/json으로 설정해주세요',
         );
       }
 
@@ -123,7 +123,7 @@ userRouter.patch(
       // 사용자 정보를 업데이트함.
       const updatedUserInfo = await userService.setUser(
         userInfoRequired,
-        toUpdate
+        toUpdate,
       );
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
@@ -131,7 +131,17 @@ userRouter.patch(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
+// 사용자 삭제(탈퇴)
+userRouter.delete('/users/:userId', loginRequired, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const deletedUserInfo = await userService.delUser(userId);
+    res.status(200).json(deletedUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
 export { userRouter };
