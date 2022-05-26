@@ -19,6 +19,8 @@ class CategoryService {
 
     return createdNewCategory;
   }
+
+
   //카테고리 이름 => return object Id 
   async getIdByName(name) {
     const category = await this.categoryModel.findByName(name)
@@ -28,13 +30,18 @@ class CategoryService {
     const { _id } = category
     return _id
   }
-  
+
+  //카테고리 전부 받기
+  async getCategories() {
+    const categories = await this.categoryModel.findAll();
+    return categories
+  }
+
   //카테고리들 이름만 받기
   async getCategorynames() {
     const categories = await this.categoryModel.findAll();
     const names = categories.map((category) => {
       const { name } = category;
-
       return name;
     });
 
@@ -63,9 +70,9 @@ class CategoryService {
 
   //상품 삭제 shortid => objectid
   async deleteCategory(shortId) {
-    const category = await this.categoryModel.delete(shortId);
-
-    return category;
+    const { _id } = await this.categoryModel.findById(shortId)
+    const result = await this.categoryModel.delete(_id);
+    return result;
   }
 }
 

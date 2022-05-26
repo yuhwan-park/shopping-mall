@@ -9,6 +9,11 @@ export class CategoryModel {
     return category;
   }
 
+  async findById(shortId) {
+    const category = await Category.findOne({ shortId });
+    return category;
+  }
+
   async findAll() {
     const categories = await Category.find({});
     return categories;
@@ -31,10 +36,9 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  async delete(shortId) {
-    //shortid => objectid
-    const category = await Category.findOneAndDelete({ _id });
-    return category;
+  async delete(_id) {
+    const result = await Category.findOneAndDelete({ _id });
+    return result;
   }
 }
 

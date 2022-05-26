@@ -4,6 +4,7 @@ class ProductService {
   constructor(productModel) {
     this.productModel = productModel;
   }
+
   async addProduct(productInfo) {
     const { category, brand, name, shortDescription, detailDescription, imageURL, price } = productInfo;
 
@@ -14,12 +15,10 @@ class ProductService {
     }
 
     const categoryId = await categoryService.getIdByName(category)
-
     const newProductInfo = { categoryId, brand, name, shortDescription, detailDescription, imageURL, price: Number(price) };
 
     // db에 저장
     const createdNewProduct = await this.productModel.create(newProductInfo);
-
     return createdNewProduct;
   }
 
@@ -29,16 +28,10 @@ class ProductService {
     return products;
   }
 
-  //category에 따른 상품 목록
-  async getProductsByCategory(category) {
-    const products = await this.productModel.findAllByCategory(category);
-    return products;
-  }
-
-  //bran에 따른 상품 목록
-  async getProductsByBrand(brand) {
-    const products = await this.productModel.findAllByBrand(brand);
-    return products;
+  // 상품 상세 조회
+  async getProduct(shortId) {
+    const product = await this.productModel.findById(shortId);
+    return product
   }
 
   // 상품 정보 수정
@@ -55,15 +48,26 @@ class ProductService {
       shortId,
       update: toUpdate,
     });
-
     return product;
   }
 
   //상품 삭제
   async deleteProduct(shortId) {
-    const product = await this.productModel.delete(shortId);
-
+    const { _id } = await this.productModel.findById(shortId)
+    const product = await this.productModel.delete(_id);
     return product;
+  }
+  
+  //category에 따른 상품 목록
+  async getProductsByCategory(category) {
+    const products = await this.productModel.findAllByCategory(category);
+    return products;
+  }
+
+  //brand에 따른 상품 목록
+  async getProductsByBrand(brand) {
+    const products = await this.productModel.findAllByBrand(brand);
+    return products;
   }
 }
 
