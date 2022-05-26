@@ -14,6 +14,13 @@ const modalPassword = document.querySelector('#modal-js-password');
 const submitButton = document.querySelector('#submitButton');
 const submitConfirmButton = document.querySelector('#submitConfirmButton');
 
+// validator
+const fullName = fullNameInput.value;
+const password = passwordInput.value;
+const passwordConfirm = passwordConfirmInput.value;
+const address = addressInput.value;
+const phone = phoneInput.value;
+
 addAllElements();
 addAllEvents();
 userData();
@@ -27,7 +34,7 @@ function addAllEvents() {
   submitConfirmButton.addEventListener('click', handlePasswordSubmit);
   swithCheckboxs.forEach((swithCheckbox) => {
     const checkbox = swithCheckbox.querySelector('input');
-    checkbox.addEventListener('click', handleSwitch);
+    checkbox.addEventListener('change', handleSwitch);
   });
 }
 
@@ -41,18 +48,27 @@ async function userData() {
 }
 
 async function handleSwitch(e) {
-  console.log(e.target.id);
+  const checkedToggle = e.target.checked;
+  const targetDataName = e.target.dataset.name;
+  const targetCheckElement = document.querySelectorAll(
+    `input[data-name=${targetDataName}], button[data-name=${targetDataName}]`,
+  );
+  targetCheckElement.forEach((input) => {
+    const typeName = input.getAttribute('type');
+    if (checkedToggle) {
+      if (typeName !== 'checkbox') {
+        input.removeAttribute('disabled');
+      }
+    } else {
+      if (typeName !== 'checkbox') {
+        input.setAttribute('disabled', '');
+      }
+    }
+  });
 }
 
 async function handleSubmit(e) {
   e.preventDefault();
-
-  // validator
-  const fullName = fullNameInput.value;
-  const password = passwordInput.value;
-  const passwordConfirm = passwordConfirmInput.value;
-  const address = addressInput.value;
-  const phone = phoneInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -60,22 +76,19 @@ async function handleSubmit(e) {
   const isPasswordSame = password === passwordConfirm;
   const isPhoneValid = phone.length > 12;
 
-  // if (!isFullNameValid || !isPasswordValid) {
-  //   return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
-  // }
+  if (!isFullNameValid || !isPasswordValid) {
+    return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
+  }
 
-  // if (!isPasswordSame) {
-  //   return alert('비밀번호가 일치하지 않습니다.');
-  // }
+  if (!isPasswordSame) {
+    return alert('비밀번호가 일치하지 않습니다.');
+  }
 
-  // if (!isPhoneValid) {
-  //   return alert('전화번호 형식이 맞지 않습니다.');
-  // }
+  if (!isPhoneValid) {
+    return alert('전화번호 형식이 맞지 않습니다.');
+  }
 
   try {
-    const data = { fullName, password, address, phone };
-    const user = await Api.patch('/api/users/:shortId', data);
-    console.log(user);
     modalPassword.classList.add('is-active');
   } catch (err) {
     console.error(err);
@@ -84,4 +97,7 @@ async function handleSubmit(e) {
 
 async function handlePasswordSubmit(e) {
   e.preventDefault();
+  const data = { fullName, password, address, phone };
+  //const user = await Api.patch('/api/users/:shortId', data);
+  console.log(data);
 }

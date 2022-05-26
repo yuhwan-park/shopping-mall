@@ -14,6 +14,10 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <!-- 구글 OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- 카카오 OAuth -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
@@ -41,10 +45,15 @@
                           class="input"
                           type="text"
                           id="fullNameInput"
+                          data-name="fullName"
                           disabled
                         />
                         <label class="switch" for="fullNameToggle">
-                          <input type="checkbox" id="fullNameToggle" />
+                          <input
+                            type="checkbox"
+                            id="fullNameToggle"
+                            data-name="fullName"
+                          />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
@@ -59,10 +68,15 @@
                             class="input"
                             type="text"
                             id="passwordInput"
+                            data-name="password"
                             disabled
                           />
                           <label class="switch" for="passwordToggle">
-                            <input type="checkbox" id="passwordToggle" />
+                            <input
+                              type="checkbox"
+                              id="passwordToggle"
+                              data-name="password"
+                            />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
@@ -76,6 +90,7 @@
                             class="input"
                             type="text"
                             id="passwordConfirmInput"
+                            data-name="password"
                             disabled
                           />
                         </div>
@@ -89,21 +104,35 @@
                             class="input"
                             type="text"
                             id="addressInput"
+                            data-name="address"
                             readonly
                             disabled
                           />
-                          <button class="button is-light" disabled>
+                          <button
+                            class="button is-light"
+                            data-name="address"
+                            disabled
+                          >
                             주소 찾기
                           </button>
                           <label class="switch" for="addressToggle">
-                            <input type="checkbox" id="addressToggle" />
+                            <input
+                              type="checkbox"
+                              id="addressToggle"
+                              data-name="address"
+                            />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
                       </div>
                       <div class="field-container">
                         <div class="control">
-                          <input class="input" type="text" disabled />
+                          <input
+                            class="input"
+                            type="text"
+                            disabled
+                            data-name="address"
+                          />
                         </div>
                       </div>
                       <div class="field-container">
@@ -112,6 +141,7 @@
                             class="input"
                             type="text"
                             id="addressInput"
+                            data-name="address"
                             disabled
                           />
                         </div>
@@ -124,10 +154,15 @@
                           class="input"
                           type="number"
                           id="phoneInput"
+                          data-name="phone"
                           disabled
                         />
                         <label class="switch" for="phoneToggle">
-                          <input type="checkbox" id="phoneToggle" />
+                          <input
+                            type="checkbox"
+                            id="phoneToggle"
+                            data-name="phone"
+                          />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
