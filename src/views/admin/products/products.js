@@ -4,7 +4,7 @@ const $productList = document.querySelector('#productList');
 
 window.onload = async () => {
   try {
-    let node;
+    let node = '';
     const products = await Api.get('/api/admin/products');
     // 받아온 데이터를 템플릿에 맞게 변수에 저장
     for (let i = 0; i < products.length; i++) {
@@ -28,7 +28,11 @@ window.onload = async () => {
       </a>`;
     }
     // ul 태그에 추가
-    $productList.innerHTML = node;
+    if (node) {
+      $productList.innerHTML = node;
+    } else {
+      $productList.innerHTML = `<p>조회된 상품이 없습니다.</p>`;
+    }
   } catch (e) {
     console.error(e);
   }

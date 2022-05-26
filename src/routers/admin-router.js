@@ -7,10 +7,14 @@ const adminRouter = Router();
 
 adminRouter.get('/', adminRequired, (req, res) => {
   res.status(200).json({
-    result: 'approach-success'
-  })
+    result: 'approach-success',
+  });
 });
 
-adminRouter.post('/')
+adminRouter.get('/products', (req, res) => {
+  res.json('a');
+});
+
+adminRouter.post('/');
 
 export { adminRouter };
