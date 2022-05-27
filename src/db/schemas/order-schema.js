@@ -1,5 +1,4 @@
 import { Schema } from 'mongoose';
-import { orderService } from '../../services';
 import { shortId } from './types/short-id';
 
 const OrderSchema = new Schema(
@@ -40,9 +39,9 @@ const OrderSchema = new Schema(
         },
         {
           _id: false,
-        },
+        }
       ),
-      required: true,
+      required: false,
     },
     deliveryRequest: {
       type: String,
