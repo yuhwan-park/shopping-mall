@@ -130,6 +130,7 @@
                             class="input"
                             type="text"
                             id="address1Input"
+                            readonly
                             disabled
                             data-name="address"
                           />
@@ -152,16 +153,17 @@
                       <div class="control">
                         <input
                           class="input"
-                          type="number"
+                          type="text"
                           id="phoneInput"
-                          data-name="phone"
+                          data-name="phoneNumber"
+                          maxlength="11"
                           disabled
                         />
                         <label class="switch" for="phoneToggle">
                           <input
                             type="checkbox"
                             id="phoneToggle"
-                            data-name="phone"
+                            data-name="phoneNumber"
                           />
                           <span class="switch-toggle"></span>
                         </label>

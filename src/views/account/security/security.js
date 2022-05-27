@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { onlyNumber } from '/useful-functions.js';
 
 // 요소(element), input 혹은 상수
 const $userEmailText = document.querySelector('#userEmailText');
@@ -21,11 +22,6 @@ const $postalCodeButton = document.querySelector('#postalCodeButton');
 const $submitButton = document.querySelector('#submitButton');
 const $submitConfirmButton = document.querySelector('#submitConfirmButton');
 
-const path = window.location.pathname.split('/');
-const id = path[path.length - 2];
-
-console.log(path, id);
-
 addAllElements();
 addAllEvents();
 userData();
@@ -43,23 +39,34 @@ function addAllEvents() {
   $submitConfirmButton.addEventListener('click', handleUserSubmit);
   $postalCodeButton.addEventListener('click', handlePost);
 }
-function hasObejctProperty(obj, item) {
-  obj.hasOwnProperty(item);
+
+function handlePost() {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      $postalCodeInput.value = data.zonecode;
+      $address1Input.value = data.address;
+      $address2Input.value = data.buildingName;
+    },
+  }).open();
 }
 
 async function userData() {
   try {
-    const data = await Api.get('/api/users', id);
+    const data = await Api.get('/api/users');
     $userEmailText.insertAdjacentHTML('beforeend', ` (${data.email})`);
     $fullNameInput.value = data.fullName;
-    $phoneInput.value = data.phone;
+    $phoneInput.value = data.phoneNumber;
     $postalCodeInput.value = data.postalCode;
     $address1Input.value = data.address1;
     $address2Input.value = data.address2;
+    const isPhoneNumber = data.hasOwnProperty('phoneNumber');
+    const isPostalCode = data.hasOwnProperty('postalCode');
+    const isAddress1 = data.hasOwnProperty('address1');
+    const isAddress2 = data.hasOwnProperty('address2');
 
-    const isPostalCode = hasObejctProperty(data, 'postalCode');
-    const isAddress1 = hasObejctProperty(data, 'address1');
-    const isAddress2 = hasObejctProperty(data, 'address2');
+    if (!isPhoneNumber) {
+      $phoneInput.value = '';
+    }
 
     if (!isPostalCode) {
       $postalCodeInput.value = '';
@@ -72,8 +79,6 @@ async function userData() {
     if (!isAddress2) {
       $address2Input.value = '';
     }
-
-    console.log(data);
   } catch (err) {
     console.error(err);
   }
@@ -99,13 +104,13 @@ async function handleSwitch(e) {
   });
 }
 
-async function handleSubmit(e) {
+function handleSubmit(e) {
   e.preventDefault();
 
-  const fullName = $fullNameInput.value;
-  const password = $passwordInput.value;
-  const passwordConfirm = $passwordConfirmInput.value;
-  const phoneNumber = $phoneInput.value;
+  let fullName = $fullNameInput.value;
+  let password = $passwordInput.value;
+  let passwordConfirm = $passwordConfirmInput.value;
+  let phoneNumber = onlyNumber($phoneInput.value);
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -117,7 +122,7 @@ async function handleSubmit(e) {
     return alert('이름은 2글자 이상이어야 합니다.');
   }
 
-  if (password.length > 0 && isPasswordValid) {
+  if (password.length > 0 && !isPasswordValid) {
     return alert('비밀번호는 4글자 이상이어야 합니다.');
   }
 
@@ -125,29 +130,16 @@ async function handleSubmit(e) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
 
-  // if (phone.length > 0 && !isPhoneValid) {
-  //   return alert('전화번호 형식이 맞지 않습니다.');
-  // }
-
-  try {
-    $modalPassword.classList.add('is-active');
-  } catch (err) {
-    console.error(err);
+  if (phoneNumber.length > 0 && !isPhoneValid) {
+    return alert('전화번호 형식이 맞지 않습니다.');
   }
-}
 
-function handlePost() {
-  new daum.Postcode({
-    oncomplete: function (data) {
-      $postalCodeInput.value = data.zonecode;
-      $address1Input.value = data.address;
-      $address2Input.value = data.buildingName;
-    },
-  }).open();
+  $modalPassword.classList.add('is-active');
 }
 
 async function handleUserSubmit(e) {
   e.preventDefault();
+
   const fullName = $fullNameInput.value;
   const password = $passwordInput.value;
   const passwordConfirm = $passwordConfirmInput.value;
@@ -155,7 +147,7 @@ async function handleUserSubmit(e) {
   const postalCode = $postalCodeInput.value;
   const address1 = $address1Input.value;
   const address2 = $address2Input.value;
-  const phoneNumber = $phoneInput.value;
+  const phoneNumber = onlyNumber($phoneInput.value);
 
   const updateData = {
     fullName,
@@ -165,20 +157,23 @@ async function handleUserSubmit(e) {
     address1,
     address2,
     phoneNumber,
-    currentPassword,
   };
 
-  const isPasswordSame = password && passwordConfirm === currentPassword;
-  if (password.length > 0 && !isPasswordSame) {
-    return alert('비밀번호가 일치하지 않습니다.');
-  }
-
-  if (currentPassword === 'kakao') {
-    return alert('kakao');
-  }
-
   try {
-    const user = await Api.patch('/api/users', id, updateData);
+    const data = await Api.get('/api/users');
+    const password = data.password;
+    const isPasswordSame = password === currentPassword;
+
+    console.log(password);
+    if (password.length > 0 && !isPasswordSame) {
+      return alert('비밀번호가 일치하지 않습니다.');
+    }
+
+    if (currentPassword === 'kakao') {
+      return alert('kakao');
+    }
+
+    await Api.patch('/api/users', '', updateData);
     $modalPassword.classList.remove('is-active');
     $swithCheckboxs.forEach((swithCheckbox) => {
       const checkbox = swithCheckbox.querySelector('input');
@@ -187,7 +182,9 @@ async function handleUserSubmit(e) {
     $formInputs.forEach((input) => {
       input.setAttribute('disabled', '');
     });
+    $currentPasswordConfirmInput.value = '';
   } catch (err) {
     console.error(err);
+    alert(`${err.message}`);
   }
 }
