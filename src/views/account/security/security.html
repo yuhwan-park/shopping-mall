@@ -14,6 +14,8 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <!-- 우편번호 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
@@ -28,7 +30,7 @@
           <!-- CONTENT : START -->
           <div class="account">
             <div class="account-header">
-              <h1 class="title">회원정보 관리 <span>(회원이메일)</span></h1>
+              <h1 class="title" id="userEmailText">회원정보 관리</h1>
             </div>
             <div class="account-content">
               <div class="account-security">
@@ -41,10 +43,15 @@
                           class="input"
                           type="text"
                           id="fullNameInput"
+                          data-name="fullName"
                           disabled
                         />
                         <label class="switch" for="fullNameToggle">
-                          <input type="checkbox" id="fullNameToggle" />
+                          <input
+                            type="checkbox"
+                            id="fullNameToggle"
+                            data-name="fullName"
+                          />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
@@ -57,12 +64,17 @@
                         <div class="control">
                           <input
                             class="input"
-                            type="text"
+                            type="password"
                             id="passwordInput"
+                            data-name="password"
                             disabled
                           />
                           <label class="switch" for="passwordToggle">
-                            <input type="checkbox" id="passwordToggle" />
+                            <input
+                              type="checkbox"
+                              id="passwordToggle"
+                              data-name="password"
+                            />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
@@ -74,8 +86,9 @@
                         <div class="control">
                           <input
                             class="input"
-                            type="text"
+                            type="password"
                             id="passwordConfirmInput"
+                            data-name="password"
                             disabled
                           />
                         </div>
@@ -83,27 +96,43 @@
                     </div>
                     <div class="field">
                       <div class="field-container">
-                        <label class="label">주소</label>
+                        <label class="label" for="address2Input">주소</label>
                         <div class="control">
                           <input
                             class="input"
                             type="text"
-                            id="addressInput"
+                            id="postalCodeInput"
+                            data-name="address"
                             readonly
                             disabled
                           />
-                          <button class="button is-light" disabled>
+                          <button
+                            id="postalCodeButton"
+                            class="button is-light"
+                            data-name="address"
+                            disabled
+                          >
                             주소 찾기
                           </button>
                           <label class="switch" for="addressToggle">
-                            <input type="checkbox" id="addressToggle" />
+                            <input
+                              type="checkbox"
+                              id="addressToggle"
+                              data-name="address"
+                            />
                             <span class="switch-toggle"></span>
                           </label>
                         </div>
                       </div>
                       <div class="field-container">
                         <div class="control">
-                          <input class="input" type="text" disabled />
+                          <input
+                            class="input"
+                            type="text"
+                            id="address1Input"
+                            disabled
+                            data-name="address"
+                          />
                         </div>
                       </div>
                       <div class="field-container">
@@ -111,7 +140,8 @@
                           <input
                             class="input"
                             type="text"
-                            id="addressInput"
+                            id="address2Input"
+                            data-name="address"
                             disabled
                           />
                         </div>
@@ -124,10 +154,15 @@
                           class="input"
                           type="number"
                           id="phoneInput"
+                          data-name="phone"
                           disabled
                         />
                         <label class="switch" for="phoneToggle">
-                          <input type="checkbox" id="phoneToggle" />
+                          <input
+                            type="checkbox"
+                            id="phoneToggle"
+                            data-name="phone"
+                          />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
@@ -169,7 +204,7 @@
                       <div class="control">
                         <input
                           class="input is-link"
-                          type="text"
+                          type="password"
                           id="currentPasswordConfirmInput"
                         />
                       </div>
