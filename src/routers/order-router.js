@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { orderService, userService } from '../services';
+import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
 
@@ -29,15 +30,12 @@ orderRouter.post('/', async (req, res, next) => {
   }
 });
 
-
-
 // 사용자의 주문 전체 조회
-orderRouter.get('/:userShortId', async function (req, res, next) {
+orderRouter.get('/', loginRequired, async (req, res, next) => {
   try {
     // 특정 사용자의 전체 주문 목록을 얻음
-    const { userShortId } = req.params
-    const orderInfo = await userService.getOrdersByUserId(userShortId)
-    const orders = await orderService.
+    const userId = req.currentuserId;
+    const orders = await orderService.getOrdersByUserId(userId);
     res.status(200).json(orders);
   } catch (error) {
     next(error);
@@ -45,19 +43,25 @@ orderRouter.get('/:userShortId', async function (req, res, next) {
 });
 
 // 사용자의 특정 주문 상세 조회
-// shortId로 objectId를 추출해서 사용할지, 바로 사용할지
-orderRouter.get('/:userShortId/:orderId', async function (req, res, next) {
+orderRouter.get('/:shortId', async (req, res, next) => {
   try {
-    // 전체 사용자 목록을 얻음
-    const orders = await orderService.getOrdersByUserId(userId)
-    res.status(200).json(orders);
+    const { shortId } = req.params;
+    const order = await orderService.getOrdersByshortId(shortId);
+    res.status(200).json(order);
   } catch (error) {
     next(error);
   }
 });
 
-
 // 주문 삭제
-orderRouter.delete('/:userShortId/orderId', async (req, res, next) => {});
+orderRouter.delete('/:ShortId', async (req, res, next) => {
+  try {
+    const { shortId } = req.params;
+    const result = await orderService.deleteByShortId(shortId);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }  
+});
 
 export { orderRouter };

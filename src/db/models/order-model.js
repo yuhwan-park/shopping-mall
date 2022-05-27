@@ -32,16 +32,21 @@ export class OrderModel {
     return createdNewOrder;
   }
 
-  // 주문 상세 조회
+  // 단일 주문 상세 조회
   async findById(shortId) {
     const order = await Order.findOne({ shortId });
     return order;
   }
 
+  async findAllByobjectId(_id) {
+    const orders = await Order.find({ _id });
+    return orders;
+  }
+
   // 유저로 주문 찾기
   async findByUserId(userId) {
-    const orders = await Order.find({ userId })
-    return orders
+    const orders = await Order.find({ userId });
+    return orders;
   }
 
   // 사용자용 주문 전체 조회
@@ -57,7 +62,7 @@ export class OrderModel {
   }
 
   // 주문 취소
-  async delete({ shortId }) {
+  async delete(_id) {
     const deletedOrder = await Order.findOneAndDelete({ _id });
     return deletedOrder;
   }
