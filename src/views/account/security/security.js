@@ -5,15 +5,23 @@ const $userEmailText = document.querySelector('#userEmailText');
 const $fullNameInput = document.querySelector('#fullNameInput');
 const $passwordInput = document.querySelector('#passwordInput');
 const $passwordConfirmInput = document.querySelector('#passwordConfirmInput');
-const $addressInput = document.querySelector('#addressInput');
+const $postalCodeInput = document.querySelector('#postalCodeInput');
+const $address1Input = document.querySelector('#address1Input');
+const $address2Input = document.querySelector('#address2Input');
 const $phoneInput = document.querySelector('#phoneInput');
 const $currentPasswordConfirmInput = document.querySelector(
   '#currentPasswordConfirmInput',
 );
+// const $inputs = document.querySelectorAll(`input[data-name]`);
 const $swithCheckboxs = document.querySelectorAll('.switch');
 const $modalPassword = document.querySelector('#modal-js-password');
 const $submitButton = document.querySelector('#submitButton');
 const $submitConfirmButton = document.querySelector('#submitConfirmButton');
+
+const path = window.location.pathname.split('/');
+const id = path[path.length - 2];
+
+console.log(path, id);
 
 addAllElements();
 addAllEvents();
@@ -38,8 +46,9 @@ async function userData() {
     $userEmailText.insertAdjacentHTML('beforeend', ` (${data.email})`);
     $fullNameInput.value = data.fullName;
     $phoneInput.value = data.phone;
-    $addressInput.value = data.address;
-    console.log(data);
+    $postalCodeInput.value = data.postalCode;
+    $address1Input.value = data.address1;
+    $address2Input.value = data.address2;
   } catch (err) {
     console.error(err);
   }
@@ -86,6 +95,7 @@ async function handleSubmit(e) {
   if (password.length > 0 && isPasswordValid) {
     return alert('비밀번호는 4글자 이상이어야 합니다.');
   }
+
   if (password.length > 0 && !isPasswordSame) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
@@ -106,7 +116,38 @@ async function handleUserSubmit(e) {
   const fullName = $fullNameInput.value;
   const password = $passwordInput.value;
   const passwordConfirm = $passwordConfirmInput.value;
+  const currentPassword = $currentPasswordConfirmInput.value;
+  const postalCode = $postalCodeInput.value;
+  const address1 = $address1Input.value;
+  const address2 = $address2Input.value;
   const phone = $phoneInput.value;
-  const data = { fullName, password, passwordConfirm, phone };
-  const user = await Api.patch('/api/users/:shortId', data);
+  const updateData = {
+    fullName,
+    password,
+    passwordConfirm,
+    postalCode,
+    address1,
+    address2,
+    phone,
+  };
+
+  const isPasswordSame = password && passwordConfirm === currentPassword;
+  if (password.length > 0 && !isPasswordSame) {
+    return alert('비밀번호가 일치하지 않습니다.');
+  }
+
+  if (currentPassword === 'kakao') {
+    return alert('kakao');
+  }
+
+  try {
+    //const user = await Api.patch('/api/users/', id, updateData);
+    $modalPassword.classList.remove('is-active');
+    $swithCheckboxs.forEach((swithCheckbox) => {
+      const checkbox = swithCheckbox.querySelector('input');
+      checkbox.checked = false;
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
