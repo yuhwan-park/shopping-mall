@@ -15,6 +15,11 @@ export class UserModel {
     return user;
   }
 
+  async findByShortId(shortId) {
+    const user = await User.findOne({ shortId });
+    return user;
+  }
+
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;

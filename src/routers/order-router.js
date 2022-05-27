@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { orderService } from '../services';
+import { orderService, userService } from '../services';
 
 const orderRouter = Router();
 
@@ -29,11 +29,15 @@ orderRouter.post('/', async (req, res, next) => {
   }
 });
 
+
+
 // 사용자의 주문 전체 조회
 orderRouter.get('/:userShortId', async function (req, res, next) {
   try {
     // 특정 사용자의 전체 주문 목록을 얻음
-    const orders = await orderService.getOrders();
+    const { userShortId } = req.params
+    const orderInfo = await userService.getOrdersByUserId(userShortId)
+    const orders = await orderService.
     res.status(200).json(orders);
   } catch (error) {
     next(error);
@@ -45,12 +49,13 @@ orderRouter.get('/:userShortId', async function (req, res, next) {
 orderRouter.get('/:userShortId/:orderId', async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
-    const orders = await orderService.findById();
+    const orders = await orderService.getOrdersByUserId(userId)
     res.status(200).json(orders);
   } catch (error) {
     next(error);
   }
 });
+
 
 // 주문 삭제
 orderRouter.delete('/:userShortId/orderId', async (req, res, next) => {});
