@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { orderService } from '../services';
+import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
 
 // 주문 생성
-orderRouter.post('/', async (req, res, next) => {
+orderRouter.post('/', loginRequired, async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -16,9 +17,6 @@ orderRouter.post('/', async (req, res, next) => {
     // 주문 안에 상품이 여러개일 경우, products를 배열로 받아온다.
     // products = [{shortId, quantity}]
     const { orderInfo } = req.body;
-
-    // jwt token
-    const userId = req.currentuserId;
 
     // 위 데이터를 주문 db에 추가하기
     const newOrder = await orderService.addOrder(orderInfo);

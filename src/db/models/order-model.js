@@ -1,5 +1,6 @@
 import { model } from 'mongoose';
 import { OrderSchema } from '../schemas/order-schema';
+import { UserSchema } from '../schemas/user-schema';
 import { productModel } from './product-model';
 
 const Order = model('orders', OrderSchema);
@@ -7,12 +8,10 @@ const Order = model('orders', OrderSchema);
 export class OrderModel {
   // 주문 생성
   async create(orderInfo) {
-    // product 정보 가져오기
-    // shortId를 사용해서 ObjectId를 가져온다!
+    // product 정보 가져오기 - shortId를 사용해서 ObjectId를 가져온다!
     const { products } = orderInfo;
     // products = [{shortId, quantity}]
     // products에 값이 있을 경우 값 추출
-
     for (let i = 0; i <= products.length; i++) {
       const { shortId } = products[i];
 
@@ -26,9 +25,12 @@ export class OrderModel {
     }
 
     orderInfo.products = products;
-
     // orderDB에 데이터 추가
     const createdNewOrder = await Order.create({ orderInfo });
+    // 유저 스키마에 주문 정보 저장
+    const updateOrderInfoOfUser = await UserSchema.findOneAndUpdate({})
+
+
     return createdNewOrder;
   }
 
