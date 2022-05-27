@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import { shortId } from './types/short-id';
-import { AdressSchema } from './address-schema';
+import { AddressSchema } from './address-schema';
 
 const UserSchema = new Schema(
   {
@@ -29,7 +29,7 @@ const UserSchema = new Schema(
         required: false,
       },
     ],
-    address: AdressSchema,
+    address: AddressSchema,
     role: {
       type: String,
       required: false,

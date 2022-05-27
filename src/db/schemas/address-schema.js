@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const address = new Schema ({
+const AddressSchema = new Schema ({
           postalCode: {
               type: String,
             required: true
@@ -16,5 +16,5 @@ const address = new Schema ({
 })
 const Address = model('addresses', AddressSchema);
 
-export { AdressSchema };
+export { AddressSchema };
 export { Address };
