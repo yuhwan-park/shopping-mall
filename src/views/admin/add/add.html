@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="add.js" defer></script>
+    <script src="add.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -53,10 +53,16 @@
                     <select id="categorySelectBox">
                       <option value="">카테고리를 선택해 주세요.</option>
 
-                      <option class="notification is-primary is-light">
+                      <option
+                        value="Men Top"
+                        class="notification is-primary is-light"
+                      >
                         Men Clothes
                       </option>
-                      <option class="notification is-warning is-light">
+                      <option
+                        value="Women Top"
+                        class="notification is-warning is-light"
+                      >
                         Women Clothes
                       </option>
                     </select>
@@ -131,7 +137,7 @@
                 </div>
               </div>
 
-              <div class="field">
+              <!-- <div class="field">
                 <label class="label" for="inventoryInput">재고 수</label>
                 <div class="control">
                   <input
@@ -142,7 +148,7 @@
                     autocomplete="on"
                   />
                 </div>
-              </div>
+              </div> -->
 
               <div class="field">
                 <label class="label" for="priceInput">가격</label>
@@ -160,7 +166,7 @@
                 </div>
               </div>
 
-              <div class="field">
+              <!-- <div class="field">
                 <label class="label" for="searchKeywordInput"
                   >검색 키워드</label
                 >
@@ -184,7 +190,7 @@
               <div
                 class="field is-grouped is-grouped-multiline mt-3"
                 id="keywordContainer"
-              ></div>
+              ></div> -->
 
               <div class="mt-5">
                 <button
