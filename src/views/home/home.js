@@ -16,7 +16,9 @@ $slider.style.width = sliderWidth * totalSlides + 'px';
 
 function showSlides() {
   for (let i = 0; i < $slides.length; i++) {
-    sliderWidth.style.left = -(sliderWidth * slideIndex) + 'px';
+    // sliderWidth.style.left = -(sliderWidth * slideIndex) + 'px';
+
+    sliderWidth.style.transform = `translateX(-${sliderWidth * slideIndex}px)`;
   }
   slideIndex++;
   if (slideIndex === totalSlides) {
@@ -56,3 +58,4 @@ function buttonSlide() {
 }
 
 buttonSlide();
+showSlides();
