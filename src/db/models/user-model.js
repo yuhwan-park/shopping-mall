@@ -9,8 +9,9 @@ export class UserModel {
     return user;
   }
 
-  async findById(shortId) {
-    const user = await User.findOne({ shortId });
+  // 사용 - 삭제, 사용자 정보 조회
+  async findById(_id) {
+    const user = await User.findOne({ _id });
     return user;
   }
 
@@ -19,7 +20,7 @@ export class UserModel {
     return createdNewUser;
   }
 
-  async findAll() {
+  async userfindAll() {
     const users = await User.find({});
     return users;
   }
@@ -33,7 +34,7 @@ export class UserModel {
   }
 
   // 삭제
-  async delete( _id) {
+  async delete(_id) {
     const deleteUser = await User.findOneAndDelete({ _id });
     return deleteUser;
   }

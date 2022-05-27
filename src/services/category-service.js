@@ -5,14 +5,14 @@ class CategoryService {
     this.categoryModel = categoryModel;
   }
   async addCategory(categoryInfo) {
-    const { name, content, image } = categoryInfo;
+    const { name, content, imageURL } = categoryInfo;
 
     // 카테고리명 중복 확인
     const category = await this.categoryModel.findByName(name);
     if (category) {
       throw new Error('이미 해당 카테고리가 존재합니다.');
     }
-    const newCategoryInfo = { name, content, image };
+    const newCategoryInfo = { name, content, imageURL };
 
     // db에 저장
     const createdNewCategory = await this.categoryModel.create(newCategoryInfo);
@@ -20,12 +20,28 @@ class CategoryService {
     return createdNewCategory;
   }
 
+
+  //카테고리 이름 => return object Id 
+  async getIdByName(name) {
+    const category = await this.categoryModel.findByName(name)
+    if (!category) {
+      throw new Error('카테고리가 존재하지 않습니다.')
+    }
+    const { _id } = category
+    return _id
+  }
+
+  //카테고리 전부 받기
+  async getCategories() {
+    const categories = await this.categoryModel.findAll();
+    return categories
+  }
+
   //카테고리들 이름만 받기
   async getCategorynames() {
     const categories = await this.categoryModel.findAll();
     const names = categories.map((category) => {
       const { name } = category;
-
       return name;
     });
 
@@ -52,11 +68,11 @@ class CategoryService {
     return category;
   }
 
-  //상품 삭제
+  //상품 삭제 shortid => objectid
   async deleteCategory(shortId) {
-    const category = await this.categoryModel.delete(shortId);
-
-    return category;
+    const { _id } = await this.categoryModel.findById(shortId)
+    const result = await this.categoryModel.delete(_id);
+    return result;
   }
 }
 
