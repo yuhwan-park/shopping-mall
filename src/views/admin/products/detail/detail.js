@@ -8,7 +8,7 @@ const $brand = document.querySelector('#productBrand');
 const $shortDescription = document.querySelector('#shortDescription');
 const $detailDescription = document.querySelector('#detailDescription');
 const $editButton = document.querySelector('#editButton');
-const $deleteButton = document.querySelector('#deleteButton');
+const $deleteAcceptButton = document.querySelector('#deleteAcceptButton');
 
 const elements = [
   $title,
@@ -25,7 +25,7 @@ const id = path[path.length - 2];
 printDetail();
 
 $editButton.addEventListener('click', editDetail);
-$deleteButton.addEventListener('click', deleteProduct);
+$deleteAcceptButton.addEventListener('click', deleteProduct);
 
 async function printDetail() {
   try {
