@@ -71,10 +71,18 @@ class UserService {
     // 2개 프로퍼티를 jwt 토큰에 담음
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
-    return { token };
+    // shortId 넘기기
+    const shortId = user.shortId;
+    return { token, shortId };
   }
 
   // 사용자 목록을 받음. - admin으로 이동
+  async getUsers() {
+    const users = await this.userModel.findAll();
+    return users;
+  }
+
+  // 사용자 목록을 받음.
   async getUsers() {
     const users = await this.userModel.findAll();
     return users;
@@ -99,12 +107,12 @@ class UserService {
     const correctPasswordHash = user.password;
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
-      correctPasswordHash,
+      correctPasswordHash
     );
 
     if (!isPasswordCorrect) {
       throw new Error(
-        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
       );
     }
 
@@ -126,6 +134,8 @@ class UserService {
 
     return user;
   }
+
+
 
   // 사용자 정보 조회
   async getUser(userId) {
