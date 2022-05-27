@@ -2,6 +2,7 @@
 # Dependencies
 node_modules
 yarn.lock
-.env
 
+.env
 src/public/css/main.css
+src/uploads
