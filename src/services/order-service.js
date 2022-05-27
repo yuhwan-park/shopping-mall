@@ -21,6 +21,12 @@ class OrderService {
     const orders = await this.orderModel.findAll();
     return orders;
   }
+
+  // 이메일로 주문 조회
+  async getOrdersByUserId(userId) {
+    const orders = await this.orderModel.findByUserId(userId);
+    return orders
+  }
 }
 
 const orderService = new OrderService(orderModel);
