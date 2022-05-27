@@ -105,13 +105,13 @@ async function handleSubmit(e) {
   const fullName = $fullNameInput.value;
   const password = $passwordInput.value;
   const passwordConfirm = $passwordConfirmInput.value;
-  const phone = $phoneInput.value;
+  const phoneNumber = $phoneInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
   const isPasswordValid = password.length >= 4;
   const isPasswordSame = password === passwordConfirm;
-  const isPhoneValid = phone.length > 12;
+  const isPhoneValid = phoneNumber.length > 12;
 
   if (!isFullNameValid) {
     return alert('이름은 2글자 이상이어야 합니다.');
@@ -155,7 +155,7 @@ async function handleUserSubmit(e) {
   const postalCode = $postalCodeInput.value;
   const address1 = $address1Input.value;
   const address2 = $address2Input.value;
-  const phone = $phoneInput.value;
+  const phoneNumber = $phoneInput.value;
 
   const updateData = {
     fullName,
@@ -164,7 +164,7 @@ async function handleUserSubmit(e) {
     postalCode,
     address1,
     address2,
-    phone,
+    phoneNumber,
     currentPassword,
   };
 
