@@ -14,10 +14,8 @@
       crossorigin="anonymous"
       defer
     ></script>
-    <!-- 구글 OAuth -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- 카카오 OAuth -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <!-- 우편번호 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
@@ -109,6 +107,7 @@
                             disabled
                           />
                           <button
+                            id="postalCodeButton"
                             class="button is-light"
                             data-name="address"
                             disabled

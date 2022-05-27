@@ -17,6 +17,7 @@ const $formInputs = document.querySelectorAll(
 );
 const $swithCheckboxs = document.querySelectorAll('.switch');
 const $modalPassword = document.querySelector('#modal-js-password');
+const $postalCodeButton = document.querySelector('#postalCodeButton');
 const $submitButton = document.querySelector('#submitButton');
 const $submitConfirmButton = document.querySelector('#submitConfirmButton');
 
@@ -40,6 +41,7 @@ function addAllEvents() {
   });
   $submitButton.addEventListener('click', handleSubmit);
   $submitConfirmButton.addEventListener('click', handleUserSubmit);
+  $postalCodeButton.addEventListener('click', handlePost);
 }
 function hasObejctProperty(obj, item) {
   obj.hasOwnProperty(item);
@@ -123,15 +125,25 @@ async function handleSubmit(e) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
 
-  if (phone.length > 0 && !isPhoneValid) {
-    return alert('전화번호 형식이 맞지 않습니다.');
-  }
+  // if (phone.length > 0 && !isPhoneValid) {
+  //   return alert('전화번호 형식이 맞지 않습니다.');
+  // }
 
   try {
     $modalPassword.classList.add('is-active');
   } catch (err) {
     console.error(err);
   }
+}
+
+function handlePost() {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      $postalCodeInput.value = data.zonecode;
+      $address1Input.value = data.address;
+      $address2Input.value = data.buildingName;
+    },
+  }).open();
 }
 
 async function handleUserSubmit(e) {
