@@ -168,6 +168,12 @@ class UserService {
     const { _id } = await this.userModel.findByEmail(email);
     return _id
   }
+
+  // shortId => orderInfo
+  async getOrdersByUserId(shortId) {
+    const { orderInfo } = await this.userModel.findByShortId(shortId)
+    return orderInfo
+  }
 }
 
 const userService = new UserService(userModel);
