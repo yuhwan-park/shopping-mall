@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
 import { orderService } from '../../services';
 import { shortId } from './types/short-id';
+import { AddressSchema } from './address-schema';
 
 const OrderSchema = new Schema(
   {
@@ -32,17 +33,7 @@ const OrderSchema = new Schema(
       required: true,
     },
     address: {
-      type: new Schema(
-        {
-          postalCode: String,
-          address1: String,
-          address2: String,
-        },
-        {
-          _id: false,
-        },
-      ),
-      required: true,
+      AddressSchema
     },
     deliveryRequest: {
       type: String,

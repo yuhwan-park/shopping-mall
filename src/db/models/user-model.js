@@ -38,7 +38,7 @@ export class UserModel {
       address1,
       address2,
     } = update;
-
+    
     const updatedUser = await User.findOneAndUpdate(
       filter,
       {
