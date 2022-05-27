@@ -1,37 +1,58 @@
 let curPos = 0;
 let postion = 0;
-const IMAGE_WIDTH = 1000;
-const $prevBtn = document.querySelector('.prev');
-const $nextBtn = document.querySelector('.next');
-const $images = document.querySelector('.home-slideshow');
+const imageWidth = 1000;
+const slideIndex = 0;
+
+const $prevButton = document.querySelector('.prev');
+const $nextButton = document.querySelector('.next');
+
+const $slideWrapper = document.querySelector('.home-slideshow');
+const $slider = document.querySelector('.slideshow');
+const $slides = document.querySelectorAll('.slide');
+
+const totalSlides = $slides.length;
+const sliderWidth = $slideWrapper.clientWidth;
+$slider.style.width = sliderWidth * totalSlides + 'px';
+
+function showSlides() {
+  for (let i = 0; i < $slides.length; i++) {
+    sliderWidth.style.left = -(sliderWidth * slideIndex) + 'px';
+  }
+  slideIndex++;
+  if (slideIndex === totalSlides) {
+    slideIndex = 0;
+  }
+  setTimeout(showSlides, 2000);
+}
 
 function prev() {
   if (curPos > 0) {
-    $nextBtn.removeAttribute('disabled');
-    postion += IMAGE_WIDTH;
-    $images.style.transform = `translateX(${postion}px)`;
+    $nextButton.removeAttribute('disabled');
+    postion += imageWidth;
+    $slider.style.transform = `translateX(${postion}px)`;
     curPos = curPos - 1;
   }
   if (curPos == 0) {
-    $prevBtn.setAttribute('disabled', 'true');
+    $prevButton.setAttribute('disabled', 'true');
   }
 }
+
 function next() {
   if (curPos < 1) {
-    $prevBtn.removeAttribute('disabled');
-    postion -= IMAGE_WIDTH;
-    $images.style.transform = `translateX(${postion}px)`;
+    $prevButton.removeAttribute('disabled');
+    postion -= imageWidth;
+    $slider.style.transform = `translateX(${postion}px)`;
     curPos = curPos + 1;
   }
   if (curPos == 1) {
-    $nextBtn.setAttribute('disabled', 'true');
+    $nextButton.setAttribute('disabled', 'true');
   }
 }
 
 function buttonSlide() {
-  $prevBtn.setAttribute('disabled', 'true');
-  $prevBtn.addEventListener('click', prev);
-  $nextBtn.addEventListener('click', next);
+  $prevButton.setAttribute('disabled', 'true');
+  $prevButton.addEventListener('click', prev);
+  $nextButton.addEventListener('click', next);
 }
 
 buttonSlide();

@@ -6,12 +6,15 @@
   "license": "MIT",
   "scripts": {
     "sass-watch": "sass --no-source-map --watch src/public/sass/main.scss src/public/css/main.css",
+<<<<<<< HEAD
     "start": "concurrently \"nodemon index.js --exec babel-node\" \"npm run sass-watch\""
+=======
+    "start": "nodemon index.js --exec babel-node sass-watch"
+>>>>>>> b6f6fc380594ba47c30fc16f326150f82aee29e2
   },
   "dependencies": {
     "@sindresorhus/is": "^4.6.0",
     "bcrypt": "^5.0.1",
-    "concurrently": "^7.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
