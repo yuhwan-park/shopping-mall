@@ -8,6 +8,7 @@ const $brand = document.querySelector('#productBrand');
 const $shortDescription = document.querySelector('#shortDescription');
 const $detailDescription = document.querySelector('#detailDescription');
 const $editButton = document.querySelector('#editButton');
+const $deleteButton = document.querySelector('#deleteButton');
 
 const elements = [
   $title,
@@ -23,9 +24,8 @@ const id = path[path.length - 2];
 
 printDetail();
 
-$editButton.addEventListener('click', (e) => {
-  editDetail(e);
-});
+$editButton.addEventListener('click', editDetail);
+$deleteButton.addEventListener('click', deleteProduct);
 
 async function printDetail() {
   try {
@@ -62,6 +62,15 @@ async function editDetail(event) {
 
     event.target.innerText = '수정';
     toggle(true);
+  }
+}
+
+async function deleteProduct() {
+  try {
+    await Api.delete('/api/admin/products', id);
+    window.location.href = '/admin/products';
+  } catch (err) {
+    console.error(err);
   }
 }
 
