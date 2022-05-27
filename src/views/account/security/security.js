@@ -1,6 +1,7 @@
 import * as Api from '/api.js';
 
 // 요소(element), input 혹은 상수
+const userEmailText = document.querySelector('#userEmailText');
 const fullNameInput = document.querySelector('#fullNameInput');
 const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
@@ -15,11 +16,12 @@ const submitButton = document.querySelector('#submitButton');
 const submitConfirmButton = document.querySelector('#submitConfirmButton');
 
 // validator
-const fullName = fullNameInput.value;
-const password = passwordInput.value;
-const passwordConfirm = passwordConfirmInput.value;
-const address = addressInput.value;
-const phone = phoneInput.value;
+let fullName = fullNameInput.value;
+let password = passwordInput.value;
+let passwordConfirm = passwordConfirmInput.value;
+let address = addressInput.value;
+let phone = phoneInput.value;
+const data = { fullName, password, address, phone };
 
 addAllElements();
 addAllEvents();
@@ -30,18 +32,23 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  submitButton.addEventListener('click', handleSubmit);
-  submitConfirmButton.addEventListener('click', handlePasswordSubmit);
   swithCheckboxs.forEach((swithCheckbox) => {
     const checkbox = swithCheckbox.querySelector('input');
     checkbox.addEventListener('change', handleSwitch);
   });
+  submitButton.addEventListener('click', handleSubmit);
+  submitConfirmButton.addEventListener('click', handlePasswordSubmit);
+  currentPasswordConfirmInput.addEventListener('click', handleUserSubmit);
 }
 
 async function userData() {
   try {
     const data = await Api.get('/api/users/:shortId');
-    console.log(data);
+
+    fullName = data.fullName;
+    userEmailText.insertAdjacentHTML('beforeend', ` (${data.email})`);
+
+    console.log(fullName);
   } catch (err) {
     console.error(err);
   }
@@ -95,9 +102,9 @@ async function handleSubmit(e) {
   }
 }
 
-async function handlePasswordSubmit(e) {
+async function handleUserSubmit(e) {
   e.preventDefault();
-  const data = { fullName, password, address, phone };
+
   //const user = await Api.patch('/api/users/:shortId', data);
   console.log(data);
 }
