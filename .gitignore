@@ -5,3 +5,4 @@ yarn.lock
 .env
 
 src/public/css/main.css
+src/uploads
