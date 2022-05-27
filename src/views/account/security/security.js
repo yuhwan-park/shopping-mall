@@ -12,7 +12,9 @@ const $phoneInput = document.querySelector('#phoneInput');
 const $currentPasswordConfirmInput = document.querySelector(
   '#currentPasswordConfirmInput',
 );
-// const $inputs = document.querySelectorAll(`input[data-name]`);
+const $formInputs = document.querySelectorAll(
+  '.account .input, button[data-name]',
+);
 const $swithCheckboxs = document.querySelectorAll('.switch');
 const $modalPassword = document.querySelector('#modal-js-password');
 const $submitButton = document.querySelector('#submitButton');
@@ -39,16 +41,37 @@ function addAllEvents() {
   $submitButton.addEventListener('click', handleSubmit);
   $submitConfirmButton.addEventListener('click', handleUserSubmit);
 }
+function hasObejctProperty(obj, item) {
+  obj.hasOwnProperty(item);
+}
 
 async function userData() {
   try {
-    const data = await Api.get('/api/users/:shortId');
+    const data = await Api.get('/api/users', id);
     $userEmailText.insertAdjacentHTML('beforeend', ` (${data.email})`);
     $fullNameInput.value = data.fullName;
     $phoneInput.value = data.phone;
     $postalCodeInput.value = data.postalCode;
     $address1Input.value = data.address1;
     $address2Input.value = data.address2;
+
+    const isPostalCode = hasObejctProperty(data, 'postalCode');
+    const isAddress1 = hasObejctProperty(data, 'address1');
+    const isAddress2 = hasObejctProperty(data, 'address2');
+
+    if (!isPostalCode) {
+      $postalCodeInput.value = '';
+    }
+
+    if (!isAddress1) {
+      $address1Input.value = '';
+    }
+
+    if (!isAddress2) {
+      $address2Input.value = '';
+    }
+
+    console.log(data);
   } catch (err) {
     console.error(err);
   }
@@ -121,6 +144,7 @@ async function handleUserSubmit(e) {
   const address1 = $address1Input.value;
   const address2 = $address2Input.value;
   const phone = $phoneInput.value;
+
   const updateData = {
     fullName,
     password,
@@ -129,6 +153,7 @@ async function handleUserSubmit(e) {
     address1,
     address2,
     phone,
+    currentPassword,
   };
 
   const isPasswordSame = password && passwordConfirm === currentPassword;
@@ -141,11 +166,14 @@ async function handleUserSubmit(e) {
   }
 
   try {
-    //const user = await Api.patch('/api/users/', id, updateData);
+    const user = await Api.patch('/api/users', id, updateData);
     $modalPassword.classList.remove('is-active');
     $swithCheckboxs.forEach((swithCheckbox) => {
       const checkbox = swithCheckbox.querySelector('input');
       checkbox.checked = false;
+    });
+    $formInputs.forEach((input) => {
+      input.setAttribute('disabled', '');
     });
   } catch (err) {
     console.error(err);
