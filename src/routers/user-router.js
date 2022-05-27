@@ -65,6 +65,17 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
+// 사용자 정보 조회
+userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.currentUserId;
+    const getUserInfo = await userService.getUser(userId);
+    res.status(200).json(getUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
@@ -122,18 +133,6 @@ userRouter.patch(
       next(error);
     }
   })
-
-
-// 사용자 정보 조회
-userRouter.get('/:shortId', loginRequired, async (req, res, next) => {
-  try {
-    const userId = req.currentUserId;
-    const getUserInfo = await userService.getUser(userId);
-    res.status(200).json(getUserInfo);
-  } catch (error) {
-    next(error);
-  }
-});
 
 // 사용자 삭제(탈퇴) - shortId의 필요성 여부
 userRouter.delete('/:shortId', loginRequired, async (req, res, next) => {
