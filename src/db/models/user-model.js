@@ -1,5 +1,6 @@
 import { model } from 'mongoose';
 import { UserSchema } from '../schemas/user-schema';
+import { Address } from '../schemas/address-schema';
 
 const User = model('users', UserSchema);
 
@@ -38,7 +39,6 @@ export class UserModel {
       address1,
       address2,
     } = update;
-    
     const updatedUser = await User.findOneAndUpdate(
       filter,
       {
@@ -46,17 +46,10 @@ export class UserModel {
         password,
         phoneNumber,
         role,
-        $push: {
-          address: {
-            postalCode,
-            address1,
-            address2,
-          },
-        },
-      },
+        $push: {address: {postalCode, address1, address2}
+      }},
       option,
     );
-
     // const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
