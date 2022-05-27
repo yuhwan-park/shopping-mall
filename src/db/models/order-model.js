@@ -38,6 +38,12 @@ export class OrderModel {
     return order;
   }
 
+  // 유저로 주문 찾기
+  async findByUserId(userId) {
+    const orders = await Order.find({ userId })
+    return orders
+  }
+
   // 사용자용 주문 전체 조회
   async userfindAll(userobjectId) {
     const orders = await Order.findMany({ userobjectId });
