@@ -32,18 +32,25 @@
               <img id="productImg" alt="product-img" />
               <div class="file has-name is-fullwidth">
                 <label class="file-label">
-                  <input
-                    class="file-input"
-                    id="imageInput"
-                    type="file"
-                    name="image-file"
-                    accept=".png, .jpeg, .jpg"
-                  />
+                  <form
+                    name="fileForm"
+                    id="fileForm"
+                    enctype="multipart/form-data"
+                  >
+                    <input
+                      class="file-input"
+                      id="imageInput"
+                      type="file"
+                      name="img"
+                      accept=".png, .jpeg, .jpg"
+                    />
+                    <button class="button">업로드</button>
+                  </form>
                   <span class="file-cta">
                     <span class="file-icon">
                       <i class="fas fa-upload" aria-hidden="true"></i>
                     </span>
-                    <span class="file-label"> 사진 업로드 </span>
+                    <span class="file-label"> 사진 선택 </span>
                   </span>
                   <span class="file-name" id="fileNameSpan">
                     사진파일 (png, jpg, jpeg)
