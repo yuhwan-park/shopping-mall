@@ -57,7 +57,7 @@ adminRouter.get('/categories', adminRequired, async (req, res, next) => {
 // 카테고리 상세
 adminRouter.get('/categories/:id', adminRequired, async (req, res, next) => {
   try {
-    const shortId = await req.params.id;
+    const shortId = req.params.id;
     const category = await categoryService.getCategory(shortId);
     res.status(200).json(category);
   } catch (err) {
@@ -71,7 +71,7 @@ adminRouter.patch(
   adminRequired,
   async (req, res, next) => {
     try {
-      const shortId = await req.params.id;
+      const shortId = req.params.id;
       const { name, content, imageURL } = req.body;
       const toUpdate = {
         name,
@@ -96,7 +96,7 @@ adminRouter.delete(
   adminRequired,
   async (req, res, next) => {
     try {
-      const shortId = await req.params.id;
+      const shortId = req.params.id;
       const result = await categoryService.deleteCategory(shortId);
       res.status(200).json(result);
     } catch (err) {
@@ -164,7 +164,7 @@ adminRouter.delete(
   adminRequired,
   async (req, res, next) => {
     try {
-      const shortId = await req.params.id;
+      const shortId = req.params.id;
       const result = await productService.deleteProduct(shortId);
       res.status(200).json(result);
     } catch (err) {
