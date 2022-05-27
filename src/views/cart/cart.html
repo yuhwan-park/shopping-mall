@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="cart.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <section class="section">
+        <div class="container">
+          <div class="progress-container">
+            <h1>장바구니</h1>
+            <span> > 주문결제</span>
+            <span> > 주문완료</span>
+          </div>
+        </div>
+        <div class="tile is-ancestor">
+          <div class="tile is-8 is-parent">
+            <div class="box cart-container">
+              <div class="cart-header">
+                <!-- 전체선택 체크박스 -->
+                <input type="checkbox" />
+                <p>전체선택 |</p>
+                <p>선택삭제</p>
+              </div>
+              <div class="cart-item">
+                <input type="checkbox" />
+                <img
+                  src="https://cdn.pixabay.com/photo/2022/01/13/21/17/jar-6936032_1280.jpg"
+                  alt="image"
+                />
+                <div class="content">
+                  <div class="content-title">상품 이름</div>
+                  <div class="quantity">
+                    <button class="button is-rounded">-</button>
+                    <input type="number" min="1" max="99" value="1" />
+                    <button class="button is-rounded">+</button>
+                  </div>
+                </div>
+                <div class="calculation">
+                  <p>상품 가격</p>
+                  <p>X</p>
+                  <p>상품 개수</p>
+                  <p>=</p>
+                  <p>가격*개수</p>
+                </div>
+                <button class="button" id="delete-product">삭제</button>
+              </div>
+            </div>
+          </div>
+          <div class="tile is-parent">
+            <div class="box order-summary">
+              <div class="header">결제정보</div>
+              <div class="order-info">
+                <div class="info">
+                  <p>상품수</p>
+                  <p>n개</p>
+                </div>
+                <div class="info">
+                  <p>상품금액</p>
+                  <p>n원</p>
+                </div>
+                <div class="info">
+                  <p>배송비</p>
+                  <p>n원</p>
+                </div>
+              </div>
+              <div class="total">
+                <p>총 결제금액</p>
+                <p>n원</p>
+              </div>
+              <!-- JS의 window.location 을 이용해서 페이지 이동을 해야하지만 개발 시 페이지 이동을 위해 a태그 추가
+              기능 추가할 때 수정 필요 -->
+              <a href="/order"
+                ><button class="button is-info">구매하기</button></a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
