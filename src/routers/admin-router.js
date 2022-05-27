@@ -102,7 +102,7 @@ adminRouter.get('/products/:id', adminRequired, async (req, res) => {
 // 상품 삭제
 adminRouter.delete('/products/:id', adminRequired, async (req, res) => {
   const shortId = req.params.id;
-  const result = await productService.delete(shortId);
+  const result = await productService.deleteProduct(shortId);
   res.status(200).json(result);
 });
 

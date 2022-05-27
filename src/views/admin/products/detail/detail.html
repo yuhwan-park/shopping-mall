@@ -17,6 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
+    <script src="/static/js/modal.js" type="module" defer></script>
     <script src="detail.js" type="module" defer></script>
   </head>
 
@@ -54,6 +55,13 @@
               <div class="button-container">
                 <button class="button edit-content-button" id="editButton">
                   수정
+                </button>
+                <button
+                  class="button edit-content-button js-modal-trigger"
+                  data-target="modal-js-delete-product"
+                  id="deleteButton"
+                >
+                  삭제
                 </button>
               </div>
               <div class="box product-form">
@@ -169,6 +177,31 @@
           <!-- CONTENT : END -->
         </div>
       </section>
+      <div class="modal" id="modal-js-delete-product">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <div class="modal-header">
+              <p class="is-size-6">
+                상품 삭제 시 복구할 수 없습니다.<br />
+                정말로 삭제하시겠습니까?
+              </p>
+              <button
+                class="delete is-large modal-close"
+                aria-label="close"
+              ></button>
+            </div>
+            <div
+              class="modal-controller is-flex is-justify-content-center mt-5"
+            >
+              <button class="button" id="deleteAcceptButton">네</button>
+              <button class="button is-primary modal-close-button">
+                아니오
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- SECTION : END -->
     </div>
   </body>
