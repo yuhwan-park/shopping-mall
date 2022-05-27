@@ -117,5 +117,26 @@ async function del(endpoint, params = '', data = {}) {
   return result;
 }
 
+async function postImage(data) {
+  const res = await fetch('/upload', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: data,
+  });
+
+  if (!res.ok) {
+    const errorContent = await res.json();
+    const { reason } = errorContent;
+
+    throw new Error(reason);
+  }
+
+  const result = await res.json();
+
+  return result;
+}
+
 // 아래처럼 export하면, import * as Api 로 할 시 Api.get, Api.post 등으로 쓸 수 있음.
-export { get, post, patch, del as delete };
+export { get, post, patch, del as delete, postImage };

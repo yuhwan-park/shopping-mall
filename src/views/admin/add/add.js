@@ -7,14 +7,22 @@ const $brand = document.querySelector('#manufacturerInput');
 const $shortDescription = document.querySelector('#shortDescriptionInput');
 const $detailDescription = document.querySelector('#detailDescriptionInput');
 const $price = document.querySelector('#priceInput');
+const $imageInput = document.querySelector('#imageInput');
+const $fileNameSpan = document.querySelector('#fileNameSpan');
 
-$productForm.addEventListener('submit', addProduct);
+function applyFileName(event) {
+  $fileNameSpan.innerHTML = event.target.files[0].name;
+}
 
 async function addProduct(e) {
   e.preventDefault();
 
   try {
-    const newProductData = getData();
+    const formData = new FormData();
+    formData.append('img', e.target.img.files[0]);
+    const result = await Api.postImage(formData);
+
+    const newProductData = getData(result.url);
     await Api.post('/api/admin/products', newProductData);
     alert('상품이 성공적으로 추가되었습니다!');
     location.reload();
@@ -27,7 +35,7 @@ async function addProduct(e) {
   }
 }
 
-function getData() {
+function getData(imageURL) {
   const newProductData = {
     name: $title.value,
     brand: $brand.value,
@@ -35,7 +43,7 @@ function getData() {
     detailDescription: $detailDescription.value,
     price: $price.value,
     category: $categorySelectBox.value,
-    imageURL: '/src/uploads/test.jpg',
+    imageURL,
   };
   // 비워져있는 칸이 있는지 검증
   const isValid = Object.values(newProductData).filter((value) => !value);
@@ -46,3 +54,6 @@ function getData() {
     return newProductData;
   }
 }
+
+$productForm.addEventListener('submit', addProduct);
+$imageInput.addEventListener('change', applyFileName);
