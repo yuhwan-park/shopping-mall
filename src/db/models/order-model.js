@@ -30,7 +30,7 @@ export class OrderModel {
 
     // userSchema의 orderInfo에 createdNewOrder추가
     const userOrderInfo = await User.findOneAndUpdate({
-      orderInfo: createdNewOrder._id,
+      order: createdNewOrder._id,
     });
 
     return createdNewOrder;
