@@ -1,6 +1,7 @@
 import { model } from 'mongoose';
 import { OrderSchema } from '../schemas/order-schema';
 import { productModel } from './product-model';
+import { User } from './user-model';
 
 const Order = model('orders', OrderSchema);
 
@@ -26,6 +27,12 @@ export class OrderModel {
     orderInfo.products = products;
     // orderDB에 데이터 추가
     const createdNewOrder = await Order.create({ orderInfo });
+
+    // userSchema의 orderInfo에 createdNewOrder추가
+    const userOrderInfo = await User.findOneAndUpdate({
+      orderInfo: createdNewOrder._id,
+    });
+
     return createdNewOrder;
   }
 
