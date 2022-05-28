@@ -1,0 +1,41 @@
+.switch {
+  & {
+    position: relative;
+    display: inline-block;
+    height: 34px;
+    width: 60px;
+  }
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  &-toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    background-color: #ccc;
+    transition: 0.4s;
+  }
+  &-toggle::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  input:checked + .switch-toggle {
+    background: #2196f3;
+  }
+  input:checked + .switch-toggle:before {
+    left: calc(100% - 30px);
+  }
+}

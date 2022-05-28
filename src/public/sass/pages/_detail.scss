@@ -1,0 +1,59 @@
+.detail-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 50%;
+    height: auto;
+  }
+
+  .detail-right-wrap {
+    width: 50%;
+    height: auto;
+    padding: 2rem;
+    align-items: stretch;
+
+    .detail-text-wrap {
+      align-items: stretch;
+
+      .p-title {
+        width: 100%;
+        border-bottom: 1px solid #dbdbdb;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        padding: 3px 0;
+      }
+
+      .detail-title {
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      .detail-price {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+      }
+
+      .p-contents {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        font-size: 1em;
+      }
+    }
+
+    .btn-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+
+      button:nth-last-child(1) {
+        margin-left: 10px;
+      }
+    }
+  }
+}
