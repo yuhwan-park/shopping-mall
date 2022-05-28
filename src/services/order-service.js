@@ -29,7 +29,7 @@ class OrderService {
   }
 
   // 주문 정보로 주문 모두 찾기
-  async getOrdersByshortId(shortId) {
+  async getOrdersByShortId(shortId) {
     const orders = await this.orderModel.findById({ shortId });
     return orders;
   }

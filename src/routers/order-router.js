@@ -46,7 +46,7 @@ orderRouter.get('/', loginRequired, async (req, res, next) => {
 orderRouter.get('/:shortId', async (req, res, next) => {
   try {
     const { shortId } = req.params;
-    const order = await orderService.getOrdersByshortId(shortId);
+    const order = await orderService.getOrdersByShortId(shortId);
     res.status(200).json(order);
   } catch (error) {
     next(error);
@@ -54,7 +54,7 @@ orderRouter.get('/:shortId', async (req, res, next) => {
 });
 
 // 주문 삭제
-orderRouter.delete('/:ShortId', async (req, res, next) => {
+orderRouter.delete('/:shortId', async (req, res, next) => {
   try {
     const { shortId } = req.params;
     const result = await orderService.deleteByShortId(shortId);
