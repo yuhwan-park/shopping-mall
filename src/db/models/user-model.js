@@ -43,7 +43,7 @@ export class UserModel {
 
   // admin
   async findByShortId(shortId) {
-    const user = await User.findOne({ shortId });
+    const user = await User.findOne({ shortId: shortId });
     return user;
   }
 }
