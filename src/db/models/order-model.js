@@ -1,7 +1,7 @@
 import { model } from 'mongoose';
 import { OrderSchema } from '../schemas/order-schema';
-import { UserSchema } from '../schemas/user-schema';
 import { productModel } from './product-model';
+import { User } from './user-model';
 
 const Order = model('orders', OrderSchema);
 
@@ -27,40 +27,30 @@ export class OrderModel {
     orderInfo.products = products;
     // orderDB에 데이터 추가
     const createdNewOrder = await Order.create({ orderInfo });
-    // 유저 스키마에 주문 정보 저장
-    const updateOrderInfoOfUser = await UserSchema.findOneAndUpdate({})
 
+    // userSchema의 orderInfo에 createdNewOrder추가
+    const userOrderInfo = await User.findOneAndUpdate({
+      order: createdNewOrder._id,
+    });
 
     return createdNewOrder;
   }
 
-  // 주문 상세 조회
-  async findById(shortId) {
-    const order = await Order.findOne({ shortId });
-    return order;
-  }
-
-  // 유저로 주문 찾기
+  // 전체 주문 목록 조회 - user, admin에서 사용
   async findByUserId(userId) {
-    const orders = await Order.find({ userId })
-    return orders
-  }
-
-  // 사용자용 주문 전체 조회
-  async userfindAll(userobjectId) {
-    const orders = await Order.findMany({ userobjectId });
+    const orders = await Order.find({ userId });
     return orders;
   }
 
-  // 관리자용 주문 전체 조회
-  async adminfindAll() {
-    const orders = await Order.find({});
-    return orders;
+  // 사용자 특정 주문 상세 조회
+  async findById(shortId) {
+    const orderInfo = await Order.findOne({ shortId });
+    return orderInfo;
   }
 
-  // 주문 취소
-  async delete({ shortId }) {
-    const deletedOrder = await Order.findOneAndDelete({ _id });
+  // 주문 삭제(취소)
+  async delete(orderId) {
+    const deletedOrder = await Order.findOneAndDelete({ _id: orderId });
     return deletedOrder;
   }
 }
