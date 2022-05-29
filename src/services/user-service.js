@@ -155,12 +155,6 @@ class UserService {
     return _id;
   }
 
-  // userId로 유저 주문정보 조회 - admin
-  async getOrdersByUserId(shortId) {
-    const { orderInfo } = await this.userModel.findByShortId(shortId);
-    return orderInfo;
-  }
-
   // 사용자 전체 목록 조회 - admin
   async getUsers() {
     const users = await this.userModel.findAll();
