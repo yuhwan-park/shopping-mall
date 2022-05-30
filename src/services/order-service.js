@@ -24,7 +24,7 @@ class OrderService {
 
   // 사용자 특정 주문 상세 조회
   async getOrderInfo(shortId) {
-    const orderInfo = await findById(shortId);
+    const orderInfo = await this.orderModel.findById(shortId);
     return orderInfo;
   }
 
@@ -34,6 +34,7 @@ class OrderService {
     const orderId = await this.orderModel.findById(shortId);
     // orderId로 해당 order 삭제
     const deletedOrder = await this.orderModel.delete(orderId);
+    return deletedOrder;
   }
 }
 

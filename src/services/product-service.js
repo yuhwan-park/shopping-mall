@@ -15,7 +15,7 @@ class ProductService {
       imageURL,
       price,
     } = productInfo;
-    
+
     // 같은 상품 중복을 걸러낼 수 있는 방법이 무엇이 있을까 고민됨
     const product = await this.productModel.findOneByName(name);
     if (product) {
@@ -67,7 +67,7 @@ class ProductService {
       detailDescription,
       imageURL,
       price,
-    } = await updateRequest
+    } = await updateRequest;
 
     const newcategoryId = await categoryService.getIdByName(category);
     const toUpdate = {
@@ -78,7 +78,7 @@ class ProductService {
       detailDescription,
       imageURL,
       price,
-    }
+    };
 
     // 업데이트 진행
     product = await this.productModel.update({
@@ -96,8 +96,8 @@ class ProductService {
   }
 
   //category에 따른 상품 목록
-  async getProductsByCategory(category) {
-    const products = await this.productModel.findAllByCategory(category);
+  async getProductsByCategoryId(categoryId) {
+    const products = await this.productModel.findAllByCategoryId(categoryId)
     return products;
   }
 

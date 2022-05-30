@@ -12,13 +12,10 @@ export class OrderModel {
     const { products } = orderInfo;
     // products = [{shortId, quantity}]
     // products에 값이 있을 경우 값 추출
-    for (let i = 0; i <= products.length; i++) {
+    for (let i = 0; i < products.length; i++) {
       const { shortId } = products[i];
-
       // productModel에서 shortId로 검색
-      const product = await productModel.findOne({
-        shortId,
-      });
+      const product = await productModel.findById(shortId);
       delete products[i].shortId;
       products[i].productId = product._id;
       // products = [{productId, quantity}]
@@ -26,12 +23,7 @@ export class OrderModel {
 
     orderInfo.products = products;
     // orderDB에 데이터 추가
-    const createdNewOrder = await Order.create({ orderInfo });
-
-    // userSchema의 orderInfo에 createdNewOrder추가
-    const userOrderInfo = await User.findOneAndUpdate({
-      order: createdNewOrder._id,
-    });
+    const createdNewOrder = await Order.create(orderInfo);
 
     return createdNewOrder;
   }
