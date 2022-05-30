@@ -32,6 +32,7 @@
             <form
               class="box register-product-form-box"
               id="registerProductForm"
+              enctype="multipart/form-data"
             >
               <div class="field">
                 <label class="label" for="titleInput">제품 이름</label>
@@ -115,20 +116,22 @@
 
               <div class="field is-fullwidth">
                 <label class="label" for="imageInput">제품 사진</label>
+                <!-- <img id="productImg" alt="product-img" /> -->
                 <div class="file has-name is-fullwidth">
                   <label class="file-label">
                     <input
                       class="file-input"
                       id="imageInput"
                       type="file"
-                      name="image-file"
+                      name="img"
                       accept=".png, .jpeg, .jpg"
                     />
+
                     <span class="file-cta">
                       <span class="file-icon">
                         <i class="fas fa-upload" aria-hidden="true"></i>
                       </span>
-                      <span class="file-label"> 사진 업로드 </span>
+                      <span class="file-label"> 사진 선택 </span>
                     </span>
                     <span class="file-name" id="fileNameSpan">
                       사진파일 (png, jpg, jpeg)

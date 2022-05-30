@@ -38,4 +38,4 @@ uploadRouter.post('/', upload.single('img'), (req, res) => {
   res.json({ url: `/static/uploads/${req.file.filename}` });
 });
 
-export { uploadRouter }
+export { uploadRouter };

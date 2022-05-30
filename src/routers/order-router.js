@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { orderService, userService } from '../services';
+import is from '@sindresorhus/is';
+import { orderService } from '../services';
 import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
 
 // 주문 생성
-orderRouter.post('/', async (req, res, next) => {
+orderRouter.post('/', loginRequired, async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -16,13 +17,32 @@ orderRouter.post('/', async (req, res, next) => {
     }
     // 주문 안에 상품이 여러개일 경우, products를 배열로 받아온다.
     // products = [{shortId, quantity}]
-    const { orderInfo } = req.body;
-
-    // jwt token
-    const userId = req.currentuserId;
-
+    const {
+      ordererName,
+      phoneNumber,
+      postalCode,
+      address1,
+      address2,
+      products,
+      deliveryRequest,
+      deliveryFee,
+      totalPrice,
+    } = req.body;
+    const userId = req.currentUserId;
+    const orderInfo = {
+      ordererName,
+      phoneNumber,
+      postalCode,
+      address1,
+      address2,
+      products,
+      deliveryRequest,
+      deliveryFee,
+      totalPrice,
+      userId,
+    };
     // 위 데이터를 주문 db에 추가하기
-    const newOrder = await orderService.addOrder(orderInfo);
+    const newOrder = await orderService.addOrderInfo(orderInfo);
 
     res.status(201).json(newOrder);
   } catch (error) {
@@ -30,11 +50,10 @@ orderRouter.post('/', async (req, res, next) => {
   }
 });
 
-// 사용자의 주문 전체 조회
-orderRouter.get('/', loginRequired, async (req, res, next) => {
+// 사용자 주문 전체 조회
+orderRouter.get('/', loginRequired, async function (req, res, next) {
   try {
-    // 특정 사용자의 전체 주문 목록을 얻음
-    const userId = req.currentuserId;
+    const userId = req.currentUserId;
     const orders = await orderService.getOrdersByUserId(userId);
     res.status(200).json(orders);
   } catch (error) {
@@ -43,11 +62,11 @@ orderRouter.get('/', loginRequired, async (req, res, next) => {
 });
 
 // 사용자의 특정 주문 상세 조회
-orderRouter.get('/:shortId', async (req, res, next) => {
+orderRouter.get('/:shortId', loginRequired, async function (req, res, next) {
   try {
-    const { shortId } = req.params;
-    const order = await orderService.getOrdersByShortId(shortId);
-    res.status(200).json(order);
+    const shortId = req.params.shortId;
+    const orderInfo = await orderService.getOrderInfo(shortId);
+    res.status(200).json(orderInfo);
   } catch (error) {
     next(error);
   }
@@ -56,12 +75,12 @@ orderRouter.get('/:shortId', async (req, res, next) => {
 // 주문 삭제
 orderRouter.delete('/:shortId', async (req, res, next) => {
   try {
-    const { shortId } = req.params;
-    const result = await orderService.deleteByShortId(shortId);
-    res.status(200).json(result);
+    const shortId = req.params.shortId;
+    const deletedOrder = await orderService.deleteOrder(shortId);
+    res.status(200).json(deletedOrder);
   } catch (error) {
     next(error);
-  }  
+  }
 });
 
 export { orderRouter };

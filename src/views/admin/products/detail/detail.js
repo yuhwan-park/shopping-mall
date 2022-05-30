@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 
-const $img = document.querySelector('#productImg');
+const $image = document.querySelector('#productImg');
 const $title = document.querySelector('#productTitle');
 const $price = document.querySelector('#productPrice');
 const $categories = document.querySelector('#productCategories');
@@ -9,6 +9,9 @@ const $shortDescription = document.querySelector('#shortDescription');
 const $detailDescription = document.querySelector('#detailDescription');
 const $editButton = document.querySelector('#editButton');
 const $deleteAcceptButton = document.querySelector('#deleteAcceptButton');
+const $imageInput = document.querySelector('#imageInput');
+const $fileForm = document.querySelector('#fileForm');
+const $fileNameSpan = document.querySelector('#fileNameSpan');
 
 const elements = [
   $title,
@@ -22,10 +25,17 @@ const elements = [
 const path = window.location.pathname.split('/');
 const id = path[path.length - 2];
 
-printDetail();
+const handleSubmit = async (event) => {
+  event.preventDefault();
 
-$editButton.addEventListener('click', editDetail);
-$deleteAcceptButton.addEventListener('click', deleteProduct);
+  const formData = new FormData();
+  formData.append('img', event.target.img.files[0]);
+
+  const result = await Api.postImage(formData);
+
+  await Api.patch('/api/admin/products', id, { imageURL: result.url });
+  $image.src = result.url;
+};
 
 async function printDetail() {
   try {
@@ -37,7 +47,7 @@ async function printDetail() {
     $brand.value = product.brand;
     $shortDescription.value = product.shortDescription;
     $detailDescription.value = product.detailDescription;
-    $img.src = product.imageURL;
+    $image.src = product.imageURL;
   } catch (error) {
     console.error(error);
   }
@@ -55,7 +65,7 @@ async function editDetail(event) {
       category: $categories.value,
       shortDescription: $shortDescription.value,
       detailDescription: $detailDescription.value,
-      imageURL: $img.src,
+      imageURL: $image.src,
     };
 
     await Api.patch('/api/admin/products', id, newProductData);
@@ -79,3 +89,14 @@ function toggle(boolean) {
     element.disabled = boolean;
   });
 }
+
+function applyFileName(event) {
+  $fileNameSpan.innerHTML = event.target.files[0].name;
+}
+
+printDetail();
+
+$fileForm.addEventListener('submit', handleSubmit);
+$imageInput.addEventListener('change', applyFileName);
+$editButton.addEventListener('click', editDetail);
+$deleteAcceptButton.addEventListener('click', deleteProduct);
