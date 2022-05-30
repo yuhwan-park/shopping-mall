@@ -203,7 +203,7 @@ adminRouter.get('/userlist', adminRequired, async (req, res, next) => {
 });
 
 // 사용자 주문 상세 조회
-adminRouter.post('/ordeers', adminRequired, async (req, res, next) => {
+adminRouter.post('/orders', adminRequired, async (req, res, next) => {
   try {
     const { email } = req.body;
     const userId = await userService.getUserIdByEmail(email);
@@ -214,17 +214,16 @@ adminRouter.post('/ordeers', adminRequired, async (req, res, next) => {
   }
 });
 
-
 // 주문 삭제
 adminRouter.post('/orders/:shortId', adminRequired, async (req, res, next) => {
   try {
     const { shortId } = req.body;
-    const { objectId } = await orderService.getOrderInfo(shortId)
-    const deletedOrder = await orderService.deleteOrder(objectId)
-    res.status(200).json(deletedOrder)
+    const { objectId } = await orderService.getOrderInfo(shortId);
+    const deletedOrder = await orderService.deleteOrder(objectId);
+    res.status(200).json(deletedOrder);
   } catch (err) {
-    next (err)
+    next(err);
   }
-})
+});
 
 export { adminRouter };
