@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { orderService, userService } from '../services';
+import is from '@sindresorhus/is';
+import { orderService } from '../services';
 import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
@@ -16,8 +17,30 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
     }
     // 주문 안에 상품이 여러개일 경우, products를 배열로 받아온다.
     // products = [{shortId, quantity}]
-    const { orderInfo } = req.body;
-
+    const {
+      ordererName,
+      phoneNumber,
+      postalCode,
+      address1,
+      address2,
+      products,
+      deliveryRequest,
+      deliveryFee,
+      totalPrice,
+    } = req.body;
+    const userId = req.currentUserId;
+    const orderInfo = {
+      ordererName,
+      phoneNumber,
+      postalCode,
+      address1,
+      address2,
+      products,
+      deliveryRequest,
+      deliveryFee,
+      totalPrice,
+      userId,
+    };
     // 위 데이터를 주문 db에 추가하기
     const newOrder = await orderService.addOrderInfo(orderInfo);
 
