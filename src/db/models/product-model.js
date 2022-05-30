@@ -14,8 +14,8 @@ export class ProductModel {
     return product;
   }
 
-  async findAllByCategory(category) {
-    const products = await Product.find({ category });
+  async findAllByCategoryId(categoryId) {
+    const products = await Product.find({ categoryId });
     return products;
   }
 

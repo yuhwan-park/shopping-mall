@@ -8,7 +8,7 @@ export const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
 
@@ -26,4 +26,20 @@ export const convertToNumber = (string) => {
 // ms만큼 기다리게 함.
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
+};
+
+// 숫자만 입력 받게
+export const onlyNumber = (n) => {
+  return n.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+};
+
+// POST CODE
+export const handlePost = (postCode, address1, address2) => {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      postCode.value = data.zonecode;
+      address1.value = data.address;
+      address2.value = data.buildingName;
+    },
+  }).open();
 };
