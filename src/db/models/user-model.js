@@ -40,12 +40,6 @@ export class UserModel {
     const user = await User.findOne({ email });
     return user;
   }
-
-  // admin
-  async findByShortId(shortId) {
-    const user = await User.findOne({ shortId: shortId });
-    return user;
-  }
 }
 
 const userModel = new UserModel();
