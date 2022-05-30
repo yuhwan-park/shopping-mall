@@ -18,6 +18,7 @@
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
     <script src="/static/js/modal.js" type="module" defer></script>
+    <script src="signout.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -30,7 +31,7 @@
             <div class="account-content">
               <div class="account-signout">
                 <div class="account-signout-container">
-                  <form class="box">
+                  <from class="form box">
                     <div class="form-header mb-5">
                       <p class="title">삭제를 진행합니다.</p>
                     </div>
@@ -44,11 +45,12 @@
                           type="password"
                           id="passwordInput"
                           placeholder="카카오 로그인의 경우 'kakao'를 입력해 주세요."
+                          autocomplete="on"
                         />
                       </div>
                     </div>
                     <button
-                      class="button is-primary is-fullwidth mt-5 js-modal-trigger"
+                      class="button is-primary is-fullwidth mt-5"
                       data-target="modal-js-signout"
                       id="submitButton"
                     >
@@ -76,7 +78,7 @@
                 <div
                   class="modal-controller is-flex is-justify-content-center mt-5"
                 >
-                  <button class="button">네</button>
+                  <button class="button" id="deleteButton">네</button>
                   <button class="button is-primary modal-close-button">
                     아니오
                   </button>
