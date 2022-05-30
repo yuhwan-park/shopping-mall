@@ -1,7 +1,7 @@
 let curPos = 0;
 let postion = 0;
-const imageWidth = 1000;
-const slideIndex = 0;
+let imageWidth = 1000;
+let slideIndex = 0;
 
 const $prevButton = document.querySelector('.prev');
 const $nextButton = document.querySelector('.next');
@@ -11,22 +11,24 @@ const $slider = document.querySelector('.slideshow');
 const $slides = document.querySelectorAll('.slide');
 
 const totalSlides = $slides.length;
-const sliderWidth = $slideWrapper.clientWidth;
+let sliderWidth = $slideWrapper.clientWidth;
 $slider.style.width = sliderWidth * totalSlides + 'px';
 
+// 자동 슬라이드 함수
 function showSlides() {
   for (let i = 0; i < $slides.length; i++) {
     // sliderWidth.style.left = -(sliderWidth * slideIndex) + 'px';
 
-    sliderWidth.style.transform = `translateX(-${sliderWidth * slideIndex}px)`;
+    $slider.style.transform = `translateX(-${sliderWidth * slideIndex}px)`;
   }
   slideIndex++;
   if (slideIndex === totalSlides) {
     slideIndex = 0;
   }
-  setTimeout(showSlides, 2000);
+  setTimeout(showSlides, 4000);
 }
 
+// 수동 슬라이드 (버튼)
 function prev() {
   if (curPos > 0) {
     $nextButton.removeAttribute('disabled');
