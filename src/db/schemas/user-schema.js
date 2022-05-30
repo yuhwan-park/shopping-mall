@@ -23,9 +23,7 @@ const UserSchema = new Schema(
     orderInfo: [
       // 주문번호
       {
-        type: Schema.Types.ObjectId,
-        ref: 'orders',
-        required: false,
+        order: { type: Schema.Types.ObjectId, ref: 'orders', required: false },
       },
     ],
     address: {
@@ -37,7 +35,7 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },

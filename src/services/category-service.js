@@ -20,9 +20,19 @@ class CategoryService {
     return createdNewCategory;
   }
 
-  //카테고리 name => object Id 
+  //카테고리 name => objectId 
   async getIdByName(categoryname) {
     const category = await this.categoryModel.findByName(categoryname)
+    if (!category) {
+      throw new Error('카테고리가 존재하지 않습니다.')
+    }
+    const { _id } = category
+    return _id
+  }
+
+  //카테고리 shortId => objectId
+  async getIdByShortId(shortId) {
+    const category = await this.categoryModel.findById(shortId)
     if (!category) {
       throw new Error('카테고리가 존재하지 않습니다.')
     }
