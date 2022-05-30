@@ -47,6 +47,7 @@ class ProductService {
   // 상품 상세 조회
   async getProduct(shortId) {
     const product = await this.productModel.findById(shortId);
+    console.log(`product service, product: ${product}`)
     return product;
   }
 
@@ -96,8 +97,8 @@ class ProductService {
   }
 
   //category에 따른 상품 목록
-  async getProductsByCategory(category) {
-    const products = await this.productModel.findAllByCategory(category);
+  async getProductsByCategoryId(categoryId) {
+    const products = await this.productModel.findAllByCategoryId(categoryId)
     return products;
   }
 
