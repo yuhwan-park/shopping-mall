@@ -3,7 +3,6 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { userService } from '../services';
-
 const userRouter = Router();
 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
@@ -136,12 +135,12 @@ userRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
 
-    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    // 비밀번호 일치확인을 위해 사용자가 입력한 현재 비밀번호를 가져옴
     const currentPassword = req.body.currentPassword;
 
     // currentPassword 없을 시, 진행 불가
     if (!currentPassword) {
-      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
+      throw new Error('탈퇴를 하시려면 현재 비밀번호가 필요합니다.');
     }
 
     const deletedUserInfo = await userService.delUser(userId, currentPassword);

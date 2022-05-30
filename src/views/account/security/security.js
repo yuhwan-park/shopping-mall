@@ -1,5 +1,6 @@
 import * as Api from '/api.js';
 import { handlePost, onlyNumber } from '/useful-functions.js';
+import { INPUT } from '/useful-validator.js';
 
 // 요소(element), input 혹은 상수
 const $accountSecurity = document.querySelector('.account-security');
@@ -124,15 +125,11 @@ function handleSubmit(e) {
   let passwordConfirm = $passwordConfirmInput.value;
   let phoneNumber = onlyNumber($phoneInput.value);
 
-  const MIN_LENGTH_NAME = 2;
-  const MIN_LENGTH_PASSWORD = 4;
-  const MIN_LENGTH_PHONE_NUMBER = 12;
-
   // 잘 입력했는지 확인
-  const isFullNameValid = fullName.length >= MIN_LENGTH_NAME;
-  const isPasswordValid = password.length >= MIN_LENGTH_PASSWORD;
+  const isFullNameValid = fullName.length >= INPUT.MINLENGTH.name;
+  const isPasswordValid = password.length >= INPUT.MINLENGTH.password;
   const isPasswordSame = password === passwordConfirm;
-  const isPhoneValid = phoneNumber.length > MIN_LENGTH_PHONE_NUMBER;
+  const isPhoneValid = phoneNumber.length >= INPUT.MINLENGTH.phoneNumber;
 
   if (!isFullNameValid) {
     return alert('이름은 2글자 이상이어야 합니다.');
