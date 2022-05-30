@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import jwt from 'jsonwebtoken';
 
 import { adminRequired } from '../middlewares';
 import {
@@ -20,6 +21,29 @@ adminRouter.get('/', adminRequired, async (req, res, next) => {
     next(err);
   }
 });
+
+adminRouter.post('/', async (req, res, next) => {
+  try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    if (!userToken || userToken === 'null') {
+      throw new Error();
+    }
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const role = jwtDecoded.role;
+    if (role === 'admin') {
+      res.status(200).json({
+        result: 'admin'
+      })
+    } else if (role === 'basic-user') {
+      res.status(200).json({
+        result: 'basic-user'
+      })
+    }
+  } catch (err) {
+    next(err);
+  }
+})
 
 /****************************/
 /********* category *********/
