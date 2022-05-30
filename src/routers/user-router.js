@@ -19,6 +19,7 @@ userRouter.post('/register', async (req, res, next) => {
     // req (request)의 body 에서 데이터 가져오기
     const { fullName, email, password, adminCode } = req.body;
 
+    // admin 권한 부여
     const checkAdminCode = '222222';
     let role = 'basic-user';
     if (adminCode == checkAdminCode) {

@@ -20,12 +20,6 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
-    orderInfo: [
-      // 주문번호
-      {
-        order: { type: Schema.Types.ObjectId, ref: 'orders', required: false },
-      },
-    ],
     address: {
       type: new Schema(
         {

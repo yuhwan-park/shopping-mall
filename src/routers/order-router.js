@@ -20,27 +20,26 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
     const {
       ordererName,
       phoneNumber,
-      postalCode,
-      address1,
-      address2,
+      address,
       products,
       deliveryRequest,
       deliveryFee,
       totalPrice,
     } = req.body;
+
     const userId = req.currentUserId;
+
     const orderInfo = {
       ordererName,
       phoneNumber,
-      postalCode,
-      address1,
-      address2,
+      address,
       products,
       deliveryRequest,
       deliveryFee,
       totalPrice,
       userId,
     };
+
     // 위 데이터를 주문 db에 추가하기
     const newOrder = await orderService.addOrderInfo(orderInfo);
 
