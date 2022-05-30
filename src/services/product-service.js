@@ -47,7 +47,6 @@ class ProductService {
   // 상품 상세 조회
   async getProduct(shortId) {
     const product = await this.productModel.findById(shortId);
-    console.log(`product service, product: ${product}`)
     return product;
   }
 
