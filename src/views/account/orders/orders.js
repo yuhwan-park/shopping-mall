@@ -18,14 +18,15 @@ function addAllEvents() {
 function printUserOrders(orders) {
   const dataOrder = orders.reduce(
     (acc, order) =>
-      `<tr>
+      `<tr data-order="${order.shortId}">
     <td>${order.createdAt}</td>
-    <td>${order.products[0].shortId} / ${order.products[0].quantity}</td>
+    <td>${order.products[0].productId} / ${order.products[0].quantity}</td>
     <td>${order.deliveryFree}</td>
     <td>
       <button
         class="button js-delete-order-button js-modal-trigger"
         data-target="modal-js-order-cancel"
+        data-order="${order.shortId}"
       >
         주문 취소
       </button>
