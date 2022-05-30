@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import { productService, categoryService } from '../services'
+import { productService, categoryService } from '../services';
 
 const productRouter = Router();
 
 productRouter.get('/', async (req, res, next) => {
   try {
     const { category } = req.query;
-    const { _id } = await categoryService.getIdByShortId(category)
+    const categoryId = category.slice(0, -1);
+    const { _id } = await categoryService.getIdByShortId(categoryId);
     const products = await productService.getProductsByCategoryId(_id);
     res.status(200).json(products);
   } catch (err) {

@@ -7,6 +7,7 @@ getProducts();
 
 function getUrlQuries() {
   // 쿼리 URL을 쓰기 쉽게 변환하는 함수
+  // 이 함수는 쿼리 파라미터가 하나만 있다고 가정한다. 복수의 쿼리가 있다면 &를 기준으로 split이 들어가야됨
   // {category: 'CmckSTVPo9BeWHfY1KzZQ'}
   const queryString = window.location.search.replace('?', '');
   const [key, value] = queryString.split('=');
@@ -48,7 +49,7 @@ async function getProducts() {
   try {
     const queryParams = getUrlQuries();
     const products = await Api.get(
-      `/api/products/list?category=${queryParams['category']}`,
+      `/api/products?category=${queryParams['category']}`,
     );
     printProducts(products);
   } catch (err) {
