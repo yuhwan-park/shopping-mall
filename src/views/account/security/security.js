@@ -32,16 +32,12 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  $swithCheckboxs.forEach((swithCheckbox) => {
-    const checkbox = swithCheckbox.querySelector('input');
-    checkbox.addEventListener('change', handleSwitch);
-  });
+  $accountSecurity.addEventListener('click', handleSwitch);
   $submitButton.addEventListener('click', handleSubmit);
   $submitConfirmButton.addEventListener('click', handleUserSubmit);
   $postalCodeButton.addEventListener(
     'click',
     handlePost($postalCodeInput, $address1Input, $address2Input),
-    false,
   );
 }
 
@@ -56,30 +52,37 @@ function addAllEvents() {
 // }
 
 function handleSwitch(e) {
-  const checkedToggle = e.target.checked;
-  const targetDataName = e.target.dataset.name;
-  const targetCheckElement = document.querySelectorAll(
-    `input[data-name=${targetDataName}], button[data-name=${targetDataName}]`,
-  );
-  targetCheckElement.forEach((input) => {
-    const typeName = input.getAttribute('type');
-    if (checkedToggle) {
-      if (typeName !== 'checkbox') {
-        input.removeAttribute('disabled');
+  const targetElement = e.target.matches('input[type="checkbox"]');
+  if (targetElement) {
+    const checkedToggle = e.target.checked;
+    const targetDataName = e.target.dataset.name;
+    const targetCheckElement = document.querySelectorAll(
+      `input[data-name=${targetDataName}], button[data-name=${targetDataName}]`,
+    );
+    targetCheckElement.forEach((input) => {
+      const typeName = input.getAttribute('type');
+      if (checkedToggle) {
+        if (typeName !== 'checkbox') {
+          input.removeAttribute('disabled');
+        }
+      } else {
+        if (typeName !== 'checkbox') {
+          input.setAttribute('disabled', '');
+        }
       }
-    } else {
-      if (typeName !== 'checkbox') {
-        input.setAttribute('disabled', '');
-      }
-    }
-  });
+    });
+  }
+}
+
+function hasProperty(obj, elemet) {
+  return obj.hasOwnProperty(elemet);
 }
 
 function checkUserData(obj) {
-  const isPhoneNumber = obj.hasOwnProperty('phoneNumber');
-  const isPostalCode = obj.hasOwnProperty('postalCode');
-  const isAddress1 = obj.hasOwnProperty('address1');
-  const isAddress2 = obj.hasOwnProperty('address2');
+  const isPhoneNumber = hasProperty(obj, 'phoneNumber');
+  const isPostalCode = hasProperty(obj, 'postalCode');
+  const isAddress1 = hasProperty(obj, 'address1');
+  const isAddress2 = hasProperty(obj, 'address2');
 
   if (!isPhoneNumber) {
     $phoneInput.value = '';
