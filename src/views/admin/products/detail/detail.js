@@ -33,8 +33,9 @@ const handleSubmit = async (event) => {
 
   const result = await Api.postImage(formData);
 
-  await Api.patch('/api/admin/products', id, { imageURL: result.url });
   $image.src = result.url;
+
+  await patchData();
 };
 
 async function printDetail() {
@@ -53,22 +54,26 @@ async function printDetail() {
   }
 }
 
+async function patchData() {
+  const newProductData = {
+    name: $title.value,
+    brand: $brand.value,
+    price: $price.value,
+    category: $categories.value,
+    shortDescription: $shortDescription.value,
+    detailDescription: $detailDescription.value,
+    imageURL: $image.src,
+  };
+
+  await Api.patch('/api/admin/products', id, newProductData);
+}
+
 async function editDetail(event) {
   if (event.target.innerText === '수정') {
     event.target.innerText = '수정완료';
     toggle(false);
   } else {
-    const newProductData = {
-      name: $title.value,
-      brand: $brand.value,
-      price: $price.value,
-      category: $categories.value,
-      shortDescription: $shortDescription.value,
-      detailDescription: $detailDescription.value,
-      imageURL: $image.src,
-    };
-
-    await Api.patch('/api/admin/products', id, newProductData);
+    await patchData();
 
     event.target.innerText = '수정';
     toggle(true);
