@@ -34,22 +34,23 @@ async function handleSubmit(e) {
     return alert('kakao');
   }
 
-  try {
-    const data = { password };
-    await Api.post('/api/users', data);
-    $modalSignout.classList.add('is-modal');
-  } catch (err) {
-    alert(`${err.message}`);
-  }
+  // try {
+  //   const data = { inputPassword };
+  //   await Api.patch('/api/users', data);
+  // } catch (err) {
+  //   alert(`${err.message}`);
+  // }
+  $modalSignout.classList.add('is-active');
 }
 
 async function handleUserDelete(e) {
   e.preventDefault;
-
+  const currentPassword = $passwordInput.value;
+  const data = { currentPassword };
   try {
-    await Api.delete('/api/users');
-    localStorage.removeItem('key');
-    window.location.href = '/home';
+    await Api.delete('/api/users', '', data);
+    localStorage.removeItem('token');
+    window.location.href = '/';
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);
