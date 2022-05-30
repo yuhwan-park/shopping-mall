@@ -1,8 +1,4 @@
 import { orderModel } from '../db';
-
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
 class OrderService {
   constructor(orderModel) {
     this.orderModel = orderModel;
