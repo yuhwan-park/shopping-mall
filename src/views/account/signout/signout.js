@@ -34,17 +34,12 @@ async function handleSubmit(e) {
     return alert('kakao');
   }
 
-  // try {
-  //   const data = { inputPassword };
-  //   await Api.patch('/api/users', data);
-  // } catch (err) {
-  //   alert(`${err.message}`);
-  // }
   $modalSignout.classList.add('is-active');
 }
 
 async function handleUserDelete(e) {
   e.preventDefault();
+
   const currentPassword = $passwordInput.value;
   const data = { currentPassword };
   try {
