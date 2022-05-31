@@ -4,7 +4,8 @@ async function pagination(total, page, perPage) {
   const pageLimit = page * perPage;
   const endIndex = sorted.length > pageLimit ? pageLimit : sorted.length;
   const posts = await sorted.slice(startIndex, endIndex);
-  return posts;
+  const totalPage = Math.ceil(total / perPage);
+  return { totalPage, posts };
 }
 
 export { pagination };
