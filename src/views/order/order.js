@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 import { addCommas, handlePost } from '/useful-functions.js';
-import { INPUT } from '/useful-validator.js';
+import { INPUT } from '/useful-constants.js';
 
 const $productsTitle = document.querySelector('#productsTitle');
 const $productsPrice = document.querySelector('#productsPrice');
