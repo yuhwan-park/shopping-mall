@@ -44,7 +44,7 @@ async function handleSubmit(e) {
 }
 
 async function handleUserDelete(e) {
-  e.preventDefault;
+  e.preventDefault();
   const currentPassword = $passwordInput.value;
   const data = { currentPassword };
   try {
