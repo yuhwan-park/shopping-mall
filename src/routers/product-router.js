@@ -18,7 +18,6 @@ productRouter.get('/result', async (req, res, next) => {
 //카테고리 별 상품 조회
 productRouter.get('/', async (req, res, next) => {
   try {
-    console.log(req.query)
     const { category } = req.query;
     const { _id } = await categoryService.getIdByShortId(category);
     const products = await productService.getProductsByCategoryId(_id);
