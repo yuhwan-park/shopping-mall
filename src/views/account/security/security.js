@@ -5,7 +5,6 @@ import { INPUT } from '/useful-constants.js';
 // 요소(element), input 혹은 상수
 const $accountSecurity = document.querySelector('.account-security');
 const $modal = document.querySelector('.modal');
-const $swithCheckboxs = document.querySelectorAll('.switch');
 const $userEmailText = document.querySelector('#userEmailText');
 const $fullNameInput = document.querySelector('#fullNameInput');
 const $passwordInput = document.querySelector('#passwordInput');
@@ -16,9 +15,6 @@ const $address2Input = document.querySelector('#address2Input');
 const $phoneInput = document.querySelector('#phoneInput');
 const $currentPasswordConfirmInput = document.querySelector(
   '#currentPasswordConfirmInput',
-);
-const $formInputs = document.querySelectorAll(
-  '.account .input, button[data-name]',
 );
 const $modalPassword = document.querySelector('#modal-js-password');
 const $postalCodeButton = document.querySelector('#postalCodeButton');
