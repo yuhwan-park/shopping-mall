@@ -2,7 +2,8 @@ import * as Api from '/api.js';
 import { dateYearMonthDay } from '/useful-functions.js';
 // 요소(element), input 혹은 상수
 const $accountOrder = document.querySelector('.account-orders');
-const $deleteOrderButton = document.querySelector('.js-delete-order-button');
+const $modal = document.querySelector('.modal');
+const $submitButton = document.querySelector('#submitButton');
 
 addAllElements();
 addAllEvents();
@@ -45,7 +46,7 @@ getUserOrders();
 //     deliveryRequest: '직접 수령하겠습니다.',
 //     deliveryFee: 3000,
 //     totalPrice: 210000,
-//     shortId: 'AZ_pp-6fnYfoLG-1Ddwpa',
+//     shortId: '2Z_pp-6fnYfoLG-1Ddwpa',
 //     createdAt: '2022-05-30T00:25:03.125Z',
 //     updatedAt: '2022-05-30T00:25:03.125Z',
 //     __v: 0,
@@ -59,7 +60,28 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  $accountOrder.addEventListener('click', handleOrderDataDelete);
+  $accountOrder.addEventListener('click', getOrderId);
+  $modal.addEventListener('click', closeModal);
+  $submitButton.addEventListener('click', handleOrderDataDelete);
+}
+
+function getOrderId(e) {
+  e.preventDefault();
+  const targetElement = e.target.matches('button.js-delete-order-button');
+  if (targetElement) {
+    const setOrderId = e.target.getAttribute('data-order');
+    $submitButton.setAttribute('data-order', setOrderId);
+  }
+}
+
+function closeModal(e) {
+  e.preventDefault();
+  const $modalClose = e.target.matches('.modal-close');
+  const $modalCloseButton = e.target.matches('.modal-close-button');
+  const $modalBackground = e.target.matches('.modal-background');
+  if ($modalClose || $modalCloseButton || $modalBackground) {
+    $submitButton.removeAttribute('data-order');
+  }
 }
 
 function printUserOrders(orders) {
@@ -70,7 +92,7 @@ function printUserOrders(orders) {
     <td>${order.deliveryFree}</td>
     <td>
       <button
-        class="button js-delete-order-button js-modal-trigger"
+        class="button js-delete-order-button is-modal js-modal-trigger"
         data-target="modal-js-order-cancel"
         data-order="${order.shortId}"
       >
@@ -99,7 +121,6 @@ async function getUserOrders() {
   try {
     const data = await Api.get('/api/orders');
     printUserOrders(data);
-    console.log(data);
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);
@@ -108,14 +129,12 @@ async function getUserOrders() {
 
 async function handleOrderDataDelete(e) {
   e.preventDefault();
-  const targetElement = e.target.matches('button.js-delete-order-button');
-  if (targetElement) {
-    const orderId = e.target.getAttribute('data-order');
-    try {
-      await Api.delete('/api/orders', orderId);
-    } catch (err) {
-      console.error(err);
-      alert(`${err.message}`);
-    }
+  let orderId = e.target.getAttribute('data-order');
+  try {
+    await Api.delete('/api/orders', orderId);
+    window.location.href = '/account/orders/';
+  } catch (err) {
+    console.error(err);
+    alert(`${err.message}`);
   }
 }
