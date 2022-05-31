@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="cart.js"></script>
+    <script src="cart.js" type="module" defer></script>
   </head>
 
   <body>
@@ -32,36 +32,14 @@
         </div>
         <div class="tile is-ancestor">
           <div class="tile is-8 is-parent">
-            <div class="box cart-container">
-              <div class="cart-header">
+            <div class="box cart-container" id="cartContainer">
+              <div class="cart-header" id="cartHeader">
                 <!-- 전체선택 체크박스 -->
-                <input type="checkbox" />
-                <p>전체선택 |</p>
-                <p>선택삭제</p>
+                <input type="checkbox" id="selectCheckbox" />
+                <p id="selectAll">전체선택 |</p>
+                <p id="cancleAll">선택삭제</p>
               </div>
-              <div class="cart-item">
-                <input type="checkbox" />
-                <img
-                  src="https://cdn.pixabay.com/photo/2022/01/13/21/17/jar-6936032_1280.jpg"
-                  alt="image"
-                />
-                <div class="content">
-                  <div class="content-title">상품 이름</div>
-                  <div class="quantity">
-                    <button class="button is-rounded">-</button>
-                    <input type="number" min="1" max="99" value="1" />
-                    <button class="button is-rounded">+</button>
-                  </div>
-                </div>
-                <div class="calculation">
-                  <p>상품 가격</p>
-                  <p>X</p>
-                  <p>상품 개수</p>
-                  <p>=</p>
-                  <p>가격*개수</p>
-                </div>
-                <button class="button" id="delete-product">삭제</button>
-              </div>
+              <div id="cartItemContainer"></div>
             </div>
           </div>
           <div class="tile is-parent">
@@ -70,20 +48,20 @@
               <div class="order-info">
                 <div class="info">
                   <p>상품수</p>
-                  <p>n개</p>
+                  <p><span id="productsCount"></span>개</p>
                 </div>
                 <div class="info">
                   <p>상품금액</p>
-                  <p>n원</p>
+                  <p><span id="productsPrice"></span>원</p>
                 </div>
                 <div class="info">
                   <p>배송비</p>
-                  <p>n원</p>
+                  <p>3,000원</p>
                 </div>
               </div>
               <div class="total">
                 <p>총 결제금액</p>
-                <p>n원</p>
+                <p><span id="productsTotal"></span>원</p>
               </div>
               <!-- JS의 window.location 을 이용해서 페이지 이동을 해야하지만 개발 시 페이지 이동을 위해 a태그 추가
               기능 추가할 때 수정 필요 -->

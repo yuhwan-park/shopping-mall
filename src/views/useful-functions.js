@@ -43,3 +43,7 @@ export const handlePost = (postCode, address1, address2) => {
     },
   }).open();
 };
+
+export const filterArray = (arr, value) => {
+  return arr.filter((el) => el !== value);
+};
