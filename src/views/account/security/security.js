@@ -36,10 +36,9 @@ function addAllEvents() {
   $accountSecurity.addEventListener('click', handleSwitch);
   $submitButton.addEventListener('click', handleSubmit);
   $submitConfirmButton.addEventListener('click', handleUserSubmit);
-  $postalCodeButton.addEventListener(
-    'click',
-    handlePost($postalCodeInput, $address1Input, $address2Input),
-  );
+  $postalCodeButton.addEventListener('click', () => {
+    handlePost($postalCodeInput, $address1Input, $address2Input);
+  });
 }
 
 // function handlePost() {
