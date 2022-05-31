@@ -51,6 +51,7 @@ const $cartItemContainer = document.querySelector('#cartItemContainer');
 const $productsCount = document.querySelector('#productsCount');
 const $productsPrice = document.querySelector('#productsPrice');
 const $productsTotal = document.querySelector('#productsTotal');
+const $deliveryFee = document.querySelector('#deliveryFee');
 const $cartHeader = document.querySelector('#cartHeader');
 const $selectCheckbox = document.querySelector('#selectCheckbox');
 
@@ -112,9 +113,13 @@ class Cart {
 
   // 주문내역을 요약한 정보를 HTML에 주입하는 메소드
   printOrderSummary() {
+    const deliveryFee = this.orderData.productsTotal > 50000 ? 0 : 3000;
     $productsCount.innerHTML = this.orderData.productsCount;
     $productsPrice.innerHTML = addCommas(this.orderData.productsTotal);
-    $productsTotal.innerHTML = addCommas(this.orderData.productsTotal + 3000);
+    $productsTotal.innerHTML = addCommas(
+      this.orderData.productsTotal + deliveryFee,
+    );
+    $deliveryFee.innerHTML = addCommas(deliveryFee);
   }
 
   // 모든 상품이 선택되거나 선택되지 않았을 때 전체선택 체크박스를 on/off 하는 메소드
