@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="complete.js"></script>
+    <script src="complete.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -43,7 +43,7 @@
                 <span class="icon"><i class="fas fa-circle-check"></i></span>
                 <span>주문이 완료되었습니다!</span>
               </div>
-              <div class="button-container">
+              <div class="button-container" id="buttonContainer">
                 <button
                   class="button is-medium is-fullwidth"
                   id="orderDetailButton"
