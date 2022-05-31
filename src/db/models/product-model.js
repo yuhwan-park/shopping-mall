@@ -9,6 +9,12 @@ export class ProductModel {
     return product;
   }
 
+  async findByName(filter) {
+    console.log(`in model, filter: ${filter}`)
+    const product = await Product.find({ name: { $regex: `${filter}` } });
+    return product;
+  }
+
   async findById(shortId) {
     const product = await Product.findOne({ shortId });
     return product;
