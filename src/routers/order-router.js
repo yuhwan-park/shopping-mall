@@ -20,6 +20,8 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
     const {
       ordererName,
       phoneNumber,
+      shortTitle,
+      orderStatus,
       address,
       products,
       deliveryRequest,
@@ -32,6 +34,8 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
     const orderInfo = {
       ordererName,
       phoneNumber,
+      shortTitle,
+      orderStatus,
       address,
       products,
       deliveryRequest,
@@ -72,7 +76,7 @@ orderRouter.get('/:shortId', loginRequired, async function (req, res, next) {
 });
 
 // 주문 삭제
-orderRouter.delete('/:shortId', async (req, res, next) => {
+orderRouter.delete('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const shortId = req.params.shortId;
     const deletedOrder = await orderService.deleteOrder(shortId);
