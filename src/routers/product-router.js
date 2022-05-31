@@ -1,15 +1,17 @@
 import { Router } from 'express';
 import { productService, categoryService } from '../services';
+import { pagination } from '../middlewares'
 
 const productRouter = Router();
 
 productRouter.get('/', async (req, res, next) => {
   try {
-    const { category } = req.query;
-    const categoryId = category.slice(0, -1);
-    const { _id } = await categoryService.getIdByShortId(categoryId);
+    const { category, page, perPage } = req.query;
+    const { _id } = await categoryService.getIdByShortId(category);
     const products = await productService.getProductsByCategoryId(_id);
-    res.status(200).json(products);
+    const posts = await pagination(products, Number(page), Number(perPage))
+    res.status(200).json(posts)
+    // res.status(200).json(products);
   } catch (err) {
     next(err);
   }
