@@ -4,16 +4,22 @@ import { shortId } from './types/short-id';
 const OrderSchema = new Schema(
   {
     shortId,
+    shortTitle: {
+      type: String,
+      required: true,
+    },
+    orderStatus: {
+      type: String,
+      required: true,
+    },
     products: [
       {
         productId: {
           type: Schema.Types.ObjectId,
           ref: 'products',
-          required: true,
         },
         quantity: {
           type: Number,
-          required: true,
         },
       },
     ],

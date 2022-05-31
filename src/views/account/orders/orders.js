@@ -69,6 +69,7 @@ function getOrderId(e) {
   e.preventDefault();
   const targetElement = e.target.matches('button.js-delete-order-button');
   if (targetElement) {
+    $modal.classList.add('is-active');
     const setOrderId = e.target.getAttribute('data-order');
     $submitButton.setAttribute('data-order', setOrderId);
   }
@@ -88,8 +89,8 @@ function printUserOrders(orders) {
   const dataOrder = orders.reduce((acc, order) => {
     return (acc += `<tr>
     <td>${dateYearMonthDay(order.createdAt)}</td>
-    <td>${order.products[0].productId} / ${order.products[0].quantity} 개</td>
-    <td>${order.deliveryFree}</td>
+    <td>${order.shortTitle} 개</td>
+    <td>${order.orderStatus}</td>
     <td>
       <button
         class="button js-delete-order-button is-modal js-modal-trigger"
