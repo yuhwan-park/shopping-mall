@@ -1,5 +1,5 @@
 import * as Api from '/api.js';
-import { INPUT } from '/useful-validator.js';
+import { INPUT } from '/useful-constants.js';
 
 // 요소(element), input 혹은 상수
 const SECRET_KEY = 'MY-SECRET-KEY';
