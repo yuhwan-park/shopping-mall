@@ -50,7 +50,7 @@ async function getProducts() {
     const queryParams = getUrlQuries();
     const products = await Api.get(
       `/api`,
-      `/products?category=${queryParams['category']}`,
+      `products?category=${queryParams['category']}`,
     );
     printProducts(products);
   } catch (err) {
