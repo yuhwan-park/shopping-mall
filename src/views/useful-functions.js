@@ -47,3 +47,14 @@ export const handlePost = (postCode, address1, address2) => {
 export const filterArray = (arr, value) => {
   return arr.filter((el) => el !== value);
 };
+
+// date YYYY-MM-DD
+export const dateYearMonthDay = (date) => {
+  const result = date.split('-');
+  let year = Number(result[0]);
+  let month = Number(result[1]);
+  month = month >= 10 ? month : '0' + month;
+  let day = Number(result[2].slice(0, 2));
+  const hyphenFormat = `${year}-${month}-${day}`;
+  return hyphenFormat;
+};
