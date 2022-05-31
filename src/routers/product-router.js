@@ -6,8 +6,7 @@ const productRouter = Router();
 productRouter.get('/', async (req, res, next) => {
   try {
     const { category } = req.query;
-    const categoryId = category.slice(0, -1);
-    const { _id } = await categoryService.getIdByShortId(categoryId);
+    const { _id } = await categoryService.getIdByShortId(category);
     const products = await productService.getProductsByCategoryId(_id);
     res.status(200).json(products);
   } catch (err) {

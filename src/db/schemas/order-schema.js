@@ -5,12 +5,12 @@ const OrderSchema = new Schema(
   {
     shortId,
     shortTitle: {
-      type:string,
-      required: true
+      type: String,
+      required: true,
     },
     orderStatus: {
-      type: string,
-      required: true
+      type: String,
+      required: true,
     },
     products: [
       {

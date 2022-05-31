@@ -49,7 +49,8 @@ async function getProducts() {
   try {
     const queryParams = getUrlQuries();
     const products = await Api.get(
-      `/api/products?category=${queryParams['category']}`,
+      `/api`,
+      `/products?category=${queryParams['category']}`,
     );
     printProducts(products);
   } catch (err) {
