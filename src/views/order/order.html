@@ -16,8 +16,9 @@
     ></script>
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- custom -->
-    <script src="order.js"></script>
+    <script src="order.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -92,7 +93,10 @@
                           readonly
                         />
                       </p>
-                      <button class="button is-light is-hovered">
+                      <button
+                        class="button is-light is-hovered"
+                        id="addressButton"
+                      >
                         주소찾기
                       </button>
                     </div>
@@ -124,7 +128,6 @@
                           class="input"
                           id="address2"
                           autocomplete="on"
-                          readonly
                         />
                       </p>
                     </div>
@@ -139,22 +142,22 @@
                       <div class="select">
                         <select id="requestSelect">
                           <option value="0" class="select-option">
-                            요청사항1
+                            배송 시 요청사항을 선택해 주세요.
                           </option>
                           <option value="1" class="select-option">
-                            요청사항2
+                            직접 수령하겠습니다.
                           </option>
                           <option value="2" class="select-option">
-                            요청사항3
+                            배송 전 연락바랍니다.
                           </option>
                           <option value="3" class="select-option">
-                            요청사항4
+                            부재 시 경비실에 맡겨주세요.
                           </option>
                           <option value="4" class="select-option">
-                            요청사항5
+                            부재 시 문 앞에 놓아주세요.
                           </option>
                           <option value="5" class="select-option">
-                            요청사항6
+                            부재 시 택배함에 넣어주세요.
                           </option>
                         </select>
                       </div>
@@ -169,33 +172,27 @@
                 <div class="order-info">
                   <div class="info">
                     <p>주문상품</p>
-                    <p class="products-title" id="productsTitle">
-                      상품명/상품수량
-                    </p>
+                    <p class="products-title" id="productsTitle"></p>
                   </div>
                   <div class="info">
                     <p>상품총액</p>
-                    <p class="products-price" id="productsPrice">
-                      상품가격*상품갯수
+                    <p class="products-price">
+                      <span id="productsPrice"></span>원
                     </p>
                   </div>
                   <div class="info">
                     <p>배송비</p>
-                    <p id="deliveryFee">n원</p>
+                    <p><span id="deliveryFee"></span>원</p>
                   </div>
                 </div>
                 <div class="total">
                   <p>총 결제금액</p>
-                  <p class="total-price" id="totalPrice">
-                    상품총액 + 배송비 원
-                  </p>
+                  <p class="total-price"><span id="totalPrice"></span>원</p>
                 </div>
                 <div class="purchase">
-                  <a href="/order/complete">
-                    <button class="button is-info" id="orderCompleteButton">
-                      결제하기
-                    </button>
-                  </a>
+                  <button class="button is-info" id="orderCompleteButton">
+                    결제하기
+                  </button>
                 </div>
               </div>
             </div>

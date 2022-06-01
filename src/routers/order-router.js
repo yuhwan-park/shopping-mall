@@ -15,15 +15,12 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
         'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
-    // 주문 안에 상품이 여러개일 경우, products를 배열로 받아온다.
-    // products = [{shortId, quantity}]
     const {
       ordererName,
       phoneNumber,
       shortTitle,
       orderStatus,
       address,
-      products,
       deliveryRequest,
       deliveryFee,
       totalPrice,
@@ -37,7 +34,6 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
       shortTitle,
       orderStatus,
       address,
-      products,
       deliveryRequest,
       deliveryFee,
       totalPrice,

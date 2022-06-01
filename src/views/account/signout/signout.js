@@ -1,5 +1,5 @@
 import * as Api from '/api.js';
-import { INPUT } from '/useful-validator.js';
+import { INPUT } from '/useful-constants.js';
 
 // 요소(element), input 혹은 상수
 const SECRET_KEY = 'MY-SECRET-KEY';
@@ -34,22 +34,18 @@ async function handleSubmit(e) {
     return alert('kakao');
   }
 
-  try {
-    const data = { password };
-    await Api.post('/api/users', data);
-    $modalSignout.classList.add('is-modal');
-  } catch (err) {
-    alert(`${err.message}`);
-  }
+  $modalSignout.classList.add('is-active');
 }
 
 async function handleUserDelete(e) {
-  e.preventDefault;
+  e.preventDefault();
 
+  const currentPassword = $passwordInput.value;
+  const data = { currentPassword };
   try {
-    await Api.delete('/api/users');
-    localStorage.removeItem('key');
-    window.location.href = '/home';
+    await Api.delete('/api/users', '', data);
+    localStorage.removeItem('token');
+    window.location.href = '/';
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);

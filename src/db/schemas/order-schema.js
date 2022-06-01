@@ -5,24 +5,22 @@ const OrderSchema = new Schema(
   {
     shortId,
     shortTitle: {
-      type:string,
-      required: true
+      type: String,
+      required: true,
     },
     orderStatus: {
-      type: string,
-      required: true
+      type: String,
+      required: true,
     },
-    products: [
-      {
-        productId: {
-          type: Schema.Types.ObjectId,
-          ref: 'products',
-        },
-        quantity: {
-          type: Number,
-        },
+    products: {
+      productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'products',
       },
-    ],
+      quantity: {
+        type: Number,
+      },
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
