@@ -26,6 +26,14 @@ const requestString = {
   5: '부재 시 택배함에 넣어주세요.',
 };
 
+function checkLogin() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('로그인이 필요한 기능입니다.');
+    window.location.href = '/login';
+  }
+}
+
 function printOrderSummary() {
   const deliveryFee = orderData['productsTotal'] > 50000 ? 0 : 3000;
   $productsTitle.innerHTML = getShortTitle();
@@ -78,11 +86,12 @@ async function postOrder() {
     }
 
     await Api.post('/api/orders', data);
+    window.location.href = '/order/complete';
   } catch (err) {
     alert(err.message);
   }
 }
-
+checkLogin();
 printOrderSummary();
 
 $addressButton.addEventListener('click', () => {

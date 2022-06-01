@@ -11,6 +11,7 @@ const $productsTotal = document.querySelector('#productsTotal');
 const $deliveryFee = document.querySelector('#deliveryFee');
 const $cartHeader = document.querySelector('#cartHeader');
 const $selectCheckbox = document.querySelector('#selectCheckbox');
+const $orderButton = document.querySelector('#orderButton');
 
 // *************************
 // *  장바구니 페이지 로직  *
@@ -220,6 +221,33 @@ class Cart {
     this.printOrderSummary();
     this.checkHeaderCheckbox();
   }
+
+  // 선택된 상품을 장바구니에서 제거하는 메소드
+  deleteAll() {
+    this.orderData['selectedIds'].forEach((id) => {
+      this.cartData = this.cartData.filter(
+        (product) => product['shortId'] !== id,
+      );
+      this.orderData['ids'] = this.orderData['ids'].filter(
+        (productId) => productId !== id,
+      );
+    });
+    this.orderData['selectedIds'] = [];
+    localStorage.setItem('cart', JSON.stringify(this.cartData));
+    localStorage.setItem('order', JSON.stringify(this.orderData));
+    this.modifyTotalPrice();
+    this.printOrderSummary();
+    this.printCartData();
+    setEventListener();
+  }
+
+  checkOrder() {
+    if (this.orderData['selectedIds'].length < 1) {
+      alert('선택된 상품이 없습니다.');
+    } else {
+      window.location.href = '/order';
+    }
+  }
 }
 
 // 이벤트리스너 모음
@@ -255,7 +283,7 @@ function setEventListener() {
     if (event.target.id === 'selectAll') {
       cart.selectAndCancleAll(true);
     } else if (event.target.id === 'cancleAll') {
-      cart.selectAndCancleAll(false);
+      cart.deleteAll();
     }
   });
   $cartHeader.addEventListener('change', (event) => {
@@ -268,3 +296,5 @@ cart.printCartData();
 cart.printOrderSummary();
 cart.checkHeaderCheckbox();
 setEventListener();
+
+$orderButton.addEventListener('click', cart.checkOrder.bind(cart));
