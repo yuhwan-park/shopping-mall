@@ -220,6 +220,25 @@ class Cart {
     this.printOrderSummary();
     this.checkHeaderCheckbox();
   }
+
+  // 선택된 상품을 장바구니에서 제거하는 메소드
+  deleteAll() {
+    this.orderData['selectedIds'].forEach((id) => {
+      this.cartData = this.cartData.filter(
+        (product) => product['shortId'] !== id,
+      );
+      this.orderData['ids'] = this.orderData['ids'].filter(
+        (productId) => productId !== id,
+      );
+    });
+    this.orderData['selectedIds'] = [];
+    localStorage.setItem('cart', JSON.stringify(this.cartData));
+    localStorage.setItem('order', JSON.stringify(this.orderData));
+    this.modifyTotalPrice();
+    this.printOrderSummary();
+    this.printCartData();
+    setEventListener();
+  }
 }
 
 // 이벤트리스너 모음
@@ -255,7 +274,7 @@ function setEventListener() {
     if (event.target.id === 'selectAll') {
       cart.selectAndCancleAll(true);
     } else if (event.target.id === 'cancleAll') {
-      cart.selectAndCancleAll(false);
+      cart.deleteAll();
     }
   });
   $cartHeader.addEventListener('change', (event) => {
