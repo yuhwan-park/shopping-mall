@@ -50,6 +50,24 @@ class ProductService {
     return product;
   }
 
+  // name으로 상품 검색
+  async getProductsByName(filter) {
+    const products = await this.productModel.findByName(filter)
+    return products
+  }
+
+  //category에 따른 상품 목록
+  async getProductsByCategoryId(categoryId) {
+    const products = await this.productModel.findAllByCategoryId(categoryId);
+    return products;
+  }
+
+  //brand에 따른 상품 목록
+  async getProductsByBrand(brand) {
+    const products = await this.productModel.findAllByBrand(brand);
+    return products;
+  }
+
   // 상품 정보 수정
   async setProduct(shortId, updateRequest) {
     // 상품 존재 여부 확인 후 에러 반환
@@ -92,18 +110,6 @@ class ProductService {
     const { _id } = await this.productModel.findById(shortId);
     const product = await this.productModel.delete(_id);
     return product;
-  }
-
-  //category에 따른 상품 목록
-  async getProductsByCategoryId(categoryId) {
-    const products = await this.productModel.findAllByCategoryId(categoryId)
-    return products;
-  }
-
-  //brand에 따른 상품 목록
-  async getProductsByBrand(brand) {
-    const products = await this.productModel.findAllByBrand(brand);
-    return products;
   }
 }
 
