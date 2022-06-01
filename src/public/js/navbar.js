@@ -2,6 +2,10 @@ import * as Api from '/api.js';
 
 const app = document.getElementById('app');
 const token = localStorage.getItem('token');
+const $searchInput = document.querySelector('#searchInput');
+
+addAllElements();
+addAllEvents();
 
 // 역할에 따른 분류
 insertNavBar();
@@ -65,5 +69,22 @@ async function insertNavBar() {
       localStorage.removeItem('token');
       window.location.reload();
     });
+  }
+}
+
+// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+async function addAllElements() {}
+
+// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+function addAllEvents() {
+  document.addEventListener('keyup', handleSearch);
+}
+
+function handleSearch(e) {
+  const targetElement = e.target.matches('#searchInput');
+  if (targetElement && e.keyCode === 13) {
+    let result = e.target.value;
+    console.log(result, e.target);
+    window.location.href = `/product/search?result=${result}`;
   }
 }
