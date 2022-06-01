@@ -3,6 +3,9 @@ import { addCommas } from '/useful-functions.js';
 
 const $productList = document.querySelector('#productList');
 
+let perPage
+let page
+
 getProducts();
 
 function getUrlQuries() {
@@ -56,4 +59,10 @@ async function getProducts() {
   } catch (err) {
     console.error(err);
   }
+}
+
+function setperPage() {
+  const perPageSelect = document.querySelector('#perpage-select')
+  perPage = perPageSelect.options[perPageSelect.selectedIndex].value;
+  page = 
 }
