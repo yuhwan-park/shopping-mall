@@ -8,21 +8,7 @@ const Order = model('orders', OrderSchema);
 export class OrderModel {
   // 주문 생성
   async create(orderInfo) {
-    // product 정보 가져오기 - shortId를 사용해서 ObjectId를 가져온다!
     const { userId } = orderInfo;
-
-    // // products = [{shortId, quantity}] - products에 값이 있을 경우 값 추출
-    // for (let i = 0; i < products.length; i++) {
-    //   const { shortId } = products[i];
-
-    //   // productModel에서 shortId로 검색
-    //   const product = await productModel.findById(shortId);
-
-    //   delete products[i].shortId;
-    //   products[i].productId = product._id; // products = [{productId, quantity}]
-    // }
-    // orderInfo.products = products;
-
     // orderDB에 데이터 추가
     const createdNewOrder = await Order.create(orderInfo);
 
