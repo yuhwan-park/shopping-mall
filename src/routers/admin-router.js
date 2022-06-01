@@ -229,9 +229,9 @@ adminRouter.get('/userlist', adminRequired, async (req, res, next) => {
 });
 
 // 특정 사용자 주문 목록 조회
-adminRouter.post('/orders', adminRequired, async (req, res, next) => {
+adminRouter.get('/orders/list', adminRequired, async (req, res, next) => {
   try {
-    const { email } = req.body;
+    const { email } = req.query;
     const userId = await userService.getUserIdByEmail(email);
     const orders = await orderService.getOrdersByUserId(userId);
     res.status(200).json(orders);
