@@ -22,8 +22,8 @@ export class OrderModel {
   }
 
   // 전체 주문 목록 조회 - user, admin에서 사용
-  async findByUserId(userId) {
-    const orders = await Order.find({ userId });
+  async findByUserId(_id) {
+    const orders = await Order.find({ userId: _id });
     return orders;
   }
 

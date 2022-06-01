@@ -9,52 +9,6 @@ addAllElements();
 addAllEvents();
 getUserOrders();
 
-//임시 데이터
-// const data = [
-//   {
-//     _id: '62940edf38cf7c43df5125e5',
-//     products: [
-//       {
-//         productId: '628f956d56a6804dd6ab12b2',
-//         quantity: 1,
-//         _id: '62940edf38cf7c43df5125e6',
-//       },
-//     ],
-//     userId: '628f1ed940a4f603fe896381',
-//     ordererName: 'admin',
-//     phoneNumber: '010-2222-3333',
-//     deliveryRequest: '직접 수령하겠습니다.',
-//     deliveryFee: 3000,
-//     totalPrice: 210000,
-//     shortId: 'AZ_pp-6fnYfoLG-1Ddwpa',
-//     createdAt: '2022-05-30T00:25:03.125Z',
-//     updatedAt: '2022-05-30T00:25:03.125Z',
-//     __v: 0,
-//   },
-//   {
-//     _id: '62940edf38cf7c43df5125e5',
-//     products: [
-//       {
-//         productId: '628f956d56a6804dd6ab12b2',
-//         quantity: 1,
-//         _id: '62940edf38cf7c43df5125e6',
-//       },
-//     ],
-//     userId: '628f1ed940a4f603fe896381',
-//     ordererName: 'admin',
-//     phoneNumber: '010-2222-3333',
-//     deliveryRequest: '직접 수령하겠습니다.',
-//     deliveryFee: 3000,
-//     totalPrice: 210000,
-//     shortId: '2Z_pp-6fnYfoLG-1Ddwpa',
-//     createdAt: '2022-05-30T00:25:03.125Z',
-//     updatedAt: '2022-05-30T00:25:03.125Z',
-//     __v: 0,
-//   },
-// ];
-
-// printUserOrders(data);
-
 // html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 async function addAllElements() {}
 
