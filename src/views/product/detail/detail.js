@@ -1,12 +1,6 @@
 import * as Api from '/api.js';
 
 const $container = document.querySelector('.detail-container');
-const $detailImage = document.querySelector('#detailProductImage');
-const $title = document.querySelector('.p-title');
-const $detailTitle = document.querySelector('.detail-title');
-const $detailPrice = document.querySelector('.detail-price');
-const $detailContents = document.querySelector('.p-contents');
-
 const path = window.location.pathname.split('/');
 const id = path[path.length - 2];
 
@@ -101,6 +95,7 @@ async function addCart(data) {
     localStorage.setItem('cart', JSON.stringify([{ ...data, quantity: 1 }]));
   }
   localStorage.setItem('order', JSON.stringify(orderData));
+  alert('장바구니에 물품이 추가되었습니다.');
 }
 
 function purchase(data) {

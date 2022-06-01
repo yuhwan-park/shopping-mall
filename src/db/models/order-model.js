@@ -29,14 +29,18 @@ export class OrderModel {
 
   // 사용자 특정 주문 상세 조회
   async findById(shortId) {
-    const orderInfo = await Order.findOne({ shortId });
+    const orderInfo = await Order.findOne({ shortId: shortId });
     return orderInfo;
   }
 
-  // 주문 삭제(취소)
-  async delete(orderId) {
-    const deletedOrder = await Order.findOneAndDelete({ _id: orderId });
-    return deletedOrder;
+  // 주문 취소
+  async update(orderInfo) {
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: orderInfo._id },
+      { orderStatus: '주문 취소' },
+      { returnOriginal: false },
+    );
+    return updatedOrder;
   }
 }
 

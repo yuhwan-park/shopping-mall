@@ -40,17 +40,6 @@ function getOrderId(e) {
   }
 }
 
-function getUrlQuries() {
-  // 쿼리 URL을 쓰기 쉽게 변환하는 함수
-  // 이 함수는 쿼리 파라미터가 하나만 있다고 가정한다. 복수의 쿼리가 있다면 &를 기준으로 split이 들어가야됨
-  // {category: 'CmckSTVPo9BeWHfY1KzZQ'}
-  const queryString = window.location.search.replace('?', '');
-  const [key, value] = queryString.split('=');
-  return {
-    [key]: value,
-  };
-}
-
 function printUserOrders(orders) {
   const dataOrder = orders.reduce((acc, order) => {
     return (acc += `<tr>
@@ -84,15 +73,10 @@ function printUserOrders(orders) {
   }
 }
 
-async function handleUserSearch(e) {
+function handleUserSearch(e) {
   if (e.keyCode === 13) {
     try {
-      const data = {
-        email: $emailInput.value,
-      };
-      const orders = await Api.post('/api/admin/orders/list', data);
-      console.log(orders);
-      // printUserOrders(orders);
+      getUserOrders();
     } catch (err) {
       console.error(err);
       alert(`${err.message}`);
@@ -100,12 +84,20 @@ async function handleUserSearch(e) {
   }
 }
 
+async function getUserOrders() {
+  const email = $emailInput.value;
+  const data = await Api.get(`/api/admin/orders`, `list?email=${email}`);
+  $accountOrder.querySelector('tbody').innerHTML = '';
+  printUserOrders(data);
+}
+
 async function handleOrderDataDelete(e) {
   e.preventDefault();
   let orderId = e.target.getAttribute('data-order');
   try {
     await Api.delete('/api/admin/orders', orderId);
-    window.location.href = '/admin/order_list';
+    $modal.classList.remove('is-active');
+    getUserOrders();
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);

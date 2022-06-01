@@ -14,6 +14,21 @@ function applyFileName(event) {
   $fileNameSpan.innerHTML = event.target.files[0].name;
 }
 
+async function getCategories() {
+  const categories = await Api.get('/api/admin', 'categories');
+  const options = categories.reduce(
+    (acc, category) =>
+      (acc += `
+  <option
+  value="${category.name}"
+  class="notification is-primary is-light">
+  ${category.name}
+  </option>`),
+    '',
+  );
+  $categorySelectBox.insertAdjacentHTML('beforeend', options);
+}
+
 async function addProduct(e) {
   e.preventDefault();
 
@@ -54,6 +69,8 @@ function getData(imageURL) {
     return newProductData;
   }
 }
+
+getCategories();
 
 $productForm.addEventListener('submit', addProduct);
 $imageInput.addEventListener('change', applyFileName);
