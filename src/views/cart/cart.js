@@ -11,6 +11,7 @@ const $productsTotal = document.querySelector('#productsTotal');
 const $deliveryFee = document.querySelector('#deliveryFee');
 const $cartHeader = document.querySelector('#cartHeader');
 const $selectCheckbox = document.querySelector('#selectCheckbox');
+const $orderButton = document.querySelector('#orderButton');
 
 // *************************
 // *  장바구니 페이지 로직  *
@@ -239,6 +240,14 @@ class Cart {
     this.printCartData();
     setEventListener();
   }
+
+  checkOrder() {
+    if (this.orderData['selectedIds'].length < 1) {
+      alert('선택된 상품이 없습니다.');
+    } else {
+      window.location.href = '/order';
+    }
+  }
 }
 
 // 이벤트리스너 모음
@@ -287,3 +296,5 @@ cart.printCartData();
 cart.printOrderSummary();
 cart.checkHeaderCheckbox();
 setEventListener();
+
+$orderButton.addEventListener('click', cart.checkOrder.bind(cart));
