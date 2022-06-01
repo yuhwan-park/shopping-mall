@@ -87,12 +87,11 @@ function printUserOrders(orders) {
 async function handleUserSearch(e) {
   if (e.keyCode === 13) {
     try {
-      const data = {
-        email: $emailInput.value,
-      };
-      const orders = await Api.post('/api/admin/orders', data);
-      console.log(orders);
-      // printUserOrders(orders);
+      const email = $emailInput.value;
+      const data = await Api.get(`/api/admin/orders`, `list?email=${email}`);
+      $accountOrder.querySelector('tbody').innerHTML = '';
+      printUserOrders(data);
+      console.log(data);
     } catch (err) {
       console.error(err);
       alert(`${err.message}`);
@@ -105,7 +104,7 @@ async function handleOrderDataDelete(e) {
   let orderId = e.target.getAttribute('data-order');
   try {
     await Api.delete('/api/admin/orders', orderId);
-    window.location.href = '/admin/order_list';
+    // window.location.href = `` url을 어디로 보내야 할까요?
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);
