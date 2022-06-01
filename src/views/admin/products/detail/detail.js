@@ -98,7 +98,7 @@ async function editDetail(event) {
 
 async function deleteProduct() {
   try {
-    await Api.delete('/api/admin/products', id);
+    await Api.delete(`/api/admin/products/${id}`, 'delete');
     window.location.href = '/admin/products';
   } catch (err) {
     console.error(err);
