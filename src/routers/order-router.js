@@ -72,11 +72,11 @@ orderRouter.get('/:shortId', loginRequired, async function (req, res, next) {
 });
 
 // 주문 삭제
-orderRouter.delete('/:shortId', loginRequired, async (req, res, next) => {
+orderRouter.patch('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const shortId = req.params.shortId;
-    const deletedOrder = await orderService.deleteOrder(shortId);
-    res.status(200).json(deletedOrder);
+    const updatedOrder = await orderService.updateOrder(shortId);
+    res.status(200).json(updatedOrder);
   } catch (error) {
     next(error);
   }
