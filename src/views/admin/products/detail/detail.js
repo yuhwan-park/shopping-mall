@@ -3,7 +3,7 @@ import * as Api from '/api.js';
 const $image = document.querySelector('#productImg');
 const $title = document.querySelector('#productTitle');
 const $price = document.querySelector('#productPrice');
-const $categories = document.querySelector('#productCategories');
+const $categories = document.querySelector('#categorySelectBox');
 const $brand = document.querySelector('#productBrand');
 const $shortDescription = document.querySelector('#shortDescription');
 const $detailDescription = document.querySelector('#detailDescription');
@@ -24,6 +24,22 @@ const elements = [
 
 const path = window.location.pathname.split('/');
 const id = path[path.length - 2];
+
+async function getCategories() {
+  const categories = await Api.get('/api/admin', 'categories');
+  const options = categories.reduce(
+    (acc, category) =>
+      (acc += `
+  <option
+  value="${category._id}"
+  class="notification is-primary is-light">
+  ${category.name}
+  </option>`),
+    '',
+  );
+  $categories.insertAdjacentHTML('beforeend', options);
+  printDetail();
+}
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -98,8 +114,7 @@ function toggle(boolean) {
 function applyFileName(event) {
   $fileNameSpan.innerHTML = event.target.files[0].name;
 }
-
-printDetail();
+getCategories();
 
 $fileForm.addEventListener('submit', handleSubmit);
 $imageInput.addEventListener('change', applyFileName);
