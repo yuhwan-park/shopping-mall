@@ -21,6 +21,16 @@ async function insertNavBar() {
           </div>
   
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <div class="search-container">
+              <from class="form">
+                <div class="field">
+                  <label class="label a11y" for="searchInput">검색어</label>
+                  <div class="control">
+                    <input class="input" id="searchInput" type="search" placeholder="검색어를 입력해주세요">
+                  </div>
+                </div>
+              </form>
+            </div>
             <ul id="navbar">
               ${
                 !token

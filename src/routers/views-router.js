@@ -23,6 +23,7 @@ viewsRouter.use('/admin/products/:id', serveStatic('admin/products/detail'));
 viewsRouter.use('/admin/add', serveStatic('admin/add'));
 viewsRouter.use('/admin/order_list', serveStatic('admin/order_list'));
 viewsRouter.use('/product/list', serveStatic('product'));
+viewsRouter.use('/product/search', serveStatic('product/search'));
 viewsRouter.use('/products/detail/:id', serveStatic('product/detail'));
 viewsRouter.use('/admin/categories', serveStatic('admin/categories'));
 viewsRouter.use('/admin/categories/add', serveStatic('admin/categories/add'));
