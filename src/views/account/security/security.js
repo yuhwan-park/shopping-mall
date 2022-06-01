@@ -59,28 +59,6 @@ function handleSwitch(e) {
         }
       }
     });
-
-    // 다시 생각해보기
-    // const inputElementMatch = e.target.matches(
-    //   `input[data-name=${targetDataName}]`,
-    // );
-    // const buttonElementMatch = e.target.matches(
-    //   `button[data-name=${targetDataName}]`,
-    // );
-    // const targetCheckElement = document.querySelectorAll(
-    //   `input[data-name=${targetDataName}], button[data-name=${targetDataName}]`,
-    // );
-    // if (inputElementMatch || buttonElementMatch) {
-    //   const typeName = e.target.getAttribute('type');
-    //   console.log(typeName, checkedToggle, targetDataName);
-    //   if (checkedToggle) {
-    //     if (typeName !== 'checkbox') {
-    //       targetCheckElement.forEach((ele) => ele.removeAttribute('disabled'));
-    //     }
-    //   } else {
-    //     targetCheckElement.forEach((ele) => ele.setAttribute('disabled', ''));
-    //   }
-    // }
   }
 }
 
