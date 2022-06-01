@@ -28,9 +28,9 @@ async function insertNavBar() {
                     <li><a href="/register">회원가입</a></li>`
                   : result === 'basic-user'
                   ? `<li><a href="/account">계정관리</a></li>
-                    <li><a href="/logout">로그아웃</a></li>`
+                    <li id="signOut"><a href="#">로그아웃</a></li>`
                   : `<li><a href="/account">계정관리</a></li>
-                    <li><a href="/logout">로그아웃</a></li>
+                    <li id="signOut"><a href="#">로그아웃</a></li>
                     <li><a href="/admin">관리자 페이지</a></li>`
               }
               <li>
@@ -48,4 +48,12 @@ async function insertNavBar() {
     </nav>
   `,
   );
+
+  if (token) {
+    const $signOut = document.querySelector('#signOut');
+    $signOut.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      window.location.reload();
+    });
+  }
 }
