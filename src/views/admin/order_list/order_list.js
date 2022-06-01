@@ -90,7 +90,7 @@ async function handleUserSearch(e) {
       const data = {
         email: $emailInput.value,
       };
-      const orders = await Api.post('/api/admin/orders', data);
+      const orders = await Api.post('/api/admin/orders/list', data);
       console.log(orders);
       // printUserOrders(orders);
     } catch (err) {
