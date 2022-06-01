@@ -86,6 +86,7 @@ async function postOrder() {
     }
 
     await Api.post('/api/orders', data);
+    window.location.href = '/order/complete';
   } catch (err) {
     alert(err.message);
   }
