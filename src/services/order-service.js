@@ -25,12 +25,12 @@ class OrderService {
   }
 
   // 주문 삭제(취소)
-  async deleteOrder(shortId) {
+  async updateOrder(shortId) {
     // shortId로 orderId 추출
-    const orderId = await this.orderModel.findById(shortId);
+    const orderInfo = await this.orderModel.findById(shortId);
     // orderId로 해당 order 삭제
-    const deletedOrder = await this.orderModel.delete(orderId);
-    return deletedOrder;
+    const updatedOrder = await this.orderModel.update(orderInfo);
+    return updatedOrder;
   }
 }
 
