@@ -13,12 +13,15 @@ authRouter.get(
 // 구글 콜백 처리
 authRouter.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', {
+    failureRedirect: '/login',
+    session: false,
+  }),
   (req, res, next) => {
     try {
       // 토큰 제공
-      const token = setUserToken(res, req.user);
-      res.status(200).json(token);
+      setUserToken(res, req.user);
+      res.redirect('/');
     } catch (error) {
       next(error);
     }

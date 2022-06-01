@@ -63,7 +63,8 @@ async function handleSubmit(e) {
   }
 }
 
-async function googlelogin() {
+async function googlelogin(e) {
+  e.preventDefault();
   try {
     // const data = { email, fullName };
     // const login = Api.post('/auth/google', data);
@@ -73,11 +74,7 @@ async function googlelogin() {
     // alert(`정상적으로 로그인되었습니다.`);
     // window.location.href = '/';
 
-    const login = await fetch('/auth/google');
-    const data = await login.json();
-
-    console.log(data);
-    console.log(login);
+    window.location.href = '/auth/google';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

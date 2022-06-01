@@ -10,7 +10,7 @@ const config = {
   callbackURL: '/auth/google/callback',
 };
 
-async function findOrCreateUser({ email, fullName }) {
+async function findOrCreateUser({ email, name }) {
   const user = await User.findOne({
     email,
   });
@@ -21,26 +21,29 @@ async function findOrCreateUser({ email, fullName }) {
   }
 
   // 없으면 user 생성
-  const hashedPassword = await bcrypt.hash(password, 10); // 비밀번호 해쉬화
+  // const hashedPassword = await bcrypt.hash(password, 10); // 비밀번호 해쉬화
   const createdNewUser = await User.create({
-    fullName,
+    fullName: name,
     email,
-    password: hashedPassword,
+    password: 'GOOGLE_OAUTH',
   });
   return createdNewUser;
 }
 
-export default new GoogleStrategy(config, async (profile, done) => {
-  const { email, fullName } = profile._json;
+export default new GoogleStrategy.Strategy(
+  config,
+  async (a, b, profile, done) => {
+    const { email, name } = profile._json;
 
-  try {
-    const user = await findOrCreateUser({ email, fullName });
-    done(null, {
-      shortId: user.shortId,
-      email: user.email,
-      fullName: user.fullName,
-    });
-  } catch (e) {
-    done(e, null);
-  }
-});
+    try {
+      const user = await findOrCreateUser({ email, name });
+      done(null, {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+      });
+    } catch (e) {
+      done(e, null);
+    }
+  },
+);
