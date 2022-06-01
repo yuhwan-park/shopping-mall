@@ -86,12 +86,17 @@ function printUserOrders(orders) {
 
 async function handleUserSearch(e) {
   if (e.keyCode === 13) {
-    const data = {
-      email: $emailInput.value,
-    };
-    const orders = await Api.post('/api/admin/orders', data);
-    console.log(orders);
-    printUserOrders(orders);
+    try {
+      const data = {
+        email: $emailInput.value,
+      };
+      const orders = await Api.post('/api/admin/orders', data);
+      console.log(orders);
+      // printUserOrders(orders);
+    } catch (err) {
+      console.error(err);
+      alert(`${err.message}`);
+    }
   }
 }
 
