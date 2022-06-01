@@ -29,9 +29,9 @@ async function insertNavBar() {
                   : result === 'basic-user'
                   ? `<li><a href="/account">계정관리</a></li>
                     <li id="signOut"><a href="#">로그아웃</a></li>`
-                  : `<li><a href="/account">계정관리</a></li>
-                    <li id="signOut"><a href="#">로그아웃</a></li>
-                    <li><a href="/admin">관리자 페이지</a></li>`
+                  : `<li><a href="/admin">관리자 페이지</a></li>
+                    <li><a href="/account">계정관리</a></li>
+                    <li id="signOut"><a href="#">로그아웃</a></li>`
               }
               <li>
                 <a href="/cart" aria-current="page">
