@@ -1,49 +1,6 @@
 import { addCommas, convertToNumber } from '/useful-functions.js';
 
 // *************************
-// *    더미 데이터        *
-// *************************
-
-const data = [
-  {
-    categoryId: '6278acb0927a0d0520ff6260',
-    createdAt: '2022-05-09T05:57:00.230Z',
-    detailDescription: '따뜻한 느낌을 줍니다. 지금깥은 날씨에 제격입니다!',
-    imageURL:
-      'http://localhost:5000/static/uploads/2579346_1_5001653723885723.jpg',
-    brand: '스플래시',
-    price: 19000,
-    quantity: 1,
-    shortDescription: '따뜻한 느낌의 남성 니트입니다.',
-    name: '아이보리 니트',
-    updatedAt: '2022-05-09T05:57:00.230Z',
-    shortId: '6278ad2c927a0d0520ff6267',
-  },
-  {
-    categoryId: '6278acb0927a0d0520ff6260',
-    createdAt: '2022-05-09T05:58:07.858Z',
-    detailDescription: '너무 두껍지 않고, 부담스럽지 않은 색상입니다.',
-    imageURL: '/static/uploads/2579346_1_5001653640330778.jpg',
-    brand: '스플래시',
-    price: 189000,
-    quantity: 1,
-    shortDescription: '세련된 느낌의 정장입니다.',
-    name: '남성 정장 ',
-    updatedAt: '2022-05-09T05:58:07.858Z',
-    shortId: '6278ad6f927a0d0520ff626a',
-  },
-];
-const orderData = {
-  ids: ['6278ad6f927a0d0520ff626a', '6278ad2c927a0d0520ff6267'],
-  productsCount: 2,
-  productsTotal: 208000,
-  selectedIds: ['6278ad6f927a0d0520ff626a', '6278ad2c927a0d0520ff6267'],
-};
-const item = JSON.stringify(data);
-localStorage.setItem('cart', item);
-localStorage.setItem('order', JSON.stringify(orderData));
-
-// *************************
 // *    엘레멘트 셀렉터     *
 // *************************
 
@@ -51,6 +8,7 @@ const $cartItemContainer = document.querySelector('#cartItemContainer');
 const $productsCount = document.querySelector('#productsCount');
 const $productsPrice = document.querySelector('#productsPrice');
 const $productsTotal = document.querySelector('#productsTotal');
+const $deliveryFee = document.querySelector('#deliveryFee');
 const $cartHeader = document.querySelector('#cartHeader');
 const $selectCheckbox = document.querySelector('#selectCheckbox');
 
@@ -71,36 +29,36 @@ class Cart {
       return (acc += `
         <div class="cart-item" id="cartItem">
           <input type="checkbox" ${isChecked ? 'checked' : ''} 
-            id="checkbox-${product.shortId}" class="check-box" 
+            id="checkbox+${product.shortId}" class="check-box" 
           />
           <img
             src=${product.imageURL}
             alt=${product.name}
-            id="image-${product.shortId}"
+            id="image+${product.shortId}"
           />
           <div class="content">
-            <div class="content-title" id="productTitle-${product.shortId}">
+            <div class="content-title" id="productTitle+${product.shortId}">
             ${product.name}</div>
             <div class="quantity">
-              <button class="button is-rounded" id="minus-${product.shortId}" 
+              <button class="button is-rounded" id="minus+${product.shortId}" 
               ${isChecked ? '' : 'disabled'}>-</button>
               <input type="number" min="1" max="99" value="${product.quantity}" 
-              id="quantityInput-${product.shortId}" 
+              id="quantityInput+${product.shortId}" 
               ${isChecked ? '' : 'disabled'} />
-              <button class="button is-rounded" id="plus-${product.shortId}" 
+              <button class="button is-rounded" id="plus+${product.shortId}" 
               ${isChecked ? '' : 'disabled'}>+</button>
             </div>
           </div>
           <div class="calculation">
-            <p id="price-${product.shortId}">${addCommas(product.price)}</p>
+            <p id="price+${product.shortId}">${addCommas(product.price)}</p>
             <p>X</p>
-            <p id="quantity-${product.shortId}">${product.quantity}</p>
+            <p id="quantity+${product.shortId}">${product.quantity}</p>
             <p>=</p>
-            <p id="total-${product.shortId}">
+            <p id="total+${product.shortId}">
             ${addCommas(product.price * product.quantity)}
             </p>
           </div>
-          <button class="button" id="delete-${product.shortId}">삭제</button>
+          <button class="button" id="delete+${product.shortId}">삭제</button>
         </div>`);
     }, '');
     if (node) {
@@ -112,9 +70,13 @@ class Cart {
 
   // 주문내역을 요약한 정보를 HTML에 주입하는 메소드
   printOrderSummary() {
+    const deliveryFee = this.orderData.productsTotal > 50000 ? 0 : 3000;
     $productsCount.innerHTML = this.orderData.productsCount;
     $productsPrice.innerHTML = addCommas(this.orderData.productsTotal);
-    $productsTotal.innerHTML = addCommas(this.orderData.productsTotal + 3000);
+    $productsTotal.innerHTML = addCommas(
+      this.orderData.productsTotal + deliveryFee,
+    );
+    $deliveryFee.innerHTML = addCommas(deliveryFee);
   }
 
   // 모든 상품이 선택되거나 선택되지 않았을 때 전체선택 체크박스를 on/off 하는 메소드
@@ -147,10 +109,10 @@ class Cart {
 
   // id에 해당하는 상품의 체크박스, 버튼, 인풋을 비활성화 하는 메소드
   toggle(id, boolean) {
-    const checkbox = document.getElementById(`checkbox-${id}`);
-    const minus = document.getElementById(`minus-${id}`);
-    const plus = document.getElementById(`plus-${id}`);
-    const quantityInput = document.getElementById(`quantityInput-${id}`);
+    const checkbox = document.getElementById(`checkbox+${id}`);
+    const minus = document.getElementById(`minus+${id}`);
+    const plus = document.getElementById(`plus+${id}`);
+    const quantityInput = document.getElementById(`quantityInput+${id}`);
     checkbox.checked = !boolean;
     minus.disabled = boolean;
     plus.disabled = boolean;
@@ -174,7 +136,7 @@ class Cart {
 
   // + 버튼, - 버튼을 이용하여 수량을 조절했을 때 스토리지에 수량 데이터를 저장하는 메소드
   modifyQuantityByButton(id, isPlus) {
-    const quantityInput = document.getElementById(`quantityInput-${id}`);
+    const quantityInput = document.getElementById(`quantityInput+${id}`);
     if (
       (isPlus && quantityInput.value >= 99) ||
       (!isPlus && quantityInput.value <= 1)
@@ -233,9 +195,9 @@ class Cart {
 
   // 수량을 조절했을 때 상품의 가격을 렌더링하는 메소드
   printProductPrice(id, quantity) {
-    const $price = document.getElementById(`price-${id}`);
-    const $quantity = document.getElementById(`quantity-${id}`);
-    const $total = document.getElementById(`total-${id}`);
+    const $price = document.getElementById(`price+${id}`);
+    const $quantity = document.getElementById(`quantity+${id}`);
+    const $total = document.getElementById(`total+${id}`);
     $quantity.innerText = quantity;
     $total.innerHTML = `${addCommas(
       convertToNumber($price.innerText) * quantity,
@@ -265,7 +227,7 @@ function setEventListener() {
   const $cartItems = document.querySelectorAll('#cartItem');
   $cartItems.forEach((item) => {
     item.addEventListener('click', (event) => {
-      const [name, id] = event.target.id.split('-');
+      const [name, id] = event.target.id.split('+');
       if (name === 'productTitle' || name === 'image') {
         // 이미지나 상품이름 클릭 시 그 상품의 판매페이지로 이동
         window.location.href = `/products/detail/${id}`;
@@ -280,7 +242,7 @@ function setEventListener() {
       }
     });
     item.addEventListener('change', (event) => {
-      const [name, id] = event.target.id.split('-');
+      const [name, id] = event.target.id.split('+');
       if (name === 'checkbox') {
         const checked = event.target.checked;
         cart.handleChangeCheckbox(id, checked);

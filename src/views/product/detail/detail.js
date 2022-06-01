@@ -89,13 +89,16 @@ async function addCart(data) {
 
   if (oldData) {
     // 축적된 데이터가 있으면
-    localStorage.setItem('cart', JSON.stringify([...oldData, data]));
+    localStorage.setItem(
+      'cart',
+      JSON.stringify([...oldData, { ...data, quantity: 1 }]),
+    );
     // order에서 shortsId 가져와서 더해줌
     // productsCount = ids.length
     // selectedIds === ids
   } else {
     // 없으면 (처음으로 장바구니에 물건을 담는다면)
-    localStorage.setItem('cart', JSON.stringify([data]));
+    localStorage.setItem('cart', JSON.stringify([{ ...data, quantity: 1 }]));
   }
   localStorage.setItem('order', JSON.stringify(orderData));
 }
