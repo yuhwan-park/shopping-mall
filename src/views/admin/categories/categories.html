@@ -17,14 +17,20 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="detail.js" type="module" defer></script>
+    <script src="/static/js/check-admin.js" type="module"></script>
+    <script src="categories.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
       <!-- SECTION : START -->
       <section class="section">
-        <div class="container detail-container">
+        <div class="container content-container">
           <!-- CONTENT : START -->
+          <div class="products-header title">
+            <p>카테고리 관리</p>
+          </div>
+
+          <ul class="product-list" id="categoryList"></ul>
 
           <!-- CONTENT : END -->
         </div>

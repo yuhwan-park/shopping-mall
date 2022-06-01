@@ -23,7 +23,13 @@ viewsRouter.use('/admin/products/:id', serveStatic('admin/products/detail'));
 viewsRouter.use('/admin/add', serveStatic('admin/add'));
 viewsRouter.use('/admin/order_list', serveStatic('admin/order_list'));
 viewsRouter.use('/product/list', serveStatic('product'));
-viewsRouter.use('/product/detail', serveStatic('product/detail'));
+viewsRouter.use('/products/detail/:id', serveStatic('product/detail'));
+viewsRouter.use('/admin/categories', serveStatic('admin/categories'));
+viewsRouter.use('/admin/categories/add', serveStatic('admin/categories/add'));
+viewsRouter.use(
+  '/admin/categories/:id',
+  serveStatic('admin/categories/detail'),
+);
 
 // views 폴더의 최상단 파일인 rabbit.png, api.jsgit  등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

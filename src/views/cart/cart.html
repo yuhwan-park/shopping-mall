@@ -55,8 +55,8 @@
                   <p><span id="productsPrice"></span>원</p>
                 </div>
                 <div class="info">
-                  <p>배송비</p>
-                  <p>3,000원</p>
+                  <p>배송비 (5만원 이상 구매 시 배송비 무료)</p>
+                  <p><span id="deliveryFee"></span>원</p>
                 </div>
               </div>
               <div class="total">
@@ -65,9 +65,7 @@
               </div>
               <!-- JS의 window.location 을 이용해서 페이지 이동을 해야하지만 개발 시 페이지 이동을 위해 a태그 추가
               기능 추가할 때 수정 필요 -->
-              <a href="/order"
-                ><button class="button is-info">구매하기</button></a
-              >
+              <button class="button is-info" id="orderButton">구매하기</button>
             </div>
           </div>
         </div>

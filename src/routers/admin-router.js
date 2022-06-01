@@ -26,24 +26,26 @@ adminRouter.post('/', async (req, res, next) => {
   try {
     const userToken = req.headers['authorization']?.split(' ')[1];
     if (!userToken || userToken === 'null') {
-      throw new Error();
+      res.status(200).json({
+        result: 'fail',
+      });
     }
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const role = jwtDecoded.role;
     if (role === 'admin') {
       res.status(200).json({
-        result: 'admin'
-      })
+        result: 'admin',
+      });
     } else if (role === 'basic-user') {
       res.status(200).json({
-        result: 'basic-user'
-      })
+        result: 'basic-user',
+      });
     }
   } catch (err) {
     next(err);
   }
-})
+});
 
 /****************************/
 /********* category *********/
@@ -250,7 +252,7 @@ adminRouter.post('/orders', adminRequired, async (req, res, next) => {
 // 특정 사용자 주문 상세 조회
 adminRouter.get('/orders/:shortId', adminRequired, async (req, res, next) => {
   try {
-    const {shortId} = req.params
+    const { shortId } = req.params;
     const order = await orderService.getOrderInfo(shortId);
     res.status(200).json(order);
   } catch (err) {
@@ -258,16 +260,19 @@ adminRouter.get('/orders/:shortId', adminRequired, async (req, res, next) => {
   }
 });
 
-
 //사용자 주문 삭제
-adminRouter.delete('/orders/:shortId', adminRequired, async (req, res, next) => {
-  try {
-    const {shortId} = req.params;
-    const deletedOrder = await orderService.deleteOrder(shortId)
-    res.status(200).json(deletedOrder);
-  } catch (err) {
-    next(err)
-  }
-})
+adminRouter.delete(
+  '/orders/:shortId',
+  adminRequired,
+  async (req, res, next) => {
+    try {
+      const { shortId } = req.params;
+      const deletedOrder = await orderService.deleteOrder(shortId);
+      res.status(200).json(deletedOrder);
+    } catch (err) {
+      next(err);
+    }
+  },
+);
 
 export { adminRouter };

@@ -1,10 +1,10 @@
 import * as Api from '/api.js';
 import { handlePost, onlyNumber } from '/useful-functions.js';
-import { INPUT } from '/useful-validator.js';
+import { INPUT } from '/useful-constants.js';
 
 // 요소(element), input 혹은 상수
 const $accountSecurity = document.querySelector('.account-security');
-const $swithCheckboxs = document.querySelectorAll('.switch');
+const $modal = document.querySelector('.modal');
 const $userEmailText = document.querySelector('#userEmailText');
 const $fullNameInput = document.querySelector('#fullNameInput');
 const $passwordInput = document.querySelector('#passwordInput');
@@ -15,9 +15,6 @@ const $address2Input = document.querySelector('#address2Input');
 const $phoneInput = document.querySelector('#phoneInput');
 const $currentPasswordConfirmInput = document.querySelector(
   '#currentPasswordConfirmInput',
-);
-const $formInputs = document.querySelectorAll(
-  '.account .input, button[data-name]',
 );
 const $modalPassword = document.querySelector('#modal-js-password');
 const $postalCodeButton = document.querySelector('#postalCodeButton');
@@ -39,17 +36,8 @@ function addAllEvents() {
   $postalCodeButton.addEventListener('click', () => {
     handlePost($postalCodeInput, $address1Input, $address2Input);
   });
+  $modal.addEventListener('click', closeModal);
 }
-
-// function handlePost() {
-//   new daum.Postcode({
-//     oncomplete: function (data) {
-//       $postalCodeInput.value = data.zonecode;
-//       $address1Input.value = data.address;
-//       $address2Input.value = data.buildingName;
-//     },
-//   }).open();
-// }
 
 function handleSwitch(e) {
   const targetElement = e.target.matches('input[type="checkbox"]');
@@ -71,6 +59,38 @@ function handleSwitch(e) {
         }
       }
     });
+
+    // 다시 생각해보기
+    // const inputElementMatch = e.target.matches(
+    //   `input[data-name=${targetDataName}]`,
+    // );
+    // const buttonElementMatch = e.target.matches(
+    //   `button[data-name=${targetDataName}]`,
+    // );
+    // const targetCheckElement = document.querySelectorAll(
+    //   `input[data-name=${targetDataName}], button[data-name=${targetDataName}]`,
+    // );
+    // if (inputElementMatch || buttonElementMatch) {
+    //   const typeName = e.target.getAttribute('type');
+    //   console.log(typeName, checkedToggle, targetDataName);
+    //   if (checkedToggle) {
+    //     if (typeName !== 'checkbox') {
+    //       targetCheckElement.forEach((ele) => ele.removeAttribute('disabled'));
+    //     }
+    //   } else {
+    //     targetCheckElement.forEach((ele) => ele.setAttribute('disabled', ''));
+    //   }
+    // }
+  }
+}
+
+function closeModal(e) {
+  e.preventDefault();
+  const $modalClose = e.target.matches('.modal-close');
+  const $modalCloseButton = e.target.matches('.modal-close-button');
+  const $modalBackground = e.target.matches('.modal-background');
+  if ($modalClose || $modalCloseButton || $modalBackground) {
+    $currentPasswordConfirmInput.value = '';
   }
 }
 
@@ -80,23 +100,15 @@ function hasProperty(obj, elemet) {
 
 function checkUserData(obj) {
   const isPhoneNumber = hasProperty(obj, 'phoneNumber');
-  const isPostalCode = hasProperty(obj, 'postalCode');
-  const isAddress1 = hasProperty(obj, 'address1');
-  const isAddress2 = hasProperty(obj, 'address2');
+  const isAdress = hasProperty(obj, 'address');
 
   if (!isPhoneNumber) {
     $phoneInput.value = '';
   }
 
-  if (!isPostalCode) {
+  if (!isAdress) {
     $postalCodeInput.value = '';
-  }
-
-  if (!isAddress1) {
     $address1Input.value = '';
-  }
-
-  if (!isAddress2) {
     $address2Input.value = '';
   }
 }
@@ -107,9 +119,9 @@ async function getUserData() {
     $userEmailText.insertAdjacentHTML('beforeend', ` (${data.email})`);
     $fullNameInput.value = data.fullName;
     $phoneInput.value = data.phoneNumber;
-    $postalCodeInput.value = data.postalCode;
-    $address1Input.value = data.address1;
-    $address2Input.value = data.address2;
+    $postalCodeInput.value = data.address?.postalCode;
+    $address1Input.value = data.address?.address1;
+    $address2Input.value = data.address?.address2;
     checkUserData(data);
   } catch (err) {
     console.error(err);
@@ -165,36 +177,21 @@ async function handleUserSubmit(e) {
     fullName,
     password,
     passwordConfirm,
-    postalCode,
-    address1,
-    address2,
+    address: {
+      postalCode,
+      address1,
+      address2,
+    },
     phoneNumber,
+    currentPassword,
   };
 
   try {
-    const data = await Api.get('/api/users');
-    const password = data.password;
-    const isPasswordSame = password === currentPassword;
-
-    console.log(password);
-    if (password.length > 0 && !isPasswordSame) {
-      return alert('비밀번호가 일치하지 않습니다.');
-    }
-
     if (currentPassword === 'kakao') {
       return alert('kakao');
     }
-
     await Api.patch('/api/users', '', updateData);
-    $modalPassword.classList.remove('is-active');
-    $swithCheckboxs.forEach((swithCheckbox) => {
-      const checkbox = swithCheckbox.querySelector('input');
-      checkbox.checked = false;
-    });
-    $formInputs.forEach((input) => {
-      input.setAttribute('disabled', '');
-    });
-    $currentPasswordConfirmInput.value = '';
+    window.location.href = '/account/security';
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);
