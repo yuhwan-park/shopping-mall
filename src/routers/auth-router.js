@@ -14,11 +14,11 @@ authRouter.get(
 authRouter.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-  async (req, res, next) => {
+  (req, res, next) => {
     try {
       // 토큰 제공
-      await setUserToken(res, req.user);
-      res.redirect('/');
+      const token = setUserToken(res, req.user);
+      res.status(200).json(token);
     } catch (error) {
       next(error);
     }
