@@ -29,18 +29,19 @@ adminRouter.post('/', async (req, res, next) => {
       res.status(200).json({
         result: 'fail',
       });
-    }
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-    const jwtDecoded = jwt.verify(userToken, secretKey);
-    const role = jwtDecoded.role;
-    if (role === 'admin') {
-      res.status(200).json({
-        result: 'admin',
-      });
-    } else if (role === 'basic-user') {
-      res.status(200).json({
-        result: 'basic-user',
-      });
+    } else {
+      const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+      const jwtDecoded = jwt.verify(userToken, secretKey);
+      const role = jwtDecoded.role;
+      if (role === 'admin') {
+        res.status(200).json({
+          result: 'admin',
+        });
+      } else if (role === 'basic-user') {
+        res.status(200).json({
+          result: 'basic-user',
+        });
+      }
     }
   } catch (err) {
     next(err);
