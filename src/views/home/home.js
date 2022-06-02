@@ -1,3 +1,5 @@
+import * as Api from '/api.js';
+
 let curPos = 0;
 let postion = 0;
 let imageWidth = 1000;
@@ -68,4 +70,38 @@ function test() {
   if (token) {
     localStorage.setItem('token', token);
   }
+}
+
+getProductList();
+
+function printNewProductList(products) {
+  const $homeProductList = document.querySelector('.home-product-list-new');
+  const dataProduct = orders.reduce((acc, product) => {
+    return (acc += `<div class="home-product-list-item">
+    <a href="">
+      <div class="image">
+        <div class="image-thumbnail">
+          <img
+            src="https://cdn.pixabay.com/photo/2014/08/26/21/48/shirts-428600_960_720.jpg"
+          />
+        </div>
+      </div>
+      <div class="description">
+        <p class="description-name">상품이름</p>
+        <p class="description-price">가격</p>
+      </div>
+    </a>
+  </div>`);
+  }, '');
+
+  if (products.length) {
+    $homeProductList
+      .querySelector('tbody')
+      .insertAdjacentHTML('afterbegin', dataProduct);
+  }
+}
+
+async function getProductList() {
+  const data = await Api.get('/api/products');
+  console.log(data);
 }
