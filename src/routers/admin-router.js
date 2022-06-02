@@ -72,7 +72,7 @@ adminRouter.post(
 );
 
 // 카테고리 목록
-adminRouter.get('/categories', adminRequired, async (req, res, next) => {
+adminRouter.get('/categories', async (req, res, next) => {
   try {
     const categories = await categoryService.getCategories();
     res.status(200).json(categories);

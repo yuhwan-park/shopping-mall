@@ -1,11 +1,13 @@
 import * as Api from '/api.js';
 
-const app = document.getElementById('app');
-const token = localStorage.getItem('token');
-
 // 역할에 따른 분류
 insertNavBar();
 async function insertNavBar() {
+  const app = document.getElementById('app');
+  const token = localStorage.getItem('token') || document.cookie;
+  if (token.indexOf('token') !== -1) {
+    localStorage.setItem('token', token.split('=')[1]);
+  }
   const { result } = await Api.post('/api/admin');
   app.insertAdjacentHTML(
     'afterbegin',
