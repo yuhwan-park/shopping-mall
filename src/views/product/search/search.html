@@ -23,19 +23,18 @@
     <div id="app">
       <!-- SECTION : START -->
       <section class="section">
-        <div class="" id="perPage">
-          <label for="perPage-select"> 페이지 수: </label>
-          <select name="perPage" id="perPage-select">
-            <option value="10" selected>10개</option>
-            <option value="20">20개</option>
-            <option value="50">50개</option>
-            <option value="100">100개</option>
-          </select>
-        </div>
         <div class="container content-container">
           <!-- CONTENT : START -->
           <div class="search-header">
             <h1 class="title">"<b id="searchWord"></b>" 결과 입니다.</h1>
+          </div>
+          <div class="" id="perPage">
+            <select name="perPage" class="page-select" id="perPage-select">
+              <option value="10" selected>10개</option>
+              <option value="20">20개</option>
+              <option value="50">50개</option>
+              <option value="100">100개</option>
+            </select>
           </div>
           <div class="search-content">
             <div class="container product-content-container" id="productList">
@@ -46,9 +45,9 @@
           </div>
           <!-- CONTENT : END -->
         </div>
-        <div class="" id="totalPage">
+        <div class="total-page" id="totalPage">
           <!-- TOTALPAGE : START -->
-          
+
           <!-- TOTALPAGE : END -->
         </div>
       </section>
