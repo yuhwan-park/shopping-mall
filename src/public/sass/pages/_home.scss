@@ -2,90 +2,27 @@
   position: relative;
   width: 1000px;
   margin: 0 auto;
-
-  .home-slideshow {
-    /*album*/
-    width: 1000px;
-    height: 1100px;
-    overflow: hidden;
-
-    .slideshow {
-      /*images*/
-      width: 2000px;
-      height: 1100px;
-      display: flex;
-      transition-property: transform;
-      transition-duration: 1s;
-
-      .slide {
-        /*image*/
-        width: 1000px;
-        height: 1100px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-
-        .slide-textbox {
-          /*color 다르게 할 수 있으면 다르게(맨 나중에)*/
-          width: 1000px;
-          height: 100px;
-          background-color: #ebfffc;
-          padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-
-          span {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #00947e;
-          }
-
-          p {
-            font-size: 1rem;
-            color: #00947e;
-          }
-        }
-
-        img {
-          width: 1000px;
-          height: 1000px;
-        }
+  .swiper-slide {
+    .slide-textbox {
+      width : 1000px; 
+      height : 100px; 
+      background-color : #ebfffc;
+      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+      span {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #00947e;
+        margin-bottom: 0.5rem;
       }
-    }
-  }
-
-  .slidebtn-wrap {
-    position: absolute;
-    width: 1000px;
-    margin-top: -550px;
-
-    .slidebtn {
-      &,
-      &:active,
-      &:focus {
-        width: 30px;
-        height: 30px;
-        background-color: teal;
-        border: none;
+      p {
+        font-size: 1rem;
+        color: #00947e;
       }
-
-      &:hover {
-        background-color: turquoise;
-      }
-
-      &:disabled {
-        background-color: gray;
-      }
-    }
-
-    .prev {
-      float: left;
-    }
-
-    .next {
-      float: right;
     }
   }
 }
+
+
 
 .home-products {
   margin: 5rem 0;
