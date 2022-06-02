@@ -22,6 +22,7 @@ adminRouter.get('/', adminRequired, async (req, res, next) => {
   }
 });
 
+// 관리자 로그인 여부 확인 후 navbar 변경
 adminRouter.post('/', async (req, res, next) => {
   try {
     const userToken = req.headers['authorization']?.split(' ')[1];
@@ -71,7 +72,7 @@ adminRouter.post(
   },
 );
 
-// 카테고리 목록
+// 카테고리 전체 목록 조회
 adminRouter.get('/categories', adminRequired, async (req, res, next) => {
   try {
     const categories = await categoryService.getCategories();
@@ -81,7 +82,7 @@ adminRouter.get('/categories', adminRequired, async (req, res, next) => {
   }
 });
 
-// 카테고리 상세
+// 카테고리 상세 조회
 adminRouter.get('/categories/:id', adminRequired, async (req, res, next) => {
   try {
     const shortId = req.params.id;

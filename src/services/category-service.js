@@ -46,7 +46,7 @@ class CategoryService {
     return categories
   }
 
-  //카테고리들 이름만 받기
+  //카테고리들 이름만 받기 (사용 X)
   async getCategorynames() {
     const categories = await this.categoryModel.findAll();
     const names = categories.map((category) => {
@@ -59,6 +59,9 @@ class CategoryService {
   // 카테고리 상세
   async getCategory(shortId) {
     const category = await this.categoryModel.findById(shortId)
+    if (!category) {
+      throw new Error('카테고리가 존재하지 않습니다.')
+    }
     return category
   }
 
