@@ -102,15 +102,17 @@
   }
 }
 .home-product-list {
+  min-width: 1000px;
+  height: 235px;
+  overflow: hidden;
+}
+.home-product-list-container {
   & {
-    min-width: 1000px;
     grid-gap: 2rem;
     cursor: pointer;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     text-decoration: none;
-  }
-  &-item {
   }
   .image {
     position: relative;
@@ -138,6 +140,6 @@
   .description-price {
     font-size: 1rem;
     color: #666;
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
 }
