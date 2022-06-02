@@ -8,6 +8,10 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link rel="stylesheet" href="/static/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
     <!-- cdn -->
     <script
       src="https://kit.fontawesome.com/7630448495.js"
@@ -17,6 +21,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
@@ -25,24 +30,12 @@
       <section class="section">
         <div class="container home-content-container">
           <!-- CONTENT : START -->
-
-          <div class="home-carousel">
-            <!-- image slide -->
-            <div class="home-slideshow">
-              <div class="slideshow" id="slideShowContainer"></div>
-            </div>
-            <!-- image slide code end -->
-
-            <!-- image slide btn -->
-            <div class="slidebtn-wrap">
-              <button class="slidebtn prev">
-                <i class="fa-solid fa-angle-left"></i>
-              </button>
-              <button class="slidebtn next">
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
-            </div>
-            <!-- image slide btn end -->
+          <!-- image slide -->
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiperWrapper"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
           </div>
 
           <div class="home-products">

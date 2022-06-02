@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
 const $container = document.querySelector('.detail-container');
 const path = window.location.pathname.split('/');
@@ -24,7 +25,7 @@ async function addAllEvents(data) {
   const $purchaseButton = document.querySelector('#purchase-button');
   const $likeButton = document.querySelector('#likeButton');
 
-  checkLikes($likeButton);
+  await checkLikes($likeButton);
 
   $addCartButton.addEventListener('click', () => {
     addCart(data);
@@ -33,8 +34,14 @@ async function addAllEvents(data) {
     purchase(data);
   });
   $likeButton.addEventListener('click', (e) => {
-    const isLike = e.target.style.color === 'rgb(187, 187, 187)';
-    onClickLike(e, isLike);
+    e.stopPropagation();
+    const hasLike = $likeButton.classList.contains('liked');
+    if (!hasLike) {
+      $likeButton.classList.add('liked');
+    } else {
+      $likeButton.classList.remove('liked');
+    }
+    onClickLike(!hasLike);
   });
 }
 
@@ -53,14 +60,20 @@ async function detailText() {
 
           <div class="detail-right-wrap box">
             <div class="detail-text-wrap">
-              <p class="p-title"><span>${data.brand}</span>
-              <span>
-              <span id="likeCount">${data.likeCount}</span>
-              <i class="fa-solid fa-heart" id="likeButton"></i>
-              </span>
+              <p class="p-title">
+                <span>${data.brand}</span>
+                <span id="likeButton" class='like-button'>
+                  <span class='like-icon'>
+                    <span class='heart-animation-1'></span>
+                    <span class='heart-animation-2'></span>
+                  </span>
+                  <span id="likeCount">${addCommas(
+                    data.likeCount,
+                  )}</span> Like                  
+                </span>
               </p>
               <p class="detail-title">${data.name}</p>
-              <p class="detail-price">${data.price}</p>
+              <p class="detail-price">${addCommas(data.price)}</p>
               <p class="p-contents">
                 ${data.detailDescription}
               </p>
@@ -140,14 +153,15 @@ function purchase(data) {
 }
 async function checkLikes(element) {
   const isUser = await Api.get('/api/products/likes', id);
-  element.style.color = isUser.isUser ? 'red' : '#bbb';
+  if (isUser.isUser) {
+    element.classList.add('liked');
+  }
 }
 
-async function onClickLike(e, isLike) {
+async function onClickLike(isLike) {
   const $likeCount = document.querySelector('#likeCount');
   const data = await Api.patch('/api/products/like', id, { isLike });
   $likeCount.innerHTML = data.likeCount;
-  e.target.style.color = isLike ? 'red' : '#bbb';
 }
 
 addAllElements();

@@ -1,0 +1,28 @@
+.total-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  .page-navigation {
+    color: black;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    text-decoration: none;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.page-select {
+  width: 140px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 0;
+  border-bottom: 1px solid #000;
+}

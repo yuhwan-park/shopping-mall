@@ -23,15 +23,17 @@
       .p-title {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
+
         border-bottom: 1px solid #dbdbdb;
         margin-bottom: 20px;
         font-size: 1rem;
-        padding: 3px 0;
+        padding: 3px 0 16px;
         i {
           cursor: pointer;
           font-size: 20px;
-          color : #bbb
+          color: #bbb;
         }
       }
 
