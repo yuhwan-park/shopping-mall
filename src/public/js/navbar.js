@@ -21,6 +21,16 @@ async function insertNavBar() {
           </div>
   
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <div class="search-container">
+              <form class="form" id="searchForm">
+                <div class="field">
+                  <label class="label a11y" for="searchInput">검색어</label>
+                  <div class="control">
+                    <input class="input" id="searchInput" type="search" placeholder="검색어를 입력해주세요">
+                  </div>
+                </div>
+              </form>
+            </div>
             <ul id="navbar">
               ${
                 !token
@@ -57,5 +67,21 @@ async function insertNavBar() {
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       window.location.reload();
     });
+  }
+
+  addAllEvents();
+}
+// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
+function addAllEvents() {
+  const $searchForm = document.querySelector('#searchForm');
+  $searchForm.addEventListener('keyup', handleSearch);
+}
+
+function handleSearch(e) {
+  const targetElement = e.target.matches('#searchInput');
+  if (targetElement && e.keyCode === 13) {
+    let result = e.target.value;
+    console.log(result, e.target);
+    window.location.href = `/product/search?result=${result}`;
   }
 }
