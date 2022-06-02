@@ -68,7 +68,6 @@ async function getProducts() {
       `/api/products/search`,
       `result?q=${result}&page=number&perPage=number`,
     );
-
     printProducts(data);
   } catch (err) {
     console.error(err);
