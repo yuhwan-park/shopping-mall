@@ -1,15 +1,25 @@
 import { Router } from 'express';
 import { productService, categoryService, userService } from '../services';
-import { loginRequired } from '../middlewares';
+import { pagination, loginRequired } from '../middlewares';
+
+
 const productRouter = Router();
 
 //카테고리 별 상품 조회
 productRouter.get('/', async (req, res, next) => {
   try {
-    const { category } = req.query;
+    const { category, currentPage, CountPerPage } = req.query;
     const { _id } = await categoryService.getIdByShortId(category);
     const products = await productService.getProductsByCategoryId(_id);
-    res.status(200).json(products);
+    const { totalPage, posts } = await pagination(
+      products,
+      Number(currentPage),
+      Number(CountPerPage),
+    )
+    res.status(200).json({
+      totalPage,
+      posts,
+    });
   } catch (err) {
     next(err);
   }
@@ -17,10 +27,19 @@ productRouter.get('/', async (req, res, next) => {
 
 //상품 검색
 productRouter.get('/search/result', async (req, res, next) => {
-  try {
-    const { q } = req.query;
-    const result = await productService.getProductsByName(q);
-    res.status(200).json(result);
+  try{
+    const { q, currentPage, CountPerPage } = req.query;
+    const result = await productService.getProductsByName(q)
+    const { totalPage, posts } = await pagination(
+      result,
+      Number(currentPage),
+      Number(CountPerPage)
+    );
+    res.status(200).json({
+      totalPage,
+      posts
+    })
+    //res.status(200).json(result)
   } catch (err) {
     next(err);
   }
