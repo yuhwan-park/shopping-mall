@@ -65,6 +65,7 @@ async function getProductsPosts(currentPage = 1) {
     printPosts(posts);
   } catch (err) {
     console.error(err);
+    alert(`${err.message}`)
   }
 }
 
