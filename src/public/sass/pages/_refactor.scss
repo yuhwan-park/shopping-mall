@@ -1,5 +1,3 @@
-//button class 이름 변경 필요
-
 .deepcolor {
   background-color: #6667ab;
   color: #fff;
@@ -60,6 +58,59 @@
   font-weight: 600;
   line-height: 1.125;
   word-break: break-word;
+}
+
+.re-btn-add {
+  width: 80px;
+  margin-left: 5px;
+}
+
+.re-admin-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.re-admin-content {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.re-admin-menu-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.5rem;
+
+  .re-admin-menu-content {
+    color: #363636;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.125;
+  }
+}
+
+.re-admin-table {
+  height: 65px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.re-table {
+  font-weight: 400;
+  text-align: center;
+  line-height: 65px;
+}
+
+.re-1st-table-width {
+  min-width: 100px;
+}
+
+.re-2st-table-width {
+  min-width: 1000px;
+}
+
+.re-3st-table-width {
+  min-width: 150px;
 }
 
 // .shadow {

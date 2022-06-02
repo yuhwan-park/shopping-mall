@@ -32,19 +32,28 @@
             <span>주문완료</span>
           </div>
         </div>
-        <div class="tile is-ancestor">
-          <div class="tile is-8 is-parent">
+
+        <div class="re-warp">
+          <div class="re-warp-box">
             <div class="box cart-container" id="cartContainer">
               <div class="cart-header" id="cartHeader">
                 <!-- 전체선택 체크박스 -->
-                <input type="checkbox" id="selectCheckbox" />
-                <p id="selectAll">전체선택 |</p>
-                <p id="cancleAll">선택삭제</p>
+                <div class="re-check-wrap">
+                  <input type="checkbox" id="selectCheckbox" />
+                  <p id="selectAll">전체선택</p>
+                  <span>|</span>
+                  <p id="cancleAll">선택삭제</p>
+                </div>
+
+                <span class="re-title-span">상품명</span>
+                <span class="re-cal-span">수량</span>
+                <span class="re-order-span">주문관리</span>
               </div>
               <div id="cartItemContainer"></div>
             </div>
           </div>
-          <div class="tile is-parent">
+
+          <div class="re-warp-box">
             <div class="box order-summary">
               <div class="header">결제정보</div>
               <div class="order-info">

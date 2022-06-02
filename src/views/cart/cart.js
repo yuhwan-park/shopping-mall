@@ -36,26 +36,18 @@ class Cart {
             <input type="checkbox" ${isChecked ? 'checked' : ''} 
               id="checkbox+${product.shortId}" class="check-box" 
             />
-            <img
+            <img class="re-cart-image"
               src=${product.imageURL}
               alt=${product.name}
               id="image+${product.shortId}"
             />
-            <div class="content">
+            <div class="re-content">
               <div class="content-title" id="productTitle+${product.shortId}">
               ${product.name}</div>
-              <div class="quantity">
-                <button class="button is-rounded" id="minus+${product.shortId}" 
-                ${isChecked ? '' : 'disabled'}>-</button>
-                <input type="number" min="1" max="99" value="${
-                  product.quantity
-                }" 
-                id="quantityInput+${product.shortId}" 
-                ${isChecked ? '' : 'disabled'} />
-                <button class="button is-rounded" id="plus+${product.shortId}" 
-                ${isChecked ? '' : 'disabled'}>+</button>
-              </div>
+
             </div>
+
+            <div class="re-cal-wrap">
             <div class="calculation">
               <p id="price+${product.shortId}">${addCommas(product.price)}</p>
               <p>X</p>
@@ -64,6 +56,20 @@ class Cart {
               <p id="total+${product.shortId}">
               ${addCommas(product.price * product.quantity)}
               </p>
+            </div>
+            
+            <div class="quantity">
+                <button class="re-cart-button" id="minus+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'}>-</button>
+                <input class="re-cart-input" type="number" min="1" max="99" value="${
+                  product.quantity
+                }" 
+                id="quantityInput+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'} />
+                <button class="re-cart-button" id="plus+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'}>+</button>
+              </div>
+
             </div>
             <button class="button" id="delete+${product.shortId}">삭제</button>
           </div>`);

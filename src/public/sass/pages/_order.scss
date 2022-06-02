@@ -6,6 +6,16 @@
   }
 }
 
+.delivery-info {
+  & label {
+    font-weight: 400;
+  }
+
+  & .re-field {
+    line-height: 40px;
+  }
+}
+
 .tile-order-summary {
   width: 40%;
   height: 100%;
@@ -21,4 +31,10 @@
 
 .left-arrow {
   padding: 10px;
+}
+
+.re-subtitle {
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
