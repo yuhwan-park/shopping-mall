@@ -22,14 +22,19 @@ function getUrlQuries() {
   // 이 함수는 쿼리 파라미터가 하나만 있다고 가정한다. 복수의 쿼리가 있다면 &를 기준으로 split이 들어가야됨
   // {category: 'CmckSTVPo9BeWHfY1KzZQ'}
   const queryString = window.location.search.replace('?', '');
-  const [key, value] = queryString.split('=');
-  return {
-    [key]: value,
-  };
-  console.log(key, value);
+  const queryArray = queryString.split('&').map((query) => {
+    const [key, value] = query.split('=');
+    return {
+      [key]: value,
+    };
+  });
+  const queryObject = queryArray.reduce((acc, val) => {
+    return { ...acc, ...val };
+  }, {});
+  return queryObject;
 }
 
-function printProducts(products) {
+function printPosts(products) {
   // 모든 상품을 Template에 맞춰서 String으로 저장
   const node = products.reduce(
     (acc, product) =>
@@ -58,20 +63,44 @@ function printProducts(products) {
   }
 }
 
-async function getProducts() {
+async function getProductsPosts(currentPage = 1) {
   try {
     const queryParams = getUrlQuries();
-    const result = queryParams['result'];
-    const decodeName = decodeURI(decodeURIComponent(result));
-    $searchWord.innerHTML = decodeName;
-    const data = await Api.get(
-      `/api/products/search`,
-      `result?q=${result}&page=number&perPage=number`,
+    const { totalPage, posts } = await Api.get(
+      `/api`,
+      `products?category=${queryParams['category']}&currentPage=${currentPage}&CountPerPage=${CountPerPage}`,
     );
-
-    printProducts(data);
+    setTotalPage(Number(totalPage));
+    printPosts(posts);
   } catch (err) {
     console.error(err);
-    alert(`${err.message}`);
   }
 }
+
+function setTotalPage(totalPage) {
+  const node = [];
+  for (let i = 1; i <= totalPage; i++) {
+    const page = `
+        <a href=# class=page params(${i})> ${i} </a>
+      `;
+    node.push(page);
+  }
+
+  $totalPage.innerHTML = node;
+}
+
+function getPostsByPage(event) {
+  event.preventDefault();
+  try {
+    const page = e.target.textContent;
+    if (!page) {
+      throw new Error();
+    }
+    getProductsPosts(page);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+$totalPage.addEventListener('click', (event) => getPostsByPage(event));
+$perPageSelect.addEventListener('change', getProductsPosts);
