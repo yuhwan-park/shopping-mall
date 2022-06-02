@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
 let curPos = 0;
 let postion = 0;
@@ -93,7 +94,7 @@ function printProductList(ele, products) {
       </div>
       <div class="description">
         <p class="description-name">${product.name}</p>
-        <p class="description-price">${product.price}</p>
+        <p class="description-price">${addCommas(product.price)}</p>
       </div>
     </a>
   </div>`);
