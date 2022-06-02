@@ -41,7 +41,7 @@ productRouter.get('/:id', async (req, res, next) => {
 });
 
 //상품 좋아요 top 4 조회
-productRouter.get('/filter/likes', async (req, res, next) => {
+productRouter.get('/list/likes', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
     const products = await allProducts.sort((a, b) => b.likeCount - a.likeCount);
@@ -52,7 +52,7 @@ productRouter.get('/filter/likes', async (req, res, next) => {
 })
 
 //상품 최신순 top 4 조회
-productRouter.get('/filter/new', async (req, res, next) => {
+productRouter.get('/list/new', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
     const products = await allProducts.sort((a, b) => b.createdAt - a.createdAtAt);
