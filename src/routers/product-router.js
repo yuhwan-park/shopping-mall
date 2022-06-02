@@ -55,7 +55,7 @@ productRouter.get('/list/likes', async (req, res, next) => {
 productRouter.get('/list/new', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
-    const products = await allProducts.sort((a, b) => b.createdAt - a.createdAtAt);
+    const products = await allProducts.sort((a, b) => a.createdAt - b.createdAtAt);
     res.status(200).json(products)
   } catch (err) {
     next(err)
