@@ -48,7 +48,7 @@ function highlightSearchWord(str, searchingValue) {
   return str.replace(regExp, highlightedStr);
 }
 
-function printPosts(products) {
+function printPosts(products, result) {
   // 모든 상품을 Template에 맞춰서 String으로 저장
   const node = products.reduce(
     (acc, product) =>
@@ -88,7 +88,7 @@ async function getProductsPosts(currentPage = 1) {
       `result?q=${result}&currentPage=${currentPage}&CountPerPage=${CountPerPage}`,
     );
     setTotalPage(Number(totalPage));
-    printPosts(posts);
+    printPosts(posts, result);
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);
