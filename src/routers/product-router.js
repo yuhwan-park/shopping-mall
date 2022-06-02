@@ -4,9 +4,6 @@ import { pagination } from '../middlewares';
 
 const productRouter = Router();
 
-
-
-
 //카테고리 별 상품 조회
 productRouter.get('/', async (req, res, next) => {
   try {
@@ -43,9 +40,9 @@ productRouter.get('/search/result', async (req, res, next) => {
     })
     //res.status(200).json(result)
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 //상품 상세 조회
 productRouter.get('/:id', async (req, res, next) => {
@@ -58,7 +55,31 @@ productRouter.get('/:id', async (req, res, next) => {
   }
 });
 
+//상품 좋아요 top 4 조회
+productRouter.get('/list/likes', async (req, res, next) => {
+  try {
+    const allProducts = await productService.getProducts();
+    const products = allProducts
+      .sort((a, b) => b.likeCount - a.likeCount)
+      .slice(0, 4);
+    console.log(products);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
 
-
+//상품 최신순 top 4 조회
+productRouter.get('/list/new', async (req, res, next) => {
+  try {
+    const allProducts = await productService.getProducts();
+    const products = allProducts
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .slice(0, 4);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
 
 export { productRouter };
