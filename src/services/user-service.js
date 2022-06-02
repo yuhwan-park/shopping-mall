@@ -152,7 +152,6 @@ class UserService {
   // 이메일로 userId 추출 - admin
   async getUserIdByEmail(email) {
     const { _id } = await this.userModel.findByEmail(email);
-    console.log(_id)
     return _id;
   }
 

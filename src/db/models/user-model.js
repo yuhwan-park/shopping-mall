@@ -38,7 +38,6 @@ export class UserModel {
   // admin
   async findByEmail(email) {
     const user = await User.findOne({ email });
-    console.log(user);
     return user;
   }
 }
