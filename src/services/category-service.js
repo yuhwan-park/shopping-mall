@@ -32,7 +32,7 @@ class CategoryService {
 
   //카테고리 shortId => objectId
   async getIdByShortId(shortId) {
-    const category = await this.categoryModel.findById(shortId)
+    const category = await this.categoryModel.findByShortId(shortId)
     if (!category) {
       throw new Error('카테고리가 존재하지 않습니다.')
     }
@@ -58,7 +58,7 @@ class CategoryService {
 
   // 카테고리 상세
   async getCategory(shortId) {
-    const category = await this.categoryModel.findById(shortId)
+    const category = await this.categoryModel.findByShortId(shortId)
     if (!category) {
       throw new Error('카테고리가 존재하지 않습니다.')
     }
@@ -66,9 +66,9 @@ class CategoryService {
   }
 
   // 카테고리 수정
-  async setCategory(shortId, toUpdate) {
+  async setCategory(shortId, update) {
     // 상품 존재 여부 확인 후 에러 반환
-    let category = await this.categoryModel.findById(shortId);
+    let category = await this.categoryModel.findByShortId(shortId);
 
     if (!category) {
       throw new Error(
@@ -79,7 +79,7 @@ class CategoryService {
     // 업데이트 진행
     category = await this.categoryModel.update({
       shortId,
-      update: toUpdate,
+      update,
     });
 
     return category;
@@ -87,7 +87,7 @@ class CategoryService {
 
   //카테고리 삭제
   async deleteCategory(shortId) {
-    const { _id } = await this.categoryModel.findById(shortId)
+    const { _id } = await this.categoryModel.findByShortId(shortId)
     const result = await this.categoryModel.delete(_id);
     return result;
   }

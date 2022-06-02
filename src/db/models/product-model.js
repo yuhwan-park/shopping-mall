@@ -4,17 +4,17 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findOneByName(name) {
+  async findByName(name) {
     const product = await Product.findOne({ name });
     return product;
   }
 
-  async findByName(filter) {
+  async findBySearch(filter) {
     const product = await Product.find({ name: { $regex: `${filter}` } });
     return product;
   }
 
-  async findById(shortId) {
+  async findByShortId(shortId) {
     const product = await Product.findOne({ shortId });
     return product;
   }
@@ -24,10 +24,10 @@ export class ProductModel {
     return products;
   }
 
-  async findAllByBrand(brand) {
-    const products = await Product.find({ brand });
-    return products;
-  }
+  // async findAllByBrand(brand) {
+  //   const products = await Product.find({ brand });
+  //   return products;
+  // }
 
   async findAll() {
     const products = await Product.find({});

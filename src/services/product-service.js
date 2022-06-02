@@ -17,7 +17,7 @@ class ProductService {
     } = productInfo;
 
     // 같은 상품 중복을 걸러낼 수 있는 방법이 무엇이 있을까 고민됨
-    const product = await this.productModel.findOneByName(name);
+    const product = await this.productModel.findByName(name);
     if (product) {
       throw new Error('이미 해당 상품이 존재합니다.');
     }
@@ -46,13 +46,13 @@ class ProductService {
 
   // 상품 상세 조회
   async getProduct(shortId) {
-    const product = await this.productModel.findById(shortId);
+    const product = await this.productModel.findByShortId(shortId);
     return product;
   }
 
   // name으로 상품 검색
   async getProductsByName(filter) {
-    const products = await this.productModel.findByName(filter);
+    const products = await this.productModel.findBySearch(filter);
     return products;
   }
 
@@ -71,7 +71,7 @@ class ProductService {
   // 상품 정보 수정
   async setProduct(shortId, updateRequest) {
     // 상품 존재 여부 확인 후 에러 반환
-    let product = await this.productModel.findById(shortId);
+    let product = await this.productModel.findByShortId(shortId);
     if (!product) {
       throw new Error('상품이 존재하지 않습니다. 다시 한 번 확인해 주세요.');
     }
@@ -87,7 +87,7 @@ class ProductService {
       price,
     } = await updateRequest;
 
-    const toUpdate = {
+    const update = {
       categoryId: category,
       brand,
       name,
@@ -100,14 +100,14 @@ class ProductService {
     // 업데이트 진행
     product = await this.productModel.update({
       shortId,
-      update: toUpdate,
+      update,
     });
     return product;
   }
 
   //상품 삭제
   async deleteProduct(shortId) {
-    const { _id } = await this.productModel.findById(shortId);
+    const { _id } = await this.productModel.findByShortId(shortId);
     const product = await this.productModel.delete(_id);
     return product;
   }
