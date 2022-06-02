@@ -13,7 +13,7 @@ const $slides = document.querySelectorAll('.slide');
 const totalSlides = $slides.length;
 let sliderWidth = $slideWrapper.clientWidth;
 $slider.style.width = sliderWidth * totalSlides + 'px';
-
+test();
 // 자동 슬라이드 함수
 function showSlides() {
   for (let i = 0; i < $slides.length; i++) {
@@ -61,3 +61,11 @@ function buttonSlide() {
 
 buttonSlide();
 showSlides();
+
+function test() {
+  console.log(document.cookie);
+  const [_, token] = document.cookie.split('=');
+  if (token) {
+    localStorage.setItem('token', token);
+  }
+}

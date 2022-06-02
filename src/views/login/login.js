@@ -2,9 +2,11 @@ import * as Api from '/api.js';
 import { validateEmail } from '/useful-functions.js';
 
 // 요소(element), input 혹은 상수
-const emailInput = document.querySelector('#emailInput');
-const passwordInput = document.querySelector('#passwordInput');
-const submitButton = document.querySelector('#submitButton');
+const $emailInput = document.querySelector('#emailInput');
+const $passwordInput = document.querySelector('#passwordInput');
+const $submitButton = document.querySelector('#submitButton');
+
+const $googleButton = document.querySelector('#googleButton');
 
 addAllElements();
 addAllEvents();
@@ -14,15 +16,16 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  submitButton.addEventListener('click', handleSubmit);
+  $submitButton.addEventListener('click', handleSubmit);
+  $googleButton.addEventListener('click', googlelogin);
 }
 
 // 로그인 진행
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const email = $emailInput.value;
+  const password = $passwordInput.value;
 
   // 잘 입력했는지 확인
   const isEmailValid = validateEmail(email);
@@ -36,7 +39,10 @@ async function handleSubmit(e) {
 
   // 로그인 api 요청
   try {
-    const data = { email, password };
+    const data = {
+      email,
+      password,
+    };
 
     const result = await Api.post('/api/users/login', data);
     const token = result.token;
@@ -51,6 +57,24 @@ async function handleSubmit(e) {
 
     // 기본 페이지로 이동
     window.location.href = '/';
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+async function googlelogin(e) {
+  e.preventDefault();
+  try {
+    // const data = { email, fullName };
+    // const login = Api.post('/auth/google', data);
+    // const googleToken = login.token;
+    // localStorage.setItem('token', googleToken);
+
+    // alert(`정상적으로 로그인되었습니다.`);
+    // window.location.href = '/';
+
+    window.location.href = '/auth/google';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

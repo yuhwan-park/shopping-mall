@@ -52,7 +52,9 @@ async function insertNavBar() {
   if (token) {
     const $signOut = document.querySelector('#signOut');
     $signOut.addEventListener('click', () => {
-      localStorage.removeItem('token');
+      localStorage.setItem('token', null);
+      document.cookie =
+        'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       window.location.reload();
     });
   }
