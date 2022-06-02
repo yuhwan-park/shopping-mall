@@ -86,6 +86,8 @@ async function postOrder() {
     }
 
     await Api.post('/api/orders', data);
+    localStorage.removeItem('cart');
+    localStorage.removeItem('order');
     window.location.href = '/order/complete';
   } catch (err) {
     alert(err.message);

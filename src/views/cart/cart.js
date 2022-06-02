@@ -25,43 +25,50 @@ class Cart {
 
   // 로컬스토리지의 장바구니 데이터를 가져와 템플릿에 맞게 HTML에 주입하는 메소드
   printCartData() {
-    const node = this.cartData.reduce((acc, product) => {
-      const isChecked = this.orderData['selectedIds'].includes(product.shortId);
-      return (acc += `
-        <div class="cart-item" id="cartItem">
-          <input type="checkbox" ${isChecked ? 'checked' : ''} 
-            id="checkbox+${product.shortId}" class="check-box" 
-          />
-          <img
-            src=${product.imageURL}
-            alt=${product.name}
-            id="image+${product.shortId}"
-          />
-          <div class="content">
-            <div class="content-title" id="productTitle+${product.shortId}">
-            ${product.name}</div>
-            <div class="quantity">
-              <button class="button is-rounded" id="minus+${product.shortId}" 
-              ${isChecked ? '' : 'disabled'}>-</button>
-              <input type="number" min="1" max="99" value="${product.quantity}" 
-              id="quantityInput+${product.shortId}" 
-              ${isChecked ? '' : 'disabled'} />
-              <button class="button is-rounded" id="plus+${product.shortId}" 
-              ${isChecked ? '' : 'disabled'}>+</button>
+    let node = '';
+    if (this.cartData) {
+      node = this.cartData.reduce((acc, product) => {
+        const isChecked = this.orderData['selectedIds'].includes(
+          product.shortId,
+        );
+        return (acc += `
+          <div class="cart-item" id="cartItem">
+            <input type="checkbox" ${isChecked ? 'checked' : ''} 
+              id="checkbox+${product.shortId}" class="check-box" 
+            />
+            <img
+              src=${product.imageURL}
+              alt=${product.name}
+              id="image+${product.shortId}"
+            />
+            <div class="content">
+              <div class="content-title" id="productTitle+${product.shortId}">
+              ${product.name}</div>
+              <div class="quantity">
+                <button class="button is-rounded" id="minus+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'}>-</button>
+                <input type="number" min="1" max="99" value="${
+                  product.quantity
+                }" 
+                id="quantityInput+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'} />
+                <button class="button is-rounded" id="plus+${product.shortId}" 
+                ${isChecked ? '' : 'disabled'}>+</button>
+              </div>
             </div>
-          </div>
-          <div class="calculation">
-            <p id="price+${product.shortId}">${addCommas(product.price)}</p>
-            <p>X</p>
-            <p id="quantity+${product.shortId}">${product.quantity}</p>
-            <p>=</p>
-            <p id="total+${product.shortId}">
-            ${addCommas(product.price * product.quantity)}
-            </p>
-          </div>
-          <button class="button" id="delete+${product.shortId}">삭제</button>
-        </div>`);
-    }, '');
+            <div class="calculation">
+              <p id="price+${product.shortId}">${addCommas(product.price)}</p>
+              <p>X</p>
+              <p id="quantity+${product.shortId}">${product.quantity}</p>
+              <p>=</p>
+              <p id="total+${product.shortId}">
+              ${addCommas(product.price * product.quantity)}
+              </p>
+            </div>
+            <button class="button" id="delete+${product.shortId}">삭제</button>
+          </div>`);
+      }, '');
+    }
     if (node) {
       $cartItemContainer.innerHTML = node;
     } else {
@@ -71,21 +78,27 @@ class Cart {
 
   // 주문내역을 요약한 정보를 HTML에 주입하는 메소드
   printOrderSummary() {
-    const deliveryFee = this.orderData.productsTotal > 50000 ? 0 : 3000;
-    $productsCount.innerHTML = this.orderData.productsCount;
-    $productsPrice.innerHTML = addCommas(this.orderData.productsTotal);
-    $productsTotal.innerHTML = addCommas(
-      this.orderData.productsTotal + deliveryFee,
-    );
-    $deliveryFee.innerHTML = addCommas(deliveryFee);
+    if (this.orderData) {
+      const deliveryFee = this.orderData.productsTotal > 50000 ? 0 : 3000;
+      $productsCount.innerHTML = this.orderData.productsCount;
+      $productsPrice.innerHTML = addCommas(this.orderData.productsTotal);
+      $productsTotal.innerHTML = addCommas(
+        this.orderData.productsTotal + deliveryFee,
+      );
+      $deliveryFee.innerHTML = addCommas(deliveryFee);
+    }
   }
 
   // 모든 상품이 선택되거나 선택되지 않았을 때 전체선택 체크박스를 on/off 하는 메소드
   checkHeaderCheckbox() {
-    if (this.orderData['selectedIds'].length === this.orderData['ids'].length) {
-      $selectCheckbox.checked = true;
-    } else {
-      $selectCheckbox.checked = false;
+    if (this.orderData) {
+      if (
+        this.orderData['selectedIds'].length === this.orderData['ids'].length
+      ) {
+        $selectCheckbox.checked = true;
+      } else {
+        $selectCheckbox.checked = false;
+      }
     }
   }
 

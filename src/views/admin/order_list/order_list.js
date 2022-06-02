@@ -47,17 +47,20 @@ function printUserOrders(orders) {
     <td>${order.shortTitle} 개</td>
     <td>${order.orderStatus}</td>
     <td>
-      <button
-        class="button js-delete-order-button is-modal js-modal-trigger"
-        data-target="modal-js-order-cancel"
-        data-order="${order.shortId}"
-      >
-        주문 취소
-      </button>
+      ${
+        order.orderStatus !== '주문 취소'
+          ? `<button
+      class="button js-delete-order-button is-modal js-modal-trigger"
+      data-target="modal-js-order-cancel"
+      data-order="${order.shortId}"
+    >
+      주문 취소
+    </button> `
+          : `<div></div>`
+      }
     </td>
   </tr>`);
   }, '');
-
   const noDataOrder = `<tr>
   <td colspan="4" class="py-5">주문정보가 없습니다.</td>
 </tr>`;

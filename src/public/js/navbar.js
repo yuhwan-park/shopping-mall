@@ -52,7 +52,7 @@ async function insertNavBar() {
   if (token) {
     const $signOut = document.querySelector('#signOut');
     $signOut.addEventListener('click', () => {
-      localStorage.setItem('token', null);
+      localStorage.removeItem('token');
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       window.location.reload();
