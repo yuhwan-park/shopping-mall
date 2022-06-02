@@ -21,7 +21,7 @@ function printProducts(products) {
   const node = products.reduce(
     (acc, product) =>
       (acc += `
-    <div class="list-box">
+    <div class="list-box box">
     <a href="/products/detail/${product.shortId}">
       <img
         src=${product.imageURL}

@@ -34,13 +34,16 @@ const token = localStorage.getItem('token');
 
 async function detailText() {
   const data = await Api.get('/api/products', id);
-  const node = `<img
+  const node = `
+  <div class ="box">
+  <img
             id="detailProductImage"
             src="${data.imageURL}"
             alt="제품 상세 이미지"
           />
+          </div>
 
-          <div class="detail-right-wrap">
+          <div class="detail-right-wrap box">
             <div class="detail-text-wrap">
               <p class="p-title">${data.brand}</p>
               <p class="detail-title">${data.name}</p>
@@ -52,11 +55,11 @@ async function detailText() {
                 <div class="btn-wrap">
                   <button
                     id="add-cart-button"
-                    class="button is-warning is-large"
+                    class="deepcolor"
                   >
                     장바구니 추가하기
                   </button>
-                  <button id="purchase-button" class="button is-info is-large">
+                  <button id="purchase-button" class="lightcolor">
                     바로 구매하기
                   </button>
                 </div>
