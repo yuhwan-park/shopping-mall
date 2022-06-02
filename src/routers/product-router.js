@@ -62,7 +62,6 @@ productRouter.get('/list/likes', async (req, res, next) => {
     const products = allProducts
       .sort((a, b) => b.likeCount - a.likeCount)
       .slice(0, 4);
-    console.log(products);
     res.status(200).json(products);
   } catch (err) {
     next(err);

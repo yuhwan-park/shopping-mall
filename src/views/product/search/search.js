@@ -58,7 +58,7 @@ function printPosts(products) {
 
   // 조회된 상품이 있다면 HTML에 주입
   if (products.length) {
-    $productList.insertAdjacentHTML('afterbegin', node);
+    $productList.innerHTML = node;
   } else {
     $productList.innerHTML = '<div>검색과 일치하는 상품이 없습니다.</div>';
   }
