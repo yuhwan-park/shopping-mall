@@ -58,15 +58,25 @@ export class ProductModel {
   }
 
   // 좋아요 +1
-  async updateLike(_id, likeCount) {
-    const filter = { _id: _id };
+  async updateLike(product, userId, isLike) {
+    const filter = { _id: product._id };
     const option = { returnOriginal: false };
-    const updatedLike = await Product.findOneAndUpdate(
-      filter,
-      { likeCount: likeCount },
-      option,
-    );
-    return updatedLike;
+    if (isLike === true) {
+      const updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $push: { likeUsers: { userId } },
+        },
+        option,
+      );
+    } else {
+      const updatedLike = await Product.findOneAndUpdate(
+        filter,
+        { $pull: { likeUsers: { userId } } },
+        option,
+      );
+    }
+    return updatedLike.likeUsers;
   }
 }
 

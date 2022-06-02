@@ -113,11 +113,12 @@ class ProductService {
   }
 
   // 좋아요 기능
-  async updateLikeCount(product, islike) {
-    const { _id } = product;
-    let { likeCount } = product;
-    islike === true ? likeCount++ : likeCount--;
-    const updatedLike = await this.productModel.updateLike(_id, likeCount);
+  async updateLikeCount(product, userId, isLike) {
+    const updatedLike = await this.productModel.updateLike(
+      product,
+      userId,
+      isLike,
+    );
     return updatedLike;
   }
 }
