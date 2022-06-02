@@ -129,7 +129,11 @@ function purchase(data) {
       productsTotal: data.price,
       selectedIds: [id],
     };
-
+    const oldCartData = JSON.parse(localStorage.getItem('cart'));
+    localStorage.setItem(
+      'cart',
+      JSON.stringify([...oldCartData, { ...data, quantity: 1 }]),
+    );
     localStorage.setItem('order', JSON.stringify(purchaseData));
 
     window.location.href = '/order';
