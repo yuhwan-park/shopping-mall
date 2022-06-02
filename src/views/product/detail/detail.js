@@ -70,7 +70,7 @@ async function detailText() {
 
 // 장바구니에 추가 버튼 함수
 async function addCart(data) {
-  const oldData = JSON.parse(localStorage.getItem('cart'));
+  const oldCartData = JSON.parse(localStorage.getItem('cart'));
   const oldOrderData = JSON.parse(localStorage.getItem('order'));
   const orderData = {
     ids: oldOrderData ? [...oldOrderData['ids'], id] : [id],
@@ -80,12 +80,18 @@ async function addCart(data) {
       : data.price,
     selectedIds: oldOrderData ? [...oldOrderData['ids'], id] : [id],
   };
-
-  if (oldData) {
+  if (
+    oldCartData &&
+    oldCartData.filter((product) => product.shortId === id).length
+  ) {
+    alert('이미 장바구니에 담긴 상품입니다.');
+    return;
+  }
+  if (oldCartData) {
     // 축적된 데이터가 있으면
     localStorage.setItem(
       'cart',
-      JSON.stringify([...oldData, { ...data, quantity: 1 }]),
+      JSON.stringify([...oldCartData, { ...data, quantity: 1 }]),
     );
     // order에서 shortsId 가져와서 더해줌
     // productsCount = ids.length

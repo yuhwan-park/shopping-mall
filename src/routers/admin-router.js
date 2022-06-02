@@ -269,7 +269,7 @@ adminRouter.delete(
   async (req, res, next) => {
     try {
       const { shortId } = req.params;
-      const deletedOrder = await orderService.deleteOrder(shortId);
+      const deletedOrder = await orderService.updateOrder(shortId);
       res.status(200).json(deletedOrder);
     } catch (err) {
       next(err);
