@@ -46,13 +46,17 @@ function printUserOrders(orders) {
     <td>${order.shortTitle} 개</td>
     <td>${order.orderStatus}</td>
     <td>
-      <button
-        class="button js-delete-order-button is-modal js-modal-trigger"
-        data-target="modal-js-order-cancel"
-        data-order="${order.shortId}"
-      >
-        주문 취소
-      </button>
+    ${
+      order.orderStatus !== '주문 취소'
+        ? `<button
+    class="button js-delete-order-button is-modal js-modal-trigger"
+    data-target="modal-js-order-cancel"
+    data-order="${order.shortId}"
+  >
+    주문 취소
+  </button> `
+        : `<div></div>`
+    }
     </td>
   </tr>`);
   }, '');
@@ -86,7 +90,7 @@ async function handleOrderDataDelete(e) {
   e.preventDefault();
   let orderId = e.target.getAttribute('data-order');
   try {
-    await Api.delete('/api/orders', orderId);
+    await Api.patch('/api/orders', orderId);
     window.location.href = '/account/orders/';
   } catch (err) {
     console.error(err);
