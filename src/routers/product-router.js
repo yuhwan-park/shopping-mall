@@ -42,7 +42,7 @@ productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.currentUserId;
-    const isLike = req.body;
+    const isLike = JSON.parse(req.body.isLike);
 
     // 특정 상품 가져오기
     const product = await productService.getProduct(id);
@@ -64,8 +64,8 @@ productRouter.get('/likes/:id', loginRequired, async (req, res, next) => {
   const { id } = req.params;
   const userId = req.currentUserId;
   const product = await productService.getProduct(id);
-  const isUser = product.likeUsers.find((ele) => ele === userId);
-  res.status(200).json(isUser);
+  const isUser = product.likeUsers.find((ele) => ele.userId === userId);
+  res.status(200).json({ isUser });
 });
 
 export { productRouter };

@@ -61,22 +61,27 @@ export class ProductModel {
   async updateLike(product, userId, isLike) {
     const filter = { _id: product._id };
     const option = { returnOriginal: false };
-    if (isLike === true) {
-      const updatedLike = await Product.findOneAndUpdate(
+    let updatedLike;
+    if (isLike === false) {
+      updatedLike = await Product.findOneAndUpdate(
         filter,
         {
-          $push: { likeUsers: { userId } },
+          $inc: { likeCount: -1 },
+          $pull: { likeUsers: { userId } },
         },
         option,
       );
     } else {
-      const updatedLike = await Product.findOneAndUpdate(
+      updatedLike = await Product.findOneAndUpdate(
         filter,
-        { $pull: { likeUsers: { userId } } },
+        {
+          $inc: { likeCount: 1 },
+          $push: { likeUsers: { userId } },
+        },
         option,
       );
     }
-    return updatedLike.likeUsers;
+    return updatedLike;
   }
 }
 
