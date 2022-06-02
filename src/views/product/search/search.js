@@ -32,7 +32,6 @@ function getUrlQuries() {
     return { ...acc, ...val };
   }, {});
   return queryObject;
-  console.log(queryObject);
 }
 
 function printPosts(products) {
@@ -78,7 +77,6 @@ async function getProductsPosts(currentPage = 1) {
     printPosts(posts);
   } catch (err) {
     console.error(err);
-    alert(`${err.message}`);
   }
 }
 
