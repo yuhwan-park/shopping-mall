@@ -33,6 +33,10 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
+    likeCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

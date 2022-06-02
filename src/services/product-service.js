@@ -52,8 +52,8 @@ class ProductService {
 
   // name으로 상품 검색
   async getProductsByName(filter) {
-    const products = await this.productModel.findByName(filter)
-    return products
+    const products = await this.productModel.findByName(filter);
+    return products;
   }
 
   //category에 따른 상품 목록
@@ -110,6 +110,15 @@ class ProductService {
     const { _id } = await this.productModel.findById(shortId);
     const product = await this.productModel.delete(_id);
     return product;
+  }
+
+  // 좋아요 기능
+  async updateLikeCount(product, islike) {
+    const { _id } = product;
+    let { likeCount } = product;
+    islike === true ? likeCount++ : likeCount--;
+    const updatedLike = await this.productModel.updateLike(_id, likeCount);
+    return updatedLike;
   }
 }
 
