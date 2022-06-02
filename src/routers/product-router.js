@@ -41,7 +41,7 @@ productRouter.get('/:id', async (req, res, next) => {
 productRouter.get('/list/likes', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
-    const products = await allProducts
+    const products = allProducts
       .sort((a, b) => b.likeCount - a.likeCount)
       .slice(0, 4);
     res.status(200).json(products);
