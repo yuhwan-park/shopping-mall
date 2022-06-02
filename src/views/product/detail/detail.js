@@ -34,12 +34,13 @@ async function addAllEvents(data) {
     purchase(data);
   });
   $likeButton.addEventListener('click', (e) => {
-    const isLike = e.target.style.color === 'rgb(187, 187, 187)';
-    const hasLike = e.target.classList.contains('liked');
+    e.stopPropagation();
+    const isLike = e.target.classList.contains('liked');
+    const hasLike = $likeButton.classList.contains('liked');
     if (!hasLike) {
-      e.target.classList.add('liked');
+      $likeButton.classList.add('liked');
     } else {
-      e.target.classList.remove('liked');
+      $likeButton.classList.remove('liked');
     }
     onClickLike(e, isLike);
   });
@@ -150,13 +151,13 @@ function purchase(data) {
 }
 async function checkLikes(element) {
   const isUser = await Api.get('/api/products/likes', id);
-  element.style.color = isUser.isUser ? 'red' : '#bbb';
 }
 
 async function onClickLike(e, isLike) {
   const $likeCount = document.querySelector('#likeCount');
   const data = await Api.patch('/api/products/like', id, { isLike });
   $likeCount.innerHTML = data.likeCount;
+  console.log(data.likeCount);
 }
 
 addAllElements();

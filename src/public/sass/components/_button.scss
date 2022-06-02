@@ -17,6 +17,7 @@ $bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
 
   &.liked {
+    min-width: 20px;
     color: $pink;
     border-color: currentColor;
     filter: grayscale(0);
