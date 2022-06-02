@@ -66,14 +66,6 @@ async function handleSubmit(e) {
 async function googlelogin(e) {
   e.preventDefault();
   try {
-    // const data = { email, fullName };
-    // const login = Api.post('/auth/google', data);
-    // const googleToken = login.token;
-    // localStorage.setItem('token', googleToken);
-
-    // alert(`정상적으로 로그인되었습니다.`);
-    // window.location.href = '/';
-
     window.location.href = '/auth/google';
   } catch (err) {
     console.error(err.stack);

@@ -29,8 +29,23 @@ function getUrlQuries() {
   console.log(key, value);
 }
 
+function getDecodeName() {
+  const queryParams = getUrlQuries();
+  const queryResult = queryParams['result'];
+  const decodeName = decodeURI(decodeURIComponent(queryResult));
+  return decodeName;
+}
+
+function highlightSearchWord(str, searchingValue) {
+  const regExp = new RegExp(searchingValue, 'gi');
+  let matchedStr = str.match(regExp);
+
+  let highlightedStr = "<b class='search-highlight'>" + matchedStr + '</b>';
+  return str.replace(regExp, highlightedStr);
+}
+
 function printProducts(products) {
-  // 모든 상품을 Template에 맞춰서 String으로 저장
+  const result = getDecodeName();
   const node = products.reduce(
     (acc, product) =>
       (acc += `
@@ -41,7 +56,7 @@ function printProducts(products) {
         alt=${product.name}
       />
       <div class="list-text">
-        <h2>${product.name}</h2>
+        <h2>${highlightSearchWord(product.name, result)}</h2>
         <p>${product.shortDescription}</p>
         <span>${addCommas(product.price)}원</span>
       </div>
@@ -60,15 +75,12 @@ function printProducts(products) {
 
 async function getProducts() {
   try {
-    const queryParams = getUrlQuries();
-    const result = queryParams['result'];
-    const decodeName = decodeURI(decodeURIComponent(result));
-    $searchWord.innerHTML = decodeName;
+    const result = getDecodeName();
+    $searchWord.innerHTML = result;
     const data = await Api.get(
       `/api/products/search`,
       `result?q=${result}&page=number&perPage=number`,
     );
-
     printProducts(data);
   } catch (err) {
     console.error(err);

@@ -21,11 +21,11 @@ async function findOrCreateUser({ email, name }) {
   }
 
   // 없으면 user 생성
-  // const hashedPassword = await bcrypt.hash(password, 10); // 비밀번호 해쉬화
+  const hashedPassword = await bcrypt.hash('google', 10); // 비밀번호 해쉬화
   const createdNewUser = await User.create({
     fullName: name,
     email,
-    password: 'GOOGLE_OAUTH',
+    password: hashedPassword,
   });
   return createdNewUser;
 }
