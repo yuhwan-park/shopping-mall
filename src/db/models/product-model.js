@@ -55,6 +55,33 @@ export class ProductModel {
     const result = await Product.findOneAndDelete({ _id });
     return result;
   }
+
+  // 좋아요 +1
+  async updateLike(product, userId, isLike) {
+    const filter = { _id: product._id };
+    const option = { returnOriginal: false };
+    let updatedLike;
+    if (isLike === false) {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: -1 },
+          $pull: { likeUsers: { userId } },
+        },
+        option,
+      );
+    } else {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: 1 },
+          $push: { likeUsers: { userId } },
+        },
+        option,
+      );
+    }
+    return updatedLike;
+  }
 }
 
 const productModel = new ProductModel();

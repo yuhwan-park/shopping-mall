@@ -33,6 +33,21 @@ function getUrlQuries() {
   return queryObject;
 }
 
+function getDecodeName() {
+  const queryParams = getUrlQuries();
+  const queryResult = queryParams['result'];
+  const decodeName = decodeURI(decodeURIComponent(queryResult));
+  return decodeName;
+}
+
+function highlightSearchWord(str, searchingValue) {
+  const regExp = new RegExp(searchingValue, 'gi');
+  let matchedStr = str.match(regExp);
+
+  let highlightedStr = "<b class='search-highlight'>" + matchedStr + '</b>';
+  return str.replace(regExp, highlightedStr);
+}
+
 function printPosts(products) {
   // 모든 상품을 Template에 맞춰서 String으로 저장
   const node = products.reduce(
@@ -45,7 +60,7 @@ function printPosts(products) {
         alt=${product.name}
       />
       <div class="list-text">
-        <h2>${product.name}</h2>
+        <h2>${highlightSearchWord(product.name, result)}</h2>
         <p>${product.shortDescription}</p>
         <span>${addCommas(product.price)}원</span>
       </div>
@@ -63,12 +78,11 @@ function printPosts(products) {
 }
 
 async function getProductsPosts(currentPage = 1) {
-  const CountPerPage = $perPageSelect.options[$perPageSelect.selectedIndex].value;
+  const CountPerPage =
+    $perPageSelect.options[$perPageSelect.selectedIndex].value;
   try {
-    const queryParams = getUrlQuries();
-    const result = queryParams['result'];
-    const decodeName = decodeURI(decodeURIComponent(result));
-    $searchWord.innerHTML = decodeName;
+    const result = getDecodeName();
+    $searchWord.innerHTML = result;
     const { totalPage, posts } = await Api.get(
       `/api/products/search`,
       `result?q=${result}&currentPage=${currentPage}&CountPerPage=${CountPerPage}`,

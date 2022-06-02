@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { productService, categoryService } from '../services';
-import { pagination } from '../middlewares';
+import { productService, categoryService, userService } from '../services';
+import { pagination, loginRequired } from '../middlewares';
+
 
 const productRouter = Router();
 
@@ -79,6 +80,35 @@ productRouter.get('/list/new', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.currentUserId;
+    const isLike = JSON.parse(req.body.isLike);
+
+    // 특정 상품 가져오기
+    const product = await productService.getProduct(id);
+
+    // 유저의 shortId를 likeUsers에 추가 / 그 상품의 좋아요 업데이트
+    const updatedLike = await productService.updateLikeCount(
+      product,
+      userId,
+      isLike,
+    );
+    res.status(200).json(updatedLike);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// 좋아요 조회
+productRouter.get('/likes/:id', loginRequired, async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.currentUserId;
+  const product = await productService.getProduct(id);
+  const isUser = product.likeUsers.find((ele) => ele.userId === userId);
+  res.status(200).json({ isUser });
 });
 
 export { productRouter };
