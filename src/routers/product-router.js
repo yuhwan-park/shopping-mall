@@ -41,9 +41,9 @@ productRouter.get('/:id', async (req, res, next) => {
 productRouter.get('/list/likes', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
-    const products = await allProducts.sort(
-      (a, b) => b.likeCount - a.likeCount,
-    );
+    const products = await allProducts
+      .sort((a, b) => b.likeCount - a.likeCount)
+      .slice(0, 4);
     res.status(200).json(products);
   } catch (err) {
     next(err);
@@ -54,7 +54,9 @@ productRouter.get('/list/likes', async (req, res, next) => {
 productRouter.get('/list/new', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
-    const products = allProducts.sort((a, b) => a.createdAt - b.createdAt);
+    const products = allProducts
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .slice(0, 4);
     res.status(200).json(products);
   } catch (err) {
     next(err);
