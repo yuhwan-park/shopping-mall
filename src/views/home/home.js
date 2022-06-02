@@ -95,13 +95,16 @@ function printNewProductList(products) {
   }, '');
 
   if (products.length) {
-    $homeProductList
-      .querySelector('tbody')
-      .insertAdjacentHTML('afterbegin', dataProduct);
+    const PRODUCTMAXLENGTH = 4;
+    for (let i = 0; i < PRODUCTMAXLENGTH; i++) {
+      $homeProductList
+        .querySelector('tbody')
+        .insertAdjacentHTML('afterbegin', dataProduct);
+    }
   }
 }
 
 async function getProductList() {
-  const data = await Api.get('/api/products');
+  const data = await Api.get('/api/products/list/new');
   console.log(data);
 }
