@@ -2,10 +2,6 @@ import * as Api from '/api.js';
 
 const app = document.getElementById('app');
 const token = localStorage.getItem('token');
-const $searchInput = document.querySelector('#searchInput');
-
-addAllElements();
-addAllEvents();
 
 // 역할에 따른 분류
 insertNavBar();
@@ -26,7 +22,7 @@ async function insertNavBar() {
   
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
             <div class="search-container">
-              <from class="form">
+              <form class="form" id="searchForm">
                 <div class="field">
                   <label class="label a11y" for="searchInput">검색어</label>
                   <div class="control">
@@ -70,14 +66,13 @@ async function insertNavBar() {
       window.location.reload();
     });
   }
+
+  addAllEvents();
 }
-
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
-
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  document.addEventListener('keyup', handleSearch);
+  const $searchForm = document.querySelector('#searchForm');
+  $searchForm.addEventListener('keyup', handleSearch);
 }
 
 function handleSearch(e) {
