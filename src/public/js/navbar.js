@@ -1,11 +1,13 @@
 import * as Api from '/api.js';
 
-const app = document.getElementById('app');
-const token = localStorage.getItem('token');
-
 // 역할에 따른 분류
 insertNavBar();
 async function insertNavBar() {
+  const app = document.getElementById('app');
+  const token = localStorage.getItem('token') || document.cookie;
+  if (token.indexOf('token') !== -1) {
+    localStorage.setItem('token', token.split('=')[1]);
+  }
   const { result } = await Api.post('/api/admin');
   app.insertAdjacentHTML(
     'afterbegin',
@@ -74,14 +76,12 @@ async function insertNavBar() {
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   const $searchForm = document.querySelector('#searchForm');
-  $searchForm.addEventListener('keyup', handleSearch);
+  $searchForm.addEventListener('submit', handleSearch);
 }
 
 function handleSearch(e) {
-  const targetElement = e.target.matches('#searchInput');
-  if (targetElement && e.keyCode === 13) {
-    let result = e.target.value;
-    console.log(result, e.target);
-    window.location.href = `/product/search?result=${result}`;
-  }
+  e.preventDefault();
+  const $searchInput = document.querySelector('#searchInput');
+  let result = $searchInput.value;
+  window.location.href = `/product/search?result=${result}`;
 }

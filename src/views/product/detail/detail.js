@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
 const $container = document.querySelector('.detail-container');
 const path = window.location.pathname.split('/');
@@ -19,14 +20,29 @@ async function addAllElements() {
   detailText();
 }
 
-function addAllEvents(data) {
+async function addAllEvents(data) {
   const $addCartButton = document.querySelector('#add-cart-button');
   const $purchaseButton = document.querySelector('#purchase-button');
+  const $likeButton = document.querySelector('#likeButton');
+
+  checkLikes($likeButton);
+
   $addCartButton.addEventListener('click', () => {
     addCart(data);
   });
   $purchaseButton.addEventListener('click', () => {
     purchase(data);
+  });
+  $likeButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isLike = e.target.classList.contains('liked');
+    const hasLike = $likeButton.classList.contains('liked');
+    if (!hasLike) {
+      $likeButton.classList.add('liked');
+    } else {
+      $likeButton.classList.remove('liked');
+    }
+    onClickLike(e, isLike);
   });
 }
 
@@ -42,9 +58,20 @@ async function detailText() {
 
           <div class="detail-right-wrap">
             <div class="detail-text-wrap">
-              <p class="p-title">${data.brand}</p>
+              <p class="p-title">
+                <span>${data.brand}</span>
+                <span id="likeButton" class='like-button'>
+                <span class='like-icon'>
+                  <span class='heart-animation-1'></span>
+                  <span class='heart-animation-2'></span>
+                </span>
+                <span id="likeCount">${addCommas(
+                  data.likeCount,
+                )}</span> Like                  
+                </span>
+              </p>
               <p class="detail-title">${data.name}</p>
-              <p class="detail-price">${data.price}</p>
+              <p class="detail-price">${addCommas(data.price)}</p>
               <p class="p-contents">
                 ${data.detailDescription}
               </p>
@@ -121,6 +148,16 @@ function purchase(data) {
 
     window.location.href = '/order';
   }
+}
+async function checkLikes(element) {
+  const isUser = await Api.get('/api/products/likes', id);
+}
+
+async function onClickLike(e, isLike) {
+  const $likeCount = document.querySelector('#likeCount');
+  const data = await Api.patch('/api/products/like', id, { isLike });
+  $likeCount.innerHTML = data.likeCount;
+  console.log(data.likeCount);
 }
 
 addAllElements();

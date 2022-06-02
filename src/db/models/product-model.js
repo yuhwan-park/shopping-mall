@@ -10,7 +10,6 @@ export class ProductModel {
   }
 
   async findByName(filter) {
-    console.log(`in model, filter: ${filter}`)
     const product = await Product.find({ name: { $regex: `${filter}` } });
     return product;
   }
@@ -55,6 +54,33 @@ export class ProductModel {
   async delete(_id) {
     const result = await Product.findOneAndDelete({ _id });
     return result;
+  }
+
+  // 좋아요 +1
+  async updateLike(product, userId, isLike) {
+    const filter = { _id: product._id };
+    const option = { returnOriginal: false };
+    let updatedLike;
+    if (isLike === false) {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: -1 },
+          $pull: { likeUsers: { userId } },
+        },
+        option,
+      );
+    } else {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: 1 },
+          $push: { likeUsers: { userId } },
+        },
+        option,
+      );
+    }
+    return updatedLike;
   }
 }
 
