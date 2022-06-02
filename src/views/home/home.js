@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
 let curPos = 0;
 let postion = 0;
@@ -94,4 +95,47 @@ async function getCategories() {
   );
   $slideShowContainer.insertAdjacentHTML('afterbegin', slides);
   showSlides();
+}
+
+const $homeProductListNew = document.querySelector('.home-product-list-new');
+const $homeProductListLikes = document.querySelector(
+  '.home-product-list-likes',
+);
+
+getProductList($homeProductListNew, 'new');
+getProductList($homeProductListLikes, 'likes');
+
+function printProductList(ele, products) {
+  const dataProduct = products.reduce((acc, product) => {
+    return (acc += `<div class="home-product-list-item">
+    <a href="/products/detail/${product.shortId}">
+      <div class="image">
+        <div class="image-thumbnail">
+          <img
+            src="${product.imageURL}"
+          />
+        </div>
+      </div>
+      <div class="description">
+        <p class="description-name">${product.name}</p>
+        <p class="description-price">${addCommas(product.price)}</p>
+      </div>
+    </a>
+  </div>`);
+  }, '');
+
+  if (products.length) {
+    ele.insertAdjacentHTML('afterbegin', dataProduct);
+  }
+}
+
+async function getProductList(ele, getApi) {
+  try {
+    const data = await Api.get(`/api/products/list/${getApi}`);
+    const result = data.splice(0, 4);
+    printProductList(ele, result);
+  } catch (err) {
+    console.error(err);
+    alert(`${err.message}`);
+  }
 }

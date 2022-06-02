@@ -10,7 +10,6 @@ export class ProductModel {
   }
 
   async findByName(filter) {
-    console.log(`in model, filter: ${filter}`);
     const product = await Product.find({ name: { $regex: `${filter}` } });
     return product;
   }

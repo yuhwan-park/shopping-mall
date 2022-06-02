@@ -37,7 +37,31 @@ productRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-// 좋아요 기능
+//상품 좋아요 top 4 조회
+productRouter.get('/list/likes', async (req, res, next) => {
+  try {
+    const allProducts = await productService.getProducts();
+    const products = allProducts
+      .sort((a, b) => b.likeCount - a.likeCount)
+      .slice(0, 4);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//상품 최신순 top 4 조회
+productRouter.get('/list/new', async (req, res, next) => {
+  try {
+    const allProducts = await productService.getProducts();
+    const products = allProducts
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .slice(0, 4);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
 productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
   try {
     const { id } = req.params;
