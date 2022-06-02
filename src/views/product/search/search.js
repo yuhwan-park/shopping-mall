@@ -4,7 +4,6 @@ import { addCommas } from '/useful-functions.js';
 const $productList = document.querySelector('#productList');
 const $searchWord = document.querySelector('#searchWord');
 const $perPageSelect = document.querySelector('#perPage-select');
-const CountPerPage = $perPageSelect.options[$perPageSelect.selectedIndex].value;
 const $totalPage = document.querySelector('#totalPage');
 
 addAllElements();
@@ -64,6 +63,7 @@ function printPosts(products) {
 }
 
 async function getProductsPosts(currentPage = 1) {
+  const CountPerPage = $perPageSelect.options[$perPageSelect.selectedIndex].value;
   try {
     const queryParams = getUrlQuries();
     const result = queryParams['result'];
@@ -77,6 +77,7 @@ async function getProductsPosts(currentPage = 1) {
     printPosts(posts);
   } catch (err) {
     console.error(err);
+    alert(`${err.message}`);
   }
 }
 
@@ -84,7 +85,7 @@ function setTotalPage(totalPage) {
   const node = [];
   for (let i = 1; i <= totalPage; i++) {
     const page = `
-        <a href=# class=page params(${i})> ${i} </a>
+        <a href=# id="pageNavigation" class=""> ${i} </a>
       `;
     node.push(page);
   }
@@ -95,7 +96,7 @@ function setTotalPage(totalPage) {
 function getPostsByPage(event) {
   event.preventDefault();
   try {
-    const page = e.target.textContent;
+    const page = event.target.textContent.trim();
     if (!page) {
       throw new Error();
     }
@@ -105,5 +106,11 @@ function getPostsByPage(event) {
   }
 }
 
-$totalPage.addEventListener('click', (event) => getPostsByPage(event));
-$perPageSelect.addEventListener('change', getProductsPosts);
+$totalPage.addEventListener('click', (event) => {
+  if (event.target.id === 'pageNavigation') {
+    getPostsByPage(event);
+  }
+});
+$perPageSelect.addEventListener('change', () => {
+  getProductsPosts();
+});
