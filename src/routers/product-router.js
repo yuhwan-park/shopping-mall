@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import is from '@sindresorhus/is';
 import { productService, categoryService } from '../services';
 import { pagination, loginRequired } from '../middlewares';
 
