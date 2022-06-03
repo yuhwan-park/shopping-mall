@@ -4,28 +4,21 @@ import { UserSchema } from '../schemas/user-schema';
 const User = model('users', UserSchema);
 
 export class UserModel {
+  // 회원가입
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;
   }
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
-
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
+  // 이메일로 유저 찾기 - 회원가입, 로그인, admin
+  async findByEmail(email) {
+    const user = await User.findOne({ email });
+    return user;
   }
 
-  // 삭제
-  async delete(_id) {
-    const deleteUser = await User.findOneAndDelete({ _id });
-    return deleteUser;
-  }
-
-  // 삭제, 사용자 정보 조회에서 사용
-  async findById(_id) {
-    const user = await User.findOne({ _id });
+  // userId로 유저 찾기 - 삭제, 사용자 정보 조회
+  async findById(userId) {
+    const user = await User.findOne({ userId: userId });
     return user;
   }
 
@@ -35,10 +28,19 @@ export class UserModel {
     return users;
   }
 
-  // admin
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
+  // 사용자 정보 수정
+  async update({ userId, update }) {
+    const filter = { _id: userId };
+    const option = { returnOriginal: false };
+
+    const updatedUser = await User.findOneAndUpdate(filter, update, option);
+    return updatedUser;
+  }
+
+  // 삭제
+  async delete(userId) {
+    const deleteUser = await User.findOneAndDelete({ userId: userId });
+    return deleteUser;
   }
 }
 
