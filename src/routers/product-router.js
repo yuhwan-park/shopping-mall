@@ -112,11 +112,15 @@ productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
 
 // 좋아요 조회
 productRouter.get('/likes/:id', loginRequired, async (req, res, next) => {
-  const { id } = req.params;
-  const userId = req.currentUserId;
-  const product = await productService.getProduct(id);
-  const isUser = product.likeUsers.find((ele) => ele.userId === userId);
-  res.status(200).json({ isUser });
+  try {
+    const { id } = req.params;
+    const userId = req.currentUserId;
+    const product = await productService.getProduct(id);
+    const isUser = product.likeUsers.find((ele) => ele.userId === userId);
+    res.status(200).json({ isUser });
+  } catch (err) {
+    next(err);
+  }
 });
 
 export { productRouter };
