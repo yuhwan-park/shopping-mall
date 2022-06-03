@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { adminRequired, pagination } from '../middlewares';
+import { adminRequired } from '../middlewares';
 import {
   orderService,
   productService,
@@ -168,18 +168,18 @@ adminRouter.post('/products', adminRequired, async (req, res, next) => {
 // 상품 전부 조회
 adminRouter.get('/products', adminRequired, async (req, res, next) => {
   try {
-    // const { page, perPage } = req.query
+    const { page, perPage } = req.query;
     const products = await productService.getProducts();
-    // const { totalPage, posts } = await pagination(
-    //   products,
-    //   Number(page),
-    //   Number(perPage)
-    // )
-    // res.status(200).json({
-    //   totalPage,
-    //   posts
-    // })
-    res.status(200).json(products)
+    const { totalPage, posts } = await pagination(
+      products,
+      Number(page),
+      Number(perPage),
+    );
+    res.status(200).json({
+      totalPage,
+      posts,
+    });
+    res.status(200).json(products);
   } catch (err) {
     next(err);
   }

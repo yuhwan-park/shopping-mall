@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { productService, categoryService, userService } from '../services';
+import { productService, categoryService } from '../services';
 import { pagination, loginRequired } from '../middlewares';
 
 
@@ -69,7 +69,7 @@ productRouter.get('/list/likes', async (req, res, next) => {
   }
 });
 
-//상품 최신순 top 4 조회
+// 상품 최신순 top 4 조회
 productRouter.get('/list/new', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
@@ -81,6 +81,8 @@ productRouter.get('/list/new', async (req, res, next) => {
     next(err);
   }
 });
+
+// 
 productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
   try {
     const { id } = req.params;

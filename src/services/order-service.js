@@ -14,13 +14,13 @@ class OrderService {
 
   // 사용자 주문 전체 조회 - user, admin에서 사용
   async getOrdersByUserId(userId) {
-    const orders = await this.orderModel.findByUserId(userId);
+    const orders = await this.orderModel.findById(userId);
     return orders;
   }
 
   // 사용자 특정 주문 상세 조회
   async getOrderInfo(shortId) {
-    const orderInfo = await this.orderModel.findById(shortId);
+    const orderInfo = await this.orderModel.findByShortId(shortId);
     return orderInfo;
   }
 
