@@ -12,10 +12,6 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
     },
-    productId: {
-      type: Schema.Types.ObjectId,
-      ref: 'products',
-    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
