@@ -28,18 +28,19 @@ async function getCategories() {
   const slides = categories.reduce(
     (acc, category) =>
       (acc += `
-    <div class="swiper-slide">
+      <div class="swiper-slide">
+      <a href="/product/list?category=${category.shortId}">
+      <div class="overlay"></div>
       <div class="slide-textbox">
         <span>${category.name}</span>
         <p>${category.content}</p>
       </div>
-      <a href="/product/list?category=${category.shortId}">
         <img
           src=${category.imageURL}
           alt=${category.name}
         />
-      </a>
-    </div>
+        </a>
+        </div>
   `),
     '',
   );

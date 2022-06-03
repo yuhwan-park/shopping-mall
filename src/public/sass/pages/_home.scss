@@ -5,21 +5,30 @@
 
   .swiper-slide {
     position: relative;
-
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4), transparent);
+    }
     .slide-textbox {
-      width: 400px;
+      position: absolute;
+      top: 200px;
+      left: 150px;
       height: 100px;
       background-color: transparent;
 
       span {
-        font-size: 2rem;
+        font-size: 4rem;
         font-weight: 600;
-        color: #00947e;
+        color: white;
         margin-bottom: 0.5rem;
       }
       p {
-        font-size: 1rem;
-        color: #00947e;
+        font-size: 2rem;
+        color: white;
       }
     }
   }
