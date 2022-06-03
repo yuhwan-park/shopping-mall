@@ -29,7 +29,7 @@ class OrderService {
     return orderInfo;
   }
 
-  // 주문 상태 변경
+  // 주문 취소
   async updateOrder(shortId) {
     // shortId로 해당 order 주문취소
     const updatedOrder = await this.orderModel.update(shortId);
