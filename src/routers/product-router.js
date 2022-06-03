@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { productService, categoryService, userService } from '../services';
 import { pagination, loginRequired } from '../middlewares';
 
-
 const productRouter = Router();
 
 //카테고리 별 상품 조회
@@ -15,7 +14,7 @@ productRouter.get('/', async (req, res, next) => {
       products,
       Number(currentPage),
       Number(CountPerPage),
-    )
+    );
     res.status(200).json({
       totalPage,
       posts,
@@ -27,18 +26,18 @@ productRouter.get('/', async (req, res, next) => {
 
 //상품 검색
 productRouter.get('/search/result', async (req, res, next) => {
-  try{
+  try {
     const { q, currentPage, CountPerPage } = req.query;
-    const result = await productService.getProductsByName(q)
+    const result = await productService.getProductsByName(q);
     const { totalPage, posts } = await pagination(
       result,
       Number(currentPage),
-      Number(CountPerPage)
+      Number(CountPerPage),
     );
     res.status(200).json({
       totalPage,
-      posts
-    })
+      posts,
+    });
     //res.status(200).json(result)
   } catch (err) {
     next(err);
@@ -104,11 +103,15 @@ productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
 
 // 좋아요 조회
 productRouter.get('/likes/:id', loginRequired, async (req, res, next) => {
-  const { id } = req.params;
-  const userId = req.currentUserId;
-  const product = await productService.getProduct(id);
-  const isUser = product.likeUsers.find((ele) => ele.userId === userId);
-  res.status(200).json({ isUser });
+  try {
+    const { id } = req.params;
+    const userId = req.currentUserId;
+    const product = await productService.getProduct(id);
+    const isUser = product.likeUsers.find((ele) => ele.userId === userId);
+    res.status(200).json({ isUser });
+  } catch (err) {
+    next(err);
+  }
 });
 
 export { productRouter };
