@@ -1,5 +1,6 @@
 import { Router } from 'express';
-
+import is from '@sindresorhus/is';
+import jwt from 'jsonwebtoken';
 import { adminRequired } from '../middlewares';
 import {
   orderService,
@@ -21,6 +22,33 @@ adminRouter.get('/', adminRequired, async (req, res, next) => {
   }
 });
 
+// 관리자 로그인 여부 확인 후 navbar 변경
+adminRouter.post('/', async (req, res, next) => {
+  try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    if (!userToken || userToken === 'null') {
+      res.status(200).json({
+        result: 'fail',
+      });
+    } else {
+      const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+      const jwtDecoded = jwt.verify(userToken, secretKey);
+      const role = jwtDecoded.role;
+      if (role === 'admin') {
+        res.status(200).json({
+          result: 'admin',
+        });
+      } else if (role === 'basic-user') {
+        res.status(200).json({
+          result: 'basic-user',
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 /****************************/
 /********* category *********/
 /****************************/
@@ -31,6 +59,13 @@ adminRouter.post(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const { name, content, imageURL } = req.body;
       const newCategory = await categoryService.addCategory({
         name,
@@ -45,7 +80,7 @@ adminRouter.post(
 );
 
 // 카테고리 목록
-adminRouter.get('/categories', adminRequired, async (req, res, next) => {
+adminRouter.get('/categories', async (req, res, next) => {
   try {
     const categories = await categoryService.getCategories();
     res.status(200).json(categories);
@@ -54,7 +89,7 @@ adminRouter.get('/categories', adminRequired, async (req, res, next) => {
   }
 });
 
-// 카테고리 상세
+// 카테고리 상세 조회
 adminRouter.get('/categories/:id', adminRequired, async (req, res, next) => {
   try {
     const shortId = req.params.id;
@@ -71,6 +106,13 @@ adminRouter.patch(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const shortId = req.params.id;
       const { name, content, imageURL } = req.body;
       const toUpdate = {
@@ -202,10 +244,10 @@ adminRouter.get('/userlist', adminRequired, async (req, res, next) => {
   }
 });
 
-// 사용자 주문 상세 조회
-adminRouter.post('/findorders', adminRequired, async (req, res, next) => {
+// 특정 사용자 주문 목록 조회
+adminRouter.get('/orders/list', adminRequired, async (req, res, next) => {
   try {
-    const { email } = req.body;
+    const { email } = req.query;
     const userId = await userService.getUserIdByEmail(email);
     const orders = await orderService.getOrdersByUserId(userId);
     res.status(200).json(orders);
@@ -213,5 +255,31 @@ adminRouter.post('/findorders', adminRequired, async (req, res, next) => {
     next(err);
   }
 });
+
+// 특정 사용자 주문 상세 조회
+adminRouter.get('/orders/:shortId', adminRequired, async (req, res, next) => {
+  try {
+    const { shortId } = req.params;
+    const order = await orderService.getOrderInfo(shortId);
+    res.status(200).json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//사용자 주문 취소
+adminRouter.delete(
+  '/orders/:shortId',
+  adminRequired,
+  async (req, res, next) => {
+    try {
+      const { shortId } = req.params;
+      const deletedOrder = await orderService.updateOrder(shortId);
+      res.status(200).json(deletedOrder);
+    } catch (err) {
+      next(err);
+    }
+  },
+);
 
 export { adminRouter };

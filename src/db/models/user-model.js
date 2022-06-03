@@ -4,32 +4,31 @@ import { UserSchema } from '../schemas/user-schema';
 const User = model('users', UserSchema);
 
 export class UserModel {
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
-  }
-
-  // 사용 - 삭제, 사용자 정보 조회
-  async findById(_id) {
-    const user = await User.findOne({ _id });
-    return user;
-  }
-
-  async findByShortId(shortId) {
-    const user = await User.findOne({ shortId });
-    return user;
-  }
-
+  // 회원가입
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
     return createdNewUser;
   }
 
-  async userfindAll() {
+  // 이메일로 유저 찾기 - 회원가입, 로그인, admin
+  async findByEmail(email) {
+    const user = await User.findOne({ email });
+    return user;
+  }
+
+  // userId로 유저 찾기 - 삭제, 사용자 정보 조회
+  async findById(userId) {
+    const user = await User.findOne({ userId: userId });
+    return user;
+  }
+
+  // admin
+  async findAll() {
     const users = await User.find({});
     return users;
   }
 
+  // 사용자 정보 수정
   async update({ userId, update }) {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
@@ -39,8 +38,8 @@ export class UserModel {
   }
 
   // 삭제
-  async delete(_id) {
-    const deleteUser = await User.findOneAndDelete({ _id });
+  async delete(userId) {
+    const deleteUser = await User.findOneAndDelete({ userId: userId });
     return deleteUser;
   }
 }
@@ -48,3 +47,4 @@ export class UserModel {
 const userModel = new UserModel();
 
 export { userModel };
+export { User };

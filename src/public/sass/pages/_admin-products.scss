@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   padding: 10px 0;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #ddd;
   cursor: pointer;
   .product-image {
     width: 200px;
@@ -19,4 +19,35 @@
 
 .product-list .list-link {
   color: black;
+}
+
+.re-product-image {
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  min-height: 100px;
+  border-radius: 10px;
+}
+
+.re-product-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & p {
+    display: inline;
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+.re-product-title {
+  min-width: 1000px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.re-product-price {
+  min-width: 100px;
+  font-weight: 400;
 }

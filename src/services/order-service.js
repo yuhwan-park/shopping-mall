@@ -1,37 +1,44 @@
 import { orderModel } from '../db';
-
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
 class OrderService {
   constructor(orderModel) {
     this.orderModel = orderModel;
   }
 
   // 주문 생성
-  async addOrder(orderInfo) {
+  async addOrderInfo(orderInfo) {
     // db에 저장
     const createdNewOrder = await this.orderModel.create(orderInfo);
 
     return createdNewOrder;
   }
 
-  // 주문 전체 조회
-  async getOrders() {
-    const orders = await this.orderModel.findAll();
+  // 사용자 주문 전체 조회 - user, admin에서 사용
+  async getOrdersByUserId(userId) {
+    const orders = await this.orderModel.findById(userId);
     return orders;
   }
 
-  // 이메일로 주문 조회
-  async getOrdersByUserId(userId) {
-    const orders = await this.orderModel.findByUserId(userId);
-    return orders
+  // 사용자 특정 주문 상세 조회
+  async getOrderInfo(shortId) {
+    const orderInfo = await this.orderModel.findByShortId(shortId);
+
+    if (!orderInfo) {
+      throw new Error('해당 주문이 존재하지 않습니다.');
+    }
+
+    return orderInfo;
   }
 
-  // 주문 정보로 주문 모두 찾기
-  async getOrdersByObjectId(objectId) {
-    const orders = await this.orderModel.find({objectId})
-    return orders
+  // 주문 취소
+  async updateOrder(shortId) {
+    // shortId로 해당 order 주문취소
+    const updatedOrder = await this.orderModel.update(shortId);
+
+    if (!updatedOrder) {
+      throw new Error('해당 주문이 존재하지 않습니다.');
+    }
+
+    return updatedOrder;
   }
 }
 

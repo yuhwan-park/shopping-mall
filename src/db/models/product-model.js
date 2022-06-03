@@ -4,25 +4,30 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findOneByName(name) {
+  async findByName(name) {
     const product = await Product.findOne({ name });
     return product;
   }
 
-  async findById(shortId) {
+  async findBySearch(filter) {
+    const product = await Product.find({ name: { $regex: `${filter}` } });
+    return product;
+  }
+
+  async findByShortId(shortId) {
     const product = await Product.findOne({ shortId });
     return product;
   }
 
-  async findAllByCategory(category) {
-    const products = await Product.find({ category });
+  async findAllByCategoryId(categoryId) {
+    const products = await Product.find({ categoryId });
     return products;
   }
 
-  async findAllByBrand(brand) {
-    const products = await Product.find({ brand });
-    return products;
-  }
+  // async findAllByBrand(brand) {
+  //   const products = await Product.find({ brand });
+  //   return products;
+  // }
 
   async findAll() {
     const products = await Product.find({});
@@ -49,6 +54,33 @@ export class ProductModel {
   async delete(_id) {
     const result = await Product.findOneAndDelete({ _id });
     return result;
+  }
+
+  // 좋아요
+  async updateLike(product, userId, isLike) {
+    const filter = { _id: product._id };
+    const option = { returnOriginal: false };
+    let updatedLike;
+    if (isLike === false) {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: -1 },
+          $pull: { likeUsers: { userId } },
+        },
+        option,
+      );
+    } else {
+      updatedLike = await Product.findOneAndUpdate(
+        filter,
+        {
+          $inc: { likeCount: 1 },
+          $push: { likeUsers: { userId } },
+        },
+        option,
+      );
+    }
+    return updatedLike;
   }
 }
 

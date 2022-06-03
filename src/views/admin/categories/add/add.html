@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="add.js" type="module" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div class="admin-header">
+            <h1 class="re-admin-title">카테고리 추가</h1>
+          </div>
+          <div class="register-product-form-container">
+            <form
+              class="box register-product-form-box"
+              id="registerCategoryForm"
+              enctype="multipart/form-data"
+            >
+              <div class="field">
+                <label class="label" for="titleInput">카테고리 이름</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="titleInput"
+                    type="text"
+                    placeholder="남자 상의"
+                    autocomplete="on"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="DescriptionInput"
+                  >카테고리 설명</label
+                >
+                <div class="control">
+                  <textarea
+                    class="textarea"
+                    id="descriptionInput"
+                    rows="3"
+                    placeholder="카테고리에 대한 1~2문장의 설명을 적어 주세요."
+                    autocomplete="on"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="field is-fullwidth">
+                <label class="label" for="imageInput">제품 사진</label>
+                <!-- <img id="productImg" alt="product-img" /> -->
+                <div class="file has-name is-fullwidth">
+                  <label class="file-label">
+                    <input
+                      class="file-input"
+                      id="imageInput"
+                      type="file"
+                      name="img"
+                      accept=".png, .jpeg, .jpg"
+                    />
+
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload" aria-hidden="true"></i>
+                      </span>
+                      <span class="file-label"> 사진 선택 </span>
+                    </span>
+                    <span class="file-name" id="fileNameSpan">
+                      사진파일 (png, jpg, jpeg)
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <button class="deepcolor is-fullwidth" id="submitButton">
+                  추가하기
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>

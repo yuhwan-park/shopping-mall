@@ -8,67 +8,153 @@
 .progress-container h1 {
   font-size: 32px;
   font-weight: 700;
+  padding: 0 10px;
 }
+
 .progress-container span {
   padding: 0 10px;
+}
+
+.cart-container {
+  width: 100%;
 }
 
 .cart-header {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #bbb;
+  padding: 10px 0;
+
+  p {
+    cursor: pointer;
+    margin: 0 10px;
+  }
 }
 
 .cart-item {
   display: flex;
-  padding: 5px;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
 }
 
-.cart-item img {
-  width: 96px;
-  height: 96px;
-}
-.content {
+.re-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 400px;
 }
+
 .quantity {
   display: flex;
 }
+
 .content-title {
-  font-size: 24px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .calculation {
   display: flex;
+  align-items: flex-start;
+  height: 30px;
 }
 
 .order-summary {
-  width: 100%;
-  font-size: 18px;
+  width: 400px;
+  height: 280px;
+  margin-left: 20px;
 }
+
 .order-summary .header {
   border-bottom: 1px solid #bbb;
 }
 
 .order-summary .order-info {
   border-bottom: 1px solid #bbb;
+  padding: 10px 0;
 }
 
 .order-summary .order-info .info {
   display: flex;
   justify-content: space-between;
+  padding: 2.5px 0;
 }
 
 .order-summary .total {
   display: flex;
   justify-content: space-between;
   font-size: 24px;
+  padding: 10px 0;
+  font-weight: 600;
 }
 
 .order-summary button {
-  margin-top: 20px;
+  margin-top: 5px;
   width: 100%;
+}
+
+.header {
+  padding-bottom: 10px;
+}
+
+.re-warp {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.re-cart-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  margin: 0 25px;
+  cursor: pointer;
+}
+
+.re-cart-button {
+  width: 30px;
+  height: 30px;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 5px;
+}
+
+.re-cart-input {
+  width: 40px;
+  height: 30px;
+  margin: 0 5px;
+}
+
+.re-cal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+}
+
+.re-title-span {
+  min-width: 400px;
+  text-align: center;
+}
+
+.re-cal-span {
+  min-width: 200px;
+  text-align: center;
+}
+
+.re-check-wrap {
+  min-width: 190px;
+
+  & p {
+    display: inline;
+  }
 }

@@ -17,7 +17,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
-    <script src="complete.js"></script>
+    <script src="complete.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -25,16 +25,12 @@
       <section class="section">
         <div class="container content-container">
           <!-- CONTENT : START -->
-          <div class="cart-header">
-            <div class="subtitle">
-              <p>장바구니 ></p>
-            </div>
-            <div class="subtitle">
-              <p>주문결제 ></p>
-            </div>
-            <div class="title">
-              <p>주문완료</p>
-            </div>
+          <div class="progress-container">
+            <span>장바구니</span>
+            <span>></span>
+            <span>주문결제</span>
+            <span>></span>
+            <h1>주문완료</h1>
           </div>
 
           <div class="order-complete-container">
@@ -43,17 +39,11 @@
                 <span class="icon"><i class="fas fa-circle-check"></i></span>
                 <span>주문이 완료되었습니다!</span>
               </div>
-              <div class="button-container">
-                <button
-                  class="button is-medium is-fullwidth"
-                  id="orderDetailButton"
-                >
+              <div class="button-container" id="buttonContainer">
+                <button class="deepcolor" id="orderDetailButton">
                   주문내역 보기
                 </button>
-                <button
-                  class="button is-primary is-medium is-fullwidth"
-                  id="shoppingButton"
-                >
+                <button class="lightcolor" id="shoppingButton">
                   쇼핑 계속하기
                 </button>
               </div>

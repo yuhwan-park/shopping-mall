@@ -9,22 +9,41 @@
     width: 50%;
     height: auto;
   }
+  .detail-image-box {
+    & {
+      max-width: 600px;
+      width: 600px;
+    }
+    img {
+      width: 100%;
+    }
+  }
 
   .detail-right-wrap {
     width: 50%;
     height: auto;
     padding: 2rem;
     align-items: stretch;
+    margin-left: 20px;
 
     .detail-text-wrap {
       align-items: stretch;
 
       .p-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+
         border-bottom: 1px solid #dbdbdb;
         margin-bottom: 20px;
         font-size: 1rem;
-        padding: 3px 0;
+        padding: 3px 0 16px;
+        i {
+          cursor: pointer;
+          font-size: 20px;
+          color: #bbb;
+        }
       }
 
       .detail-title {

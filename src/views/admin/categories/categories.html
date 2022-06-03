@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- head -->
+    <script src="/static/js/head.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <!-- cdn -->
+    <script
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!-- html -->
+    <script src="/static/js/navbar.js" type="module"></script>
+    <!-- custom -->
+    <script src="/static/js/check-admin.js" type="module"></script>
+    <script src="categories.js" type="module" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- SECTION : START -->
+      <section class="section">
+        <div class="container content-container">
+          <!-- CONTENT : START -->
+          <div class="admin-header">
+            <h1 class="re-admin-title">카테고리 관리</h1>
+          </div>
+
+          <div class="box">
+            <div class="re-admin-table">
+              <span class="re-table re-1st-table-width">이미지</span>
+              <span class="re-table re-2st-table-width">카테고리 이름</span>
+              <span class="re-table re-3st-table-width">설명</span>
+            </div>
+            <ul class="product-list" id="categoryList"></ul>
+          </div>
+          <!-- CONTENT : END -->
+        </div>
+      </section>
+      <!-- SECTION : END -->
+    </div>
+  </body>
+</html>

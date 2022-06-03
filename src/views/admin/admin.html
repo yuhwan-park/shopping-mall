@@ -28,55 +28,95 @@
           <!-- CONTENT : START -->
           <div class="admin">
             <div class="admin-header">
-              <h1 class="title">관리자 메뉴</h1>
+              <h1 class="re-admin-title">관리자 메뉴</h1>
             </div>
             <div class="admin-content">
               <div class="navbar-card columns is-desktop">
+                <!-- start -->
+
                 <div class="navbar-card-item column">
-                  <a class="navbar-card-menu" href="/admin/products">
+                  <a class="navbar-card-menu" href="/admin/categories">
                     <div class="navbar-card-menu-icon">
-                      <span class="icon has-text-info">
+                      <span class="icon re-icon">
                         <i class="fa-solid fa-shop"></i>
                       </span>
                     </div>
                     <div class="navbar-card-menu-body">
-                      <p class="title is-3">상품관리</p>
-                      <p class="subtitle is-5">
-                        상품의 상세 내용을 관리할 수 있습니다.
+                      <p class="title re-admin-title">카테고리 관리</p>
+                      <p class="subtitle re-admin-content">
+                        카테고리를 관리할 수 있습니다.
                       </p>
                     </div>
                   </a>
                 </div>
                 <div class="navbar-card-item column">
-                  <a class="navbar-card-menu" href="/admin/add">
+                  <a class="navbar-card-menu" href="/admin/categories/add">
                     <div class="navbar-card-menu-icon">
-                      <span class="icon has-text-info">
+                      <span class="icon re-icon">
                         <i class="fa-solid fa-square-plus"></i>
                       </span>
                     </div>
                     <div class="navbar-card-menu-body">
-                      <p class="title is-3">상품추가</p>
-                      <p class="subtitle is-5">
-                        판매 상품을 추가할 수 있습니다.
+                      <p class="title re-admin-title">카테고리 추가</p>
+                      <p class="subtitle re-admin-content">
+                        카테고리를 추가할 수 있습니다.
                       </p>
                     </div>
                   </a>
                 </div>
+
                 <div class="navbar-card-item column">
                   <a class="navbar-card-menu" href="/admin/order_list">
                     <div class="navbar-card-menu-icon">
-                      <span class="icon has-text-info">
+                      <span class="icon re-icon">
                         <i class="fa-solid fa-users"></i>
                       </span>
                     </div>
                     <div class="navbar-card-menu-body">
-                      <p class="title is-3">유저 주문 조회</p>
-                      <p class="subtitle is-5">
+                      <p class="title re-admin-title">유저 주문 조회</p>
+                      <p class="subtitle re-admin-content">
                         유저의 주문을 조회할 수 있습니다.
                       </p>
                     </div>
                   </a>
                 </div>
+                <!-- end -->
+              </div>
+
+              <div class="navbar-card columns is-desktop">
+                <div class="navbar-card-item column">
+                  <a class="navbar-card-menu" href="/admin/products">
+                    <div class="navbar-card-menu-icon">
+                      <span class="icon re-icon">
+                        <i class="fa-solid fa-shop"></i>
+                      </span>
+                    </div>
+                    <div class="navbar-card-menu-body">
+                      <p class="title re-admin-title">상품관리</p>
+                      <p class="subtitle re-admin-content">
+                        상품의 상세 내용을 관리할 수 있습니다.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="navbar-card-item column">
+                  <a class="navbar-card-menu" href="/admin/add">
+                    <div class="navbar-card-menu-icon">
+                      <span class="icon re-icon">
+                        <i class="fa-solid fa-square-plus"></i>
+                      </span>
+                    </div>
+                    <div class="navbar-card-menu-body">
+                      <p class="title re-admin-title">상품추가</p>
+                      <p class="subtitle re-admin-content">
+                        판매 상품을 추가할 수 있습니다.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="navbar-card-item column"></div>
               </div>
             </div>
           </div>

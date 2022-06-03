@@ -130,6 +130,7 @@
                             class="input"
                             type="text"
                             id="address1Input"
+                            readonly
                             disabled
                             data-name="address"
                           />
@@ -152,23 +153,24 @@
                       <div class="control">
                         <input
                           class="input"
-                          type="number"
+                          type="text"
                           id="phoneInput"
-                          data-name="phone"
+                          data-name="phoneNumber"
+                          maxlength="11"
                           disabled
                         />
                         <label class="switch" for="phoneToggle">
                           <input
                             type="checkbox"
                             id="phoneToggle"
-                            data-name="phone"
+                            data-name="phoneNumber"
                           />
                           <span class="switch-toggle"></span>
                         </label>
                       </div>
                     </div>
                     <button
-                      class="button is-info is-fullwidth mt-5"
+                      class="deepcolor is-fullwidth mt-5"
                       data-target="modal-js-password"
                       id="submitButton"
                     >
@@ -186,7 +188,7 @@
                 <div class="modal-header">
                   <p class="is-size-6">현재 비밀번호를 입력해 주세요.</p>
                   <p class="is-size-6">
-                    카카오 로그인인 경우, 'kakao'를 입력해 주세요.
+                    구글 로그인인 경우, 'google'를 입력해 주세요.
                   </p>
                   <button
                     class="delete is-large modal-close"
@@ -210,10 +212,7 @@
                       </div>
                     </div>
                     <div class="is-flex is-justify-content-center">
-                      <button
-                        class="button is-link mt-5"
-                        id="submitConfirmButton"
-                      >
+                      <button class="deepcolor" id="submitConfirmButton">
                         저장 완료하기
                       </button>
                     </div>

@@ -1,0 +1,26 @@
+.search-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-container {
+  margin-right: 1rem;
+}
+
+.search-highlight {
+  display: inline-block;
+  color: #fff;
+  background: #9495de;
+}
+
+.custom-input {
+  background-color: #d6d7ec;
+  border-radius: 30px;
+  height: 40px;
+  width: 220px;
+  border: none;
+  padding: 0 20px 0 20px;
+  font-family: fontAwesome;
+}

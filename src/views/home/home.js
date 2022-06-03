@@ -1,61 +1,92 @@
-let curPos = 0;
-let postion = 0;
-const imageWidth = 1000;
-const slideIndex = 0;
+import * as Api from '/api.js';
+import { addCommas } from '/useful-functions.js';
 
-const $prevButton = document.querySelector('.prev');
-const $nextButton = document.querySelector('.next');
+const $swiperWrapper = document.querySelector('#swiperWrapper');
 
-const $slideWrapper = document.querySelector('.home-slideshow');
-const $slider = document.querySelector('.slideshow');
-const $slides = document.querySelectorAll('.slide');
+new Swiper('.mySwiper', {
+  spaceBetween: 0,
+  centeredSlides: true,
+  rewind: true,
 
-const totalSlides = $slides.length;
-const sliderWidth = $slideWrapper.clientWidth;
-$slider.style.width = sliderWidth * totalSlides + 'px';
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
 
-function showSlides() {
-  for (let i = 0; i < $slides.length; i++) {
-    // sliderWidth.style.left = -(sliderWidth * slideIndex) + 'px';
+getCategories();
 
-    sliderWidth.style.transform = `translateX(-${sliderWidth * slideIndex}px)`;
-  }
-  slideIndex++;
-  if (slideIndex === totalSlides) {
-    slideIndex = 0;
-  }
-  setTimeout(showSlides, 2000);
+async function getCategories() {
+  const categories = await Api.get('/api/admin', 'categories');
+  const slides = categories.reduce(
+    (acc, category) =>
+      (acc += `
+      <div class="swiper-slide">
+      <a href="/product/list?category=${category.shortId}">
+      <div class="overlay"></div>
+      <div class="slide-textbox">
+        <span>${category.name}</span>
+        <p>${category.content}</p>
+      </div>
+        <img
+          src=${category.imageURL}
+          alt=${category.name}
+        />
+        </a>
+        </div>
+  `),
+    '',
+  );
+  $swiperWrapper.insertAdjacentHTML('afterbegin', slides);
 }
 
-function prev() {
-  if (curPos > 0) {
-    $nextButton.removeAttribute('disabled');
-    postion += imageWidth;
-    $slider.style.transform = `translateX(${postion}px)`;
-    curPos = curPos - 1;
-  }
-  if (curPos == 0) {
-    $prevButton.setAttribute('disabled', 'true');
+const $homeProductListNew = document.querySelector('.home-product-list-new');
+const $homeProductListLikes = document.querySelector(
+  '.home-product-list-likes',
+);
+
+getProductList($homeProductListNew, 'new');
+getProductList($homeProductListLikes, 'likes');
+
+function printProductList(ele, products) {
+  const dataProduct = products.reduce((acc, product) => {
+    return (acc += `<div class="home-product-list-item">
+    <a href="/products/detail/${product.shortId}">
+      <div class="image">
+        <div class="image-thumbnail">
+          <img
+            src="${product.imageURL}"
+          />
+        </div>
+      </div>
+      <div class="description">
+        <p class="description-name">${product.name}</p>
+        <p class="description-price">${addCommas(product.price)}</p>
+      </div>
+    </a>
+  </div>`);
+  }, '');
+
+  if (products.length) {
+    ele.insertAdjacentHTML('afterbegin', dataProduct);
   }
 }
 
-function next() {
-  if (curPos < 1) {
-    $prevButton.removeAttribute('disabled');
-    postion -= imageWidth;
-    $slider.style.transform = `translateX(${postion}px)`;
-    curPos = curPos + 1;
-  }
-  if (curPos == 1) {
-    $nextButton.setAttribute('disabled', 'true');
+async function getProductList(ele, getApi) {
+  try {
+    const data = await Api.get(`/api/products/list/${getApi}`);
+    const result = data.splice(0, 4);
+    printProductList(ele, result);
+  } catch (err) {
+    console.error(err);
+    alert(`${err.message}`);
   }
 }
-
-function buttonSlide() {
-  $prevButton.setAttribute('disabled', 'true');
-  $prevButton.addEventListener('click', prev);
-  $nextButton.addEventListener('click', next);
-}
-
-buttonSlide();
-showSlides();

@@ -2,11 +2,11 @@ import * as Api from '/api.js';
 import { validateEmail } from '/useful-functions.js';
 
 // 요소(element), input 혹은 상수
-const fullNameInput = document.querySelector('#fullNameInput');
-const emailInput = document.querySelector('#emailInput');
-const passwordInput = document.querySelector('#passwordInput');
-const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
-const submitButton = document.querySelector('#submitButton');
+const $fullNameInput = document.querySelector('#fullNameInput');
+const $emailInput = document.querySelector('#emailInput');
+const $passwordInput = document.querySelector('#passwordInput');
+const $passwordConfirmInput = document.querySelector('#passwordConfirmInput');
+const $submitButton = document.querySelector('#submitButton');
 
 addAllElements();
 addAllEvents();
@@ -16,17 +16,17 @@ async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
-  submitButton.addEventListener('click', handleSubmit);
+  $submitButton.addEventListener('click', handleSubmit);
 }
 
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const fullName = fullNameInput.value;
-  const email = emailInput.value;
-  const password = passwordInput.value;
-  const passwordConfirm = passwordConfirmInput.value;
+  const fullName = $fullNameInput.value;
+  const email = $emailInput.value;
+  const password = $passwordInput.value;
+  const passwordConfirm = $passwordConfirmInput.value;
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;

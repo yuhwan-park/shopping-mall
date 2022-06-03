@@ -8,6 +8,10 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link rel="stylesheet" href="/static/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
     <!-- cdn -->
     <script
       src="https://kit.fontawesome.com/7630448495.js"
@@ -17,6 +21,7 @@
     <!-- html -->
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <script src="home.js" type="module" defer></script>
   </head>
   <body>
@@ -25,44 +30,35 @@
       <section class="section">
         <div class="container home-content-container">
           <!-- CONTENT : START -->
-
           <!-- image slide -->
-          <div class="home-slideshow">
-            <div class="slideshow">
-              <div class="slide">
-                <div class="slide-textbox">
-                  <span>Men Clothes</span>
-                  <p>센세이셔널한 봄, 여름 코디</p>
-                </div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2014/08/26/21/48/shirts-428600_960_720.jpg"
-                  alt="남자 옷 이미지"
-                />
-              </div>
-              <div class="slide">
-                <div class="slide-textbox">
-                  <span>Women Clothes</span>
-                  <p>언제, 어디서나 아름답게</p>
-                </div>
-                <img
-                  src="https://cdn.pixabay.com/photo/2019/02/10/15/09/clothes-3987460_960_720.jpg"
-                  alt="여자 옷 이미지"
-                />
-              </div>
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper" id="swiperWrapper"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <div class="home-products">
+            <div class="home-product-header">
+              <h2 class="title">NEW</h2>
+            </div>
+            <div class="home-product-list">
+              <div
+                class="home-product-list-container home-product-list-new"
+              ></div>
             </div>
           </div>
-          <!-- image slide code end -->
 
-          <!-- image slide btn -->
-          <div class="slidebtn-wrap">
-            <button class="slidebtn prev">
-              <i class="fa-solid fa-angle-left"></i>
-            </button>
-            <button class="slidebtn next">
-              <i class="fa-solid fa-angle-right"></i>
-            </button>
+          <div class="home-products">
+            <div class="home-product-header">
+              <h2 class="title">HOT ITEMS</h2>
+            </div>
+            <div class="home-product-list">
+              <div
+                class="home-product-list-container home-product-list-likes"
+              ></div>
+            </div>
           </div>
-          <!-- image slide btn end -->
 
           <!-- CONTENT : END -->
         </div>

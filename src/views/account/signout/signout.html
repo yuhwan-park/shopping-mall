@@ -18,6 +18,7 @@
     <script src="/static/js/navbar.js" type="module"></script>
     <!-- custom -->
     <script src="/static/js/modal.js" type="module" defer></script>
+    <script src="signout.js" type="module" defer></script>
   </head>
   <body>
     <div id="app">
@@ -30,23 +31,28 @@
             <div class="account-content">
               <div class="account-signout">
                 <div class="account-signout-container">
-                  <form class="box">
+                  <from class="form box">
                     <div class="form-header mb-5">
-                      <p class="title">삭제를 진행합니다.</p>
+                      <p class="re-title">삭제를 진행합니다.</p>
                     </div>
                     <div class="field">
-                      <label class="label">현재 비밀번호</label>
+                      <label class="label" for="passwordInput"
+                        >현재 비밀번호</label
+                      >
                       <div class="control">
                         <input
                           class="input"
-                          type="text"
-                          placeholder="카카오 로그인의 경우 'kakao'를 입력해 주세요."
+                          type="password"
+                          id="passwordInput"
+                          placeholder="구글 로그인의 경우 'google'를 입력해 주세요."
+                          autocomplete="on"
                         />
                       </div>
                     </div>
                     <button
-                      class="button is-primary is-fullwidth mt-5 js-modal-trigger"
+                      class="deepcolor is-fullwidth mt-5"
                       data-target="modal-js-signout"
+                      id="submitButton"
                     >
                       회원정보 안전하게 삭제하기
                     </button>
@@ -72,8 +78,8 @@
                 <div
                   class="modal-controller is-flex is-justify-content-center mt-5"
                 >
-                  <button class="button">네</button>
-                  <button class="button is-primary modal-close-button">
+                  <button class="button" id="deleteButton">네</button>
+                  <button class="deepcolor re-btn-add modal-close-button">
                     아니오
                   </button>
                 </div>
