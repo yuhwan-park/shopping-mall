@@ -59,6 +59,13 @@ adminRouter.post(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const { name, content, imageURL } = req.body;
       const newCategory = await categoryService.addCategory({
         name,
@@ -99,6 +106,13 @@ adminRouter.patch(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const shortId = req.params.id;
       const { name, content, imageURL } = req.body;
       const toUpdate = {
