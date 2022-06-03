@@ -1,13 +1,16 @@
 .home-content-container {
   position: relative;
-  width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  // margin: 0 auto;
+
   .swiper-slide {
+    position: relative;
+
     .slide-textbox {
-      width : 1000px; 
-      height : 100px; 
-      background-color : #ebfffc;
-      padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+      width: 400px;
+      height: 100px;
+      background-color: transparent;
+
       span {
         font-size: 2rem;
         font-weight: 600;
@@ -21,8 +24,6 @@
     }
   }
 }
-
-
 
 .home-products {
   margin: 5rem 0;
