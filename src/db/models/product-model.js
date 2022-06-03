@@ -56,7 +56,7 @@ export class ProductModel {
     return result;
   }
 
-  // 좋아요 +1
+  // 좋아요
   async updateLike(product, userId, isLike) {
     const filter = { _id: product._id };
     const option = { returnOriginal: false };

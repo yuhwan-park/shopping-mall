@@ -263,7 +263,7 @@ adminRouter.get('/orders/:shortId', adminRequired, async (req, res, next) => {
   }
 });
 
-//사용자 주문 삭제
+//사용자 주문 취소
 adminRouter.delete(
   '/orders/:shortId',
   adminRequired,

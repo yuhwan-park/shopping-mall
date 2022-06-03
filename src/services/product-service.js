@@ -47,6 +47,11 @@ class ProductService {
   // 상품 상세 조회
   async getProduct(shortId) {
     const product = await this.productModel.findByShortId(shortId);
+
+    if (!product) {
+      throw new Error('해당 상품이 존재하지 않습니다.');
+    }
+
     return product;
   }
 
@@ -72,6 +77,7 @@ class ProductService {
   async setProduct(shortId, updateRequest) {
     // 상품 존재 여부 확인 후 에러 반환
     let product = await this.productModel.findByShortId(shortId);
+
     if (!product) {
       throw new Error('상품이 존재하지 않습니다. 다시 한 번 확인해 주세요.');
     }
@@ -108,7 +114,17 @@ class ProductService {
   //상품 삭제
   async deleteProduct(shortId) {
     const { _id } = await this.productModel.findByShortId(shortId);
+
+    if (!_id) {
+      throw new Error('상품이 존재하지 않습니다. 다시 한 번 확인해 주세요.');
+    }
+
     const product = await this.productModel.delete(_id);
+
+    if (!product) {
+      throw new Error('삭제에 실패하였습니다.');
+    }
+    
     return product;
   }
 

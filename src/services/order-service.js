@@ -21,13 +21,23 @@ class OrderService {
   // 사용자 특정 주문 상세 조회
   async getOrderInfo(shortId) {
     const orderInfo = await this.orderModel.findByShortId(shortId);
+
+    if (!orderInfo) {
+      throw new Error('해당 주문이 존재하지 않습니다.');
+    }
+
     return orderInfo;
   }
 
-  // 주문 취소
+  // 주문 상태 변경
   async updateOrder(shortId) {
     // shortId로 해당 order 주문취소
     const updatedOrder = await this.orderModel.update(shortId);
+
+    if (!updatedOrder) {
+      throw new Error('해당 주문이 존재하지 않습니다.');
+    }
+
     return updatedOrder;
   }
 }
