@@ -24,12 +24,10 @@ class OrderService {
     return orderInfo;
   }
 
-  // 주문 삭제(취소)
+  // 주문 취소
   async updateOrder(shortId) {
-    // shortId로 orderId 추출
-    const orderInfo = await this.orderModel.findById(shortId);
-    // orderId로 해당 order 삭제
-    const updatedOrder = await this.orderModel.update(orderInfo);
+    // shortId로 해당 order 주문취소
+    const updatedOrder = await this.orderModel.update(shortId);
     return updatedOrder;
   }
 }

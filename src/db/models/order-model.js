@@ -8,22 +8,20 @@ const Order = model('orders', OrderSchema);
 export class OrderModel {
   // 주문 생성
   async create(orderInfo) {
-    const { userId } = orderInfo;
-    // orderDB에 데이터 추가
+    // order 컬렉션에 데이터 추가
     const createdNewOrder = await Order.create(orderInfo);
 
     // 사용자 주소를 입력한 주소로 업데이트
-    const user = await User.findById(userId);
     const updateUser = await User.findOneAndUpdate(
-      { _id: userId },
+      { _id: createdNewOrder.userId },
       { address: createdNewOrder.address },
     );
     return createdNewOrder;
   }
 
   // 전체 주문 목록 조회 - user, admin에서 사용
-  async findByUserId(_id) {
-    const orders = await Order.find({ userId: _id });
+  async findByUserId(userId) {
+    const orders = await Order.find({ userId: userId });
     return orders;
   }
 
@@ -34,9 +32,9 @@ export class OrderModel {
   }
 
   // 주문 취소
-  async update(orderInfo) {
+  async update(shortId) {
     const updatedOrder = await Order.findOneAndUpdate(
-      { _id: orderInfo._id },
+      { shortId: shortId },
       { orderStatus: '주문 취소' },
       { returnOriginal: false },
     );
