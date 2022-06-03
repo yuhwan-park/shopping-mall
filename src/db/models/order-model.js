@@ -1,6 +1,5 @@
 import { model } from 'mongoose';
 import { OrderSchema } from '../schemas/order-schema';
-import { productModel } from './product-model';
 import { User } from './user-model';
 
 const Order = model('orders', OrderSchema);
@@ -20,14 +19,14 @@ export class OrderModel {
   }
 
   // 전체 주문 목록 조회 - user, admin에서 사용
-  async findByUserId(userId) {
-    const orders = await Order.find({ userId: userId });
+  async findById(userId) {
+    const orders = await Order.find({ userId });
     return orders;
   }
 
   // 사용자 특정 주문 상세 조회
-  async findById(shortId) {
-    const orderInfo = await Order.findOne({ shortId: shortId });
+  async findByShortId(shortId) {
+    const orderInfo = await Order.findOne({ shortId });
     return orderInfo;
   }
 

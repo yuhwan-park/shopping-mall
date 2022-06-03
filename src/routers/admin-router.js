@@ -1,7 +1,7 @@
 import { Router } from 'express';
+import is from '@sindresorhus/is';
 import jwt from 'jsonwebtoken';
-
-import { adminRequired, pagination } from '../middlewares';
+import { adminRequired } from '../middlewares';
 import {
   orderService,
   productService,
@@ -22,6 +22,7 @@ adminRouter.get('/', adminRequired, async (req, res, next) => {
   }
 });
 
+// 관리자 로그인 여부 확인 후 navbar 변경
 adminRouter.post('/', async (req, res, next) => {
   try {
     const userToken = req.headers['authorization']?.split(' ')[1];
@@ -58,6 +59,13 @@ adminRouter.post(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const { name, content, imageURL } = req.body;
       const newCategory = await categoryService.addCategory({
         name,
@@ -81,7 +89,7 @@ adminRouter.get('/categories', async (req, res, next) => {
   }
 });
 
-// 카테고리 상세
+// 카테고리 상세 조회
 adminRouter.get('/categories/:id', adminRequired, async (req, res, next) => {
   try {
     const shortId = req.params.id;
@@ -98,6 +106,13 @@ adminRouter.patch(
   adminRequired,
   async (req, res, next) => {
     try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
       const shortId = req.params.id;
       const { name, content, imageURL } = req.body;
       const toUpdate = {
@@ -167,18 +182,8 @@ adminRouter.post('/products', adminRequired, async (req, res, next) => {
 // 상품 전부 조회
 adminRouter.get('/products', adminRequired, async (req, res, next) => {
   try {
-    // const { page, perPage } = req.query
     const products = await productService.getProducts();
-    // const { totalPage, posts } = await pagination(
-    //   products,
-    //   Number(page),
-    //   Number(perPage)
-    // )
-    // res.status(200).json({
-    //   totalPage,
-    //   posts
-    // })
-    res.status(200).json(products)
+    res.status(200).json(products);
   } catch (err) {
     next(err);
   }
@@ -262,7 +267,7 @@ adminRouter.get('/orders/:shortId', adminRequired, async (req, res, next) => {
   }
 });
 
-//사용자 주문 삭제
+//사용자 주문 취소
 adminRouter.delete(
   '/orders/:shortId',
   adminRequired,
