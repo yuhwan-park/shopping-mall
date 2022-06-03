@@ -7,7 +7,6 @@ const $emailInput = document.querySelector('#emailInput');
 const $passwordInput = document.querySelector('#passwordInput');
 const $passwordConfirmInput = document.querySelector('#passwordConfirmInput');
 const $submitButton = document.querySelector('#submitButton');
-const $adminInput = document.querySelector('#adminCode');
 
 addAllElements();
 addAllEvents();
@@ -18,7 +17,6 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   $submitButton.addEventListener('click', handleSubmit);
-  $adminInput.addEventListener('click', adminRegister);
 }
 
 // 회원가입 진행
@@ -61,14 +59,5 @@ async function handleSubmit(e) {
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  }
-}
-
-async function adminRegister(e) {
-  e.preventDefault();
-  const adminKey = $adminInput.value;
-
-  if (adminKey === 222222) {
-    await Api.post('/api/users/register');
   }
 }
