@@ -15,13 +15,13 @@ async function getProducts() {
       <a href="/admin/products/${product.shortId}" class="list-link">
         <li class="list-item" id="listItem">
           <img
-          class="product-image"
+          class="re-product-image"
           src="${product.imageURL}"
           alt="product image"
           />
-          <div class="product-info">
-            <p class="product-title">${product.name}</p>
-            <p>상품 가격 : <span class="product-prict">${product.price}</span>원</p>
+          <div class="re-product-info">
+            <p class="re-product-title">${product.name}</p>
+            <p class="re-product-price">상품 가격 : <span class="product-prict">${product.price}</span>원</p>
           </div>
         </li>
       </a>`;

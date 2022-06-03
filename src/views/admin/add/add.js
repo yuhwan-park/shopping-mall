@@ -21,7 +21,7 @@ async function getCategories() {
       (acc += `
   <option
   value="${category.name}"
-  class="notification is-primary is-light">
+  class="re-notification">
   ${category.name}
   </option>`),
     '',

@@ -26,23 +26,19 @@
       <section class="section">
         <div class="container content-container">
           <!-- CONTENT : START -->
-          <div class="cart-header">
-            <div class="subtitle">
-              <p>장바구니 ></p>
-            </div>
-            <div class="title">
-              <p>주문결제</p>
-            </div>
-            <div class="subtitle">
-              <p>> 주문완료</p>
-            </div>
+          <div class="progress-container">
+            <span>장바구니</span>
+            <span>></span>
+            <h1>주문결제</h1>
+            <span>></span>
+            <span>주문완료</span>
           </div>
 
-          <div class="tile is-ancestor">
-            <div class="tile is-parent cart-products">
+          <div class="is-ancestor re-warp">
+            <div class="is-parent cart-products">
               <div class="box delivery-info">
-                <p class="subtitle">배송지 정보</p>
-                <div class="field is-horizontal">
+                <p class="re-subtitle">배송지 정보</p>
+                <div class="field is-horizontal re-field">
                   <div class="field-label">
                     <label for="name" class="label">이름</label>
                   </div>
@@ -60,7 +56,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal re-field">
                   <div class="field-label">
                     <label for="phoneNumber" class="label">연락처</label>
                   </div>
@@ -78,7 +74,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal re-field">
                   <div class="field-label">
                     <label for="address2" class="label">주소</label>
                   </div>
@@ -102,7 +98,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal re-field">
                   <div class="field-label no-label"></div>
                   <div class="field-body">
                     <div class="field">
@@ -118,7 +114,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal re-field">
                   <div class="field-label no-label"></div>
                   <div class="field-body">
                     <div class="field">
@@ -133,7 +129,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal re-field">
                   <div class="field-label">
                     <label for="requestSelect" class="label">요청사항</label>
                   </div>
@@ -166,7 +162,7 @@
                 </div>
               </div>
             </div>
-            <div class="tile is-parent tile-order-summary">
+            <div class="is-parent tile-order-summary">
               <div class="box order-summary">
                 <div class="header"><p>결제정보</p></div>
                 <div class="order-info">
@@ -190,7 +186,7 @@
                   <p class="total-price"><span id="totalPrice"></span>원</p>
                 </div>
                 <div class="purchase">
-                  <button class="button is-info" id="orderCompleteButton">
+                  <button class="deepcolor" id="orderCompleteButton">
                     결제하기
                   </button>
                 </div>

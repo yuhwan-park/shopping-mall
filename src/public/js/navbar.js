@@ -28,7 +28,7 @@ async function insertNavBar() {
                 <div class="field">
                   <label class="label a11y" for="searchInput">검색어</label>
                   <div class="control">
-                    <input class="input" id="searchInput" type="search" placeholder="검색어를 입력해주세요">
+                    <input class="custom-input" id="searchInput" type="search" placeholder="&#xf002;   검색어를 입력해주세요">
                   </div>
                 </div>
               </form>
@@ -36,21 +36,18 @@ async function insertNavBar() {
             <ul id="navbar">
               ${
                 !token
-                  ? `<li><a href="/login">로그인</a></li>
-                    <li><a href="/register">회원가입</a></li>`
+                  ? `<li><a href="/login">LOGIN</a></li>
+                    <li><a href="/register">SIGN UP</a></li>`
                   : result === 'basic-user'
-                  ? `<li><a href="/account">계정관리</a></li>
-                    <li id="signOut"><a href="#">로그아웃</a></li>`
-                  : `<li><a href="/admin">관리자 페이지</a></li>
-                    <li><a href="/account">계정관리</a></li>
-                    <li id="signOut"><a href="#">로그아웃</a></li>`
+                  ? `<li><a href="/account">ACCOUNTS</a></li>
+                    <li id="signOut"><a href="#">LOGOUT</a></li>`
+                  : `<li><a href="/admin">ADMIN</a></li>
+                    <li><a href="/account">ACCOUNTS</a></li>
+                    <li id="signOut"><a href="#">LOGOUT</a></li>`
               }
               <li>
                 <a href="/cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
+                  CART
                 </a>
               </li>
             </ul>

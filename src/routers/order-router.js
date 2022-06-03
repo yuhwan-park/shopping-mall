@@ -40,7 +40,7 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
       userId,
     };
 
-    // 위 데이터를 주문 db에 추가하기
+    // 위 데이터를 db에 추가하기
     const newOrder = await orderService.addOrderInfo(orderInfo);
 
     res.status(201).json(newOrder);
@@ -71,7 +71,7 @@ orderRouter.get('/:shortId', loginRequired, async function (req, res, next) {
   }
 });
 
-// 주문 삭제
+// 주문 취소
 orderRouter.patch('/:shortId', loginRequired, async (req, res, next) => {
   try {
     const shortId = req.params.shortId;

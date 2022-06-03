@@ -16,21 +16,14 @@ userRouter.post('/register', async (req, res, next) => {
       );
     }
 
-    // req (request)의 body 에서 데이터 가져오기
-    const { fullName, email, password, adminCode } = req.body;
+    // req (request)의 body에서 데이터 가져오기
+    const { fullName, email, password } = req.body;
 
-    // admin 권한 부여
-    const checkAdminCode = '222222';
-    let role = 'basic-user';
-    if (adminCode == checkAdminCode) {
-      role = 'admin';
-    }
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
-      role,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -131,7 +124,7 @@ userRouter.patch('/', loginRequired, async function (req, res, next) {
   }
 });
 
-// 사용자 삭제(탈퇴) - shortId의 필요성 여부
+// 사용자 삭제
 userRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
