@@ -77,7 +77,7 @@ class CategoryService {
   async deleteCategory(shortId) {
     const { _id } = await this.categoryModel.findByShortId(shortId);
 
-    if (!category) {
+    if (!_id) {
       throw new Error(
         '카테고리가 존재하지 않습니다. 다시 한 번 확인해 주세요.',
       );
