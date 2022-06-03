@@ -55,6 +55,7 @@ export const dateYearMonthDay = (date) => {
   let month = Number(result[1]);
   month = month >= 10 ? month : '0' + month;
   let day = Number(result[2].slice(0, 2));
+  day = day >= 10 ? day : '0' + day;
   const hyphenFormat = `${year}-${month}-${day}`;
   return hyphenFormat;
 };
