@@ -3,9 +3,10 @@ import { addCommas } from '/useful-functions.js';
 
 const $swiperWrapper = document.querySelector('#swiperWrapper');
 
-var swiper = new Swiper('.mySwiper', {
+new Swiper('.mySwiper', {
   spaceBetween: 30,
   centeredSlides: true,
+  rewind: true,
   autoplay: {
     delay: 2500,
     disableOnInteraction: false,

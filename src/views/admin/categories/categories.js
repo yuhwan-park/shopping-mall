@@ -14,13 +14,13 @@ async function getCategories() {
       <a href="/admin/categories/${category.shortId}" class="list-link">
         <li class="list-item" id="listItem">
           <img
-          class="product-image"
+          class="re-product-image"
           src="${category.imageURL}"
           alt="category image"
           />
-          <div class="product-info">
-            <p class="product-title">${category.name}</p>
-            <p>${category.content}</p>
+          <div class="re-product-info">
+            <p class="re-product-title">${category.name}</p>
+            <p class="re-product-price">${category.content}</p>
           </div>
         </li>
       </a>`),
