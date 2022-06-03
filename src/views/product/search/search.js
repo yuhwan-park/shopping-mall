@@ -96,12 +96,12 @@ async function getProductsPosts(currentPage = 1) {
 }
 
 function setTotalPage(totalPage) {
-  const node = [];
+  let node = '';
   for (let i = 1; i <= totalPage; i++) {
     const page = `
-        <a href=# id="pageNavigation" class=""> ${i} </a>
+        <a href=# id="pageNavigation" class="page-navigation"> ${i} </a>
       `;
-    node.push(page);
+    node += page;
   }
 
   $totalPage.innerHTML = node;
