@@ -37,7 +37,7 @@ const ProductSchema = new Schema(
       type: Number,
       default: 0,
     },
-    likeUsers: [{ userId: String }],
+    likeUsers: [{ userId: { type: Schema.Types.ObjectId, ref: 'users' } }],
   },
   {
     timestamps: true,
