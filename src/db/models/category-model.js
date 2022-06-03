@@ -9,7 +9,7 @@ export class CategoryModel {
     return category;
   }
 
-  async findById(shortId) {
+  async findByShortId(shortId) {
     const category = await Category.findOne({ shortId });
     return category;
   }

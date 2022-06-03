@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { productService, categoryService, userService } from '../services';
+import is from '@sindresorhus/is';
+import { productService, categoryService } from '../services';
 import { pagination, loginRequired } from '../middlewares';
-
 
 const productRouter = Router();
 
-//카테고리 별 상품 조회
+// 카테고리 별 상품 조회
 productRouter.get('/', async (req, res, next) => {
   try {
     const { category, currentPage, CountPerPage } = req.query;
@@ -15,7 +15,7 @@ productRouter.get('/', async (req, res, next) => {
       products,
       Number(currentPage),
       Number(CountPerPage),
-    )
+    );
     res.status(200).json({
       totalPage,
       posts,
@@ -25,27 +25,27 @@ productRouter.get('/', async (req, res, next) => {
   }
 });
 
-//상품 검색
+// 상품 검색
 productRouter.get('/search/result', async (req, res, next) => {
-  try{
+  try {
     const { q, currentPage, CountPerPage } = req.query;
-    const result = await productService.getProductsByName(q)
+    const result = await productService.getProductsByName(q);
     const { totalPage, posts } = await pagination(
       result,
       Number(currentPage),
-      Number(CountPerPage)
+      Number(CountPerPage),
     );
     res.status(200).json({
       totalPage,
-      posts
-    })
+      posts,
+    });
     //res.status(200).json(result)
   } catch (err) {
     next(err);
   }
 });
 
-//상품 상세 조회
+// 상품 상세 조회
 productRouter.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -56,7 +56,7 @@ productRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-//상품 좋아요 top 4 조회
+// 메인화면 "HOT" 상품 조회
 productRouter.get('/list/likes', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
@@ -69,7 +69,7 @@ productRouter.get('/list/likes', async (req, res, next) => {
   }
 });
 
-//상품 최신순 top 4 조회
+// 메인화면 "NEW" 상품 조회
 productRouter.get('/list/new', async (req, res, next) => {
   try {
     const allProducts = await productService.getProducts();
@@ -81,8 +81,17 @@ productRouter.get('/list/new', async (req, res, next) => {
     next(err);
   }
 });
+
+// 좋아요
 productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
   try {
+    // content-type 을 application/json 로 프론트에서
+    // 설정 안 하고 요청하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요',
+      );
+    }
     const { id } = req.params;
     const userId = req.currentUserId;
     const isLike = JSON.parse(req.body.isLike);
@@ -104,11 +113,15 @@ productRouter.patch('/like/:id', loginRequired, async (req, res, next) => {
 
 // 좋아요 조회
 productRouter.get('/likes/:id', loginRequired, async (req, res, next) => {
-  const { id } = req.params;
-  const userId = req.currentUserId;
-  const product = await productService.getProduct(id);
-  const isUser = product.likeUsers.find((ele) => ele.userId === userId);
-  res.status(200).json({ isUser });
+  try {
+    const { id } = req.params;
+    const userId = req.currentUserId;
+    const product = await productService.getProduct(id);
+    const isUser = product.likeUsers.find((ele) => ele.userId === userId);
+    res.status(200).json({ isUser });
+  } catch (err) {
+    next(err);
+  }
 });
 
 export { productRouter };

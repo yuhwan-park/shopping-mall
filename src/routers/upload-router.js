@@ -34,7 +34,6 @@ const upload = multer({
 uploadRouter.post('/', upload.single('img'), (req, res) => {
   // 멀터가 해석한 이미지나 동영상은 req.file 객체 내부에 담깁니다.
   // 그 외의 정보는 req.body에 담깁니다.
-  console.log(req.body, req.file);
   res.json({ url: `/static/uploads/${req.file.filename}` });
 });
 
