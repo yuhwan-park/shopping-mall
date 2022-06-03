@@ -9,6 +9,15 @@
     width: 50%;
     height: auto;
   }
+  .detail-image-box {
+    & {
+      max-width: 600px;
+      width: 600px;
+    }
+    img {
+      width: 100%;
+    }
+  }
 
   .detail-right-wrap {
     width: 50%;

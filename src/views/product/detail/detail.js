@@ -50,7 +50,7 @@ const token = localStorage.getItem('token');
 async function detailText() {
   const data = await Api.get('/api/products', id);
   const node = `
-  <div class ="box">
+  <div class ="box detail-image-box">
   <img
             id="detailProductImage"
             src="${data.imageURL}"
