@@ -18,7 +18,7 @@ export class UserModel {
 
   // userId로 유저 찾기 - 삭제, 사용자 정보 조회
   async findById(userId) {
-    const user = await User.findOne({ userId: userId });
+    const user = await User.findOne({ _id: userId });
     return user;
   }
 
@@ -39,7 +39,7 @@ export class UserModel {
 
   // 삭제
   async delete(userId) {
-    const deleteUser = await User.findOneAndDelete({ userId: userId });
+    const deleteUser = await User.findOneAndDelete({ _id: userId });
     return deleteUser;
   }
 }

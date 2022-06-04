@@ -165,8 +165,8 @@ async function handleUserSubmit(e) {
   };
 
   try {
-    if (currentPassword === 'kakao') {
-      return alert('kakao');
+    if (currentPassword === 'google') {
+      return alert('google');
     }
     await Api.patch('/api/users', '', updateData);
     window.location.href = '/account/security';
