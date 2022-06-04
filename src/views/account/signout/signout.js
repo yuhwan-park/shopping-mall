@@ -30,8 +30,8 @@ async function handleSubmit(e) {
     return alert('비밀번호는 4글자 이상이어야 합니다.');
   }
 
-  if (password === 'kakao') {
-    return alert('kakao');
+  if (password === 'google') {
+    return alert('google');
   }
 
   $modalSignout.classList.add('is-active');
