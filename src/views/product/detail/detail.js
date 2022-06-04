@@ -147,12 +147,15 @@ function purchase(data) {
     };
     const oldCartData = JSON.parse(localStorage.getItem('cart'));
     if (oldCartData) {
-     localStorage.setItem('cart',
-        JSON.stringify([...oldCartData, { ...data, quantity: 1 }]),
-       );
-     } else {
+      if (!oldCartData.filter((product) => product.shortId === id).length) {
+        localStorage.setItem(
+          'cart',
+          JSON.stringify([...oldCartData, { ...data, quantity: 1 }]),
+        );
+      }
+    } else {
       localStorage.setItem('cart', JSON.stringify([{ ...data, quantity: 1 }]));
-     }
+    }
 
     localStorage.setItem('order', JSON.stringify(purchaseData));
 
